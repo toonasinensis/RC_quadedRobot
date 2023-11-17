@@ -36,23 +36,13 @@ typedef struct
 	  u16 UART5_fps;
 	  u16 UART5_data_fps;	
     u16 USART6_fps;
+		u16 UART7_fps;
+
     u16 CAN1_fps;
     u16 CAN1_Vision_fps;
     u16 CAN2_fps;
 	
-//    u16 motor_fps[8];
-    u16 motor_turn_fps[8];
 
-
-//    u16 system_monitor_task_fps;
-    u16 read_key_task_fps;
-    u16 action_task_fps;
-    u16 gait_task_fps;
-    u16 gyro_ctrl_task_fps;
-    u16 nav_ctrl_task_fps;
-    u16 unitree_motor_ctrl_task_fps;
-    u16 basic_motor_ctrl_task_fps;
-		u16 remote_lcd_task_fps;
 
     u16 System_cnt;
     u16 USART1_cnt;
@@ -62,22 +52,12 @@ typedef struct
     u16 UART5_cnt;
     u16 UART5_data_cnt;
     u16 USART6_cnt;
+		u16 UART7_cnt;
+
     u16 CAN1_cnt;
     u16 CAN1_Vision_cnt;
     u16 CAN2_cnt;
 		
-//    u16 motor_cnt[8];
-    u16 motor_turn_cnt[8];
-
-//    u16 system_monitor_task_cnt;
-    u16 read_key_task_cnt;
-    u16 action_task_cnt;
-    u16 gait_task_cnt;
-    u16 gyro_ctrl_task_cnt;
-    u16 nav_ctrl_task_cnt;
-    u16 unitree_motor_ctrl_task_cnt;
-    u16 basic_motor_ctrl_task_cnt;
-    u16 remote_lcd_task_cnt;
 
     u32 TaskTotalTime;
     u32 TaskTotalTimeMost;
@@ -88,6 +68,7 @@ typedef struct
 } SYSTEM_MONITOR;
 
 extern SYSTEM_MONITOR system_monitor;
+void cal_fps_sys(SYSTEM_MONITOR  *sys);
 
 
 

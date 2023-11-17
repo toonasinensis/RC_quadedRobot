@@ -11,6 +11,8 @@
 
 #define PI 3.1415926536f
 
+
+//#define LEG_NUM  6
 typedef enum
 {
     ENABLE_MODE = 10,
@@ -72,7 +74,7 @@ extern uint32_t extract(motor_receive_data_t *motor_data, uint8_t *raw_data);
 extern void modify(motor_send_data_t *motor_data, uint8_t *raw_data);
 
 
-extern leg_t leg[4];
+extern leg_t leg[6];
 
 
 

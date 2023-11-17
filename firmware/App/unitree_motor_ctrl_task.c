@@ -32,6 +32,7 @@ void receive_motor_feedback(uint8_t *raw_data, leg_t *leg)
 
  void send_single_motor_command(uint8_t *raw_data, leg_t *leg, uint8_t motor_num)
 {
+	
     switch (motor_num)
     {
     case 0:
@@ -48,13 +49,27 @@ void receive_motor_feedback(uint8_t *raw_data, leg_t *leg)
        break;
     }
 		
-		HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
+		//HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
 		HAL_UART_Transmit_DMA(leg->p_huart,raw_data,UART_TX_LEN);
 		while(leg->p_huart->gState!=HAL_UART_STATE_READY){};
-			HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
-		
-
+		//	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
 }
+ void send_all_motor_command(uint8_t tx_raw_data[][UART_TX_LEN],uint8_t rx_raw_data[][UART_RX_LEN], leg_t *leg)
+{
+	for (int i=0;i<JOINT_NUM;i++)
+	{
+		for(int j=0;j<LEG_NUM;j++)
+		{
+			send_single_motor_command(tx_raw_data[j], &leg[j], i);
+		}
+		for(int j=0;j<LEG_NUM;j++)
+		{
+		receive_motor_feedback(rx_raw_data[j],&leg[j]);
+			}
+	}
+}
+
+
 
 void disable_all_motor(void)
 {
@@ -109,8 +124,10 @@ void A1_protect(void)
 int send_motor_cnt = 1;
 void send_command(void)
 {
-	
-}
+				
+
+}					
+
 
 
 void get_init_pos(void)

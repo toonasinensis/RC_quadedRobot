@@ -1,18 +1,9 @@
 #include "timer.h"
 #include "led.h"
 //////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32H7开发板
-//定时器中断驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2017/8/12
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
+
 #include "unitree_motor_ctrl_task.h"
+#include "system_monitor.h"
 TIM_HandleTypeDef TIM3_Handler;      //定时器句柄 
 
 extern u32 lwip_localtime;	         //lwip本地时间计数器,单位:ms
@@ -56,22 +47,42 @@ uint8_t if_long_use;
 uint8_t fast_send;
 //定时器3中断服务函数调用
 uint32_t timer_pp;
+
+uint32_t psc_1000;
+extern float normal_frecquency;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim==(&TIM3_Handler))
     {
 			
-			if(start_send||if_long_use)
+			psc_1000++;
+			if(start_send||if_long_use||fast_send)
 				{
+					if(if_long_use&&timer_pp>1000)
+					{
+						timer_pp = 0;
+						
+						
 					start_send = 0;
-//					HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
-			    send_single_motor_command(uart_tx_buffer[0], &leg[0], 2);
-//					send_single_motor_command(uart_tx_buffer[1], &leg[1], 2);
+						
+							send_all_motor_command(uart_tx_buffer,uart_rx_buffer,leg);
+					}
+					else if(!if_long_use)
+					{
+						
+					send_all_motor_command(uart_tx_buffer,uart_rx_buffer,leg);
+
+					}
 					timer_pp++;
-					
 				}
-				receive_motor_feedback(uart_rx_buffer[0],&leg[0]);
-//				receive_motor_feedback(uart_rx_buffer[1],&leg[1]);
+				
+				if(psc_1000>1000)//分频到1s
+				{
+					normal_frecquency = 0;
+		//			cal_fps_sys(&system_monitor);
+					psc_1000 = 0;
+				}
+
 
         lwip_localtime +=1; //加10
     }

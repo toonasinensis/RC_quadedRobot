@@ -36,6 +36,7 @@
 #include "stm32h7xx_it.h"
 #include "usart.h"
 /* USER CODE BEGIN 0 */
+#include "system_monitor.h"
 
 /* USER CODE END 0 */
 
@@ -302,34 +303,39 @@ void DMA1_Stream6_IRQHandler(void)
 * @brief This function handles USART1 global interrupt.
 */
 
-uint32_t cnt;
-uint32_t temp1;
-uint32_t itcnt;
-uint32_t itcnt2;
+
+float   ore_frecquency;
+float   normal_frecquency;
+float precent;
+
 void USART1_IRQHandler(void)
 {
-	itcnt++;
   /* USER CODE BEGIN USART1_IRQn 0 */
 //	temp1 = huart1.Instance->RDR;
   uint32_t tmp;
 	if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) == 1)
     {
+							SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_OREFLAG(&huart1);
 //        HAL_UART_DMAStop(&huart1);
         HAL_UART_Receive_DMA(&huart1, uart_rx_buffer[0], UART_RX_LEN);
         HAL_UART_DMAResume(&huart1);
+			ore_frecquency++;
+			precent = ore_frecquency/normal_frecquency;
 		}
 if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) == 1)
     {
 				SCB_InvalidateDCache();
   		  __HAL_UART_CLEAR_IDLEFLAG(&huart1);
-			  tmp = huart4.Instance->ISR;
-	      tmp = huart4.Instance->RDR;
+//			  tmp = huart4.Instance->ISR;
+//	      tmp = huart4.Instance->RDR;
 			  HAL_UART_DMAStop(&huart1);
         HAL_UART_Receive_DMA(&huart1, uart_rx_buffer[0], UART_RX_LEN);
-//        HAL_UART_DMAResume(&huart1);
-			cnt++;
-			itcnt2++;
+        HAL_UART_DMAResume(&huart1);
+			
+			normal_frecquency++;
+			system_monitor.USART1_cnt++;
 		}
 		
   /* USER CODE END USART1_IRQn 0 */
@@ -345,13 +351,29 @@ if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) == 1)
 void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
+		if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_ORE) == 1)
+    {
+							SCB_InvalidateDCache();
+
+			__HAL_UART_CLEAR_OREFLAG(&huart2);
+//        HAL_UART_DMAStop(&huart1);
+        HAL_UART_Receive_DMA(&huart2, uart_rx_buffer[1], UART_RX_LEN);
+        HAL_UART_DMAResume(&huart2);
+			ore_frecquency++;
+			precent = ore_frecquency/normal_frecquency;
+		}
 if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE) == 1)
     {
+			SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_IDLEFLAG(&huart2);
 //		  	uint8_t temp_DR = USART6->DR;
         HAL_UART_DMAStop(&huart2);
         HAL_UART_Receive_DMA(&huart2, uart_rx_buffer[1], UART_RX_LEN);
         HAL_UART_DMAResume(&huart2);
+			system_monitor.USART2_cnt++;
+						normal_frecquency++;
+
 		}
   /* USER CODE END USART2_IRQn 0 */
   HAL_UART_IRQHandler(&huart2);
@@ -366,13 +388,30 @@ if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE) == 1)
 void USART3_IRQHandler(void)
 {
   /* USER CODE BEGIN USART3_IRQn 0 */
+	
+	if (__HAL_UART_GET_FLAG(&huart3, UART_FLAG_ORE) == 1)
+    {
+							SCB_InvalidateDCache();
+
+			__HAL_UART_CLEAR_OREFLAG(&huart3);
+//        HAL_UART_DMAStop(&huart1);
+        HAL_UART_Receive_DMA(&huart3, uart_rx_buffer[2], UART_RX_LEN);
+        HAL_UART_DMAResume(&huart3);
+			ore_frecquency++;
+			precent = ore_frecquency/normal_frecquency;
+		}
 if (__HAL_UART_GET_FLAG(&huart3, UART_FLAG_IDLE) == 1)
     {
+										SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_IDLEFLAG(&huart3);
 //		  	uint8_t temp_DR = USART6->DR;
         HAL_UART_DMAStop(&huart3);
         HAL_UART_Receive_DMA(&huart3, uart_rx_buffer[2], UART_RX_LEN);
         HAL_UART_DMAResume(&huart3);
+			
+						system_monitor.USART3_cnt++;
+
 		}
 		
 		
@@ -403,13 +442,29 @@ void DMA1_Stream7_IRQHandler(void)
 void UART4_IRQHandler(void)
 {
   /* USER CODE BEGIN UART4_IRQn 0 */
+		if (__HAL_UART_GET_FLAG(&huart4, UART_FLAG_ORE) == 1)
+    {
+							SCB_InvalidateDCache();
+
+			__HAL_UART_CLEAR_OREFLAG(&huart4);
+//        HAL_UART_DMAStop(&huart1);
+        HAL_UART_Receive_DMA(&huart4, uart_rx_buffer[3], UART_RX_LEN);
+        HAL_UART_DMAResume(&huart4);
+			ore_frecquency++;
+			precent = ore_frecquency/normal_frecquency;
+		}
+	
 if (__HAL_UART_GET_FLAG(&huart4, UART_FLAG_IDLE) == 1)
     {
+										SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_IDLEFLAG(&huart4);
 //		  	uint8_t temp_DR = USART6->DR;
         HAL_UART_DMAStop(&huart4);
         HAL_UART_Receive_DMA(&huart4, uart_rx_buffer[3], UART_RX_LEN);
         HAL_UART_DMAResume(&huart4);
+									system_monitor.UART4_cnt++;
+
 		}
   /* USER CODE END UART4_IRQn 0 */
   HAL_UART_IRQHandler(&huart4);
@@ -424,9 +479,21 @@ if (__HAL_UART_GET_FLAG(&huart4, UART_FLAG_IDLE) == 1)
 void UART5_IRQHandler(void)
 {
   /* USER CODE BEGIN UART5_IRQn 0 */
-	
+			if (__HAL_UART_GET_FLAG(&huart5, UART_FLAG_ORE) == 1)
+    {
+						SCB_InvalidateDCache();
+
+			__HAL_UART_CLEAR_OREFLAG(&huart5);
+//        HAL_UART_DMAStop(&huart1);
+        HAL_UART_Receive_DMA(&huart5, uart_rx_buffer[4], UART_RX_LEN);
+        HAL_UART_DMAResume(&huart5);
+			ore_frecquency++;
+			precent = ore_frecquency/normal_frecquency;
+		}
 	if (__HAL_UART_GET_FLAG(&huart5, UART_FLAG_ORE) == 1)
     {
+				SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_IDLEFLAG(&huart5);
         HAL_UART_DMAStop(&huart5);
         HAL_UART_Receive_DMA(&huart5, uart_rx_buffer[4], UART_RX_LEN);
@@ -435,10 +502,14 @@ void UART5_IRQHandler(void)
 	
 if (__HAL_UART_GET_FLAG(&huart5, UART_FLAG_IDLE) == 1)
     {
+													SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_IDLEFLAG(&huart5);
         HAL_UART_DMAStop(&huart5);
         HAL_UART_Receive_DMA(&huart5, uart_rx_buffer[4], UART_RX_LEN);
         HAL_UART_DMAResume(&huart5);
+												system_monitor.UART5_cnt++;
+
 		}
 		
   /* USER CODE END UART5_IRQn 0 */
@@ -538,13 +609,29 @@ void DMA2_Stream5_IRQHandler(void)
 void USART6_IRQHandler(void)
 {
   /* USER CODE BEGIN USART6_IRQn 0 */
+				if (__HAL_UART_GET_FLAG(&huart6, UART_FLAG_ORE) == 1)
+    {
+							SCB_InvalidateDCache();
+
+			__HAL_UART_CLEAR_OREFLAG(&huart6);
+//        HAL_UART_DMAStop(&huart1);
+        HAL_UART_Receive_DMA(&huart6, uart_rx_buffer[5], UART_RX_LEN);
+        HAL_UART_DMAResume(&huart6);
+			ore_frecquency++;
+			precent = ore_frecquency/normal_frecquency;
+		}
+	
 if (__HAL_UART_GET_FLAG(&huart6, UART_FLAG_IDLE) == 1)
     {
+													SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_IDLEFLAG(&huart6);
 //		  	uint8_t temp_DR = USART6->DR;
         HAL_UART_DMAStop(&huart6);
-        HAL_UART_Receive_DMA(&huart6, uart_rx_buffer[5], 100);
+        HAL_UART_Receive_DMA(&huart6, uart_rx_buffer[5], UART_RX_LEN);
         HAL_UART_DMAResume(&huart6);
+															system_monitor.USART6_cnt++;
+
 		}
   /* USER CODE END USART6_IRQn 0 */
   HAL_UART_IRQHandler(&huart6);
@@ -559,12 +646,28 @@ if (__HAL_UART_GET_FLAG(&huart6, UART_FLAG_IDLE) == 1)
 void UART7_IRQHandler(void)
 {
   /* USER CODE BEGIN UART7_IRQn 0 */
+	
+				if (__HAL_UART_GET_FLAG(&huart7, UART_FLAG_ORE) == 1)
+    {
+						SCB_InvalidateDCache();
+
+			__HAL_UART_CLEAR_OREFLAG(&huart7);
+//        HAL_UART_DMAStop(&huart1);
+        HAL_UART_Receive_DMA(&huart7, uart_rx_buffer[6], UART_RX_LEN);
+        HAL_UART_DMAResume(&huart7);
+			ore_frecquency++;
+			precent = ore_frecquency/normal_frecquency;
+		}
 if (__HAL_UART_GET_FLAG(&huart7, UART_FLAG_IDLE) == 1)
     {
+													SCB_InvalidateDCache();
+
 			__HAL_UART_CLEAR_IDLEFLAG(&huart7);
         HAL_UART_DMAStop(&huart7);
-        HAL_UART_Receive_DMA(&huart7, uart_rx_buffer[6], 100);
+        HAL_UART_Receive_DMA(&huart7, uart_rx_buffer[6], UART_RX_LEN);
         HAL_UART_DMAResume(&huart7);
+																		system_monitor.UART7_cnt++;
+
 		}
   /* USER CODE END UART7_IRQn 0 */
   HAL_UART_IRQHandler(&huart7);

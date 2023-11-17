@@ -122,8 +122,8 @@ typedef enum
 //力控和PID开关枚举
 typedef enum
 {
-    PID_LOOP,   // pid控制模式
-    FORCE_CTRL, //力控制模式
+   // PID_LOOP,   // pid控制模式
+   // FORCE_CTRL, //力控制模式
     STOP        //急停
 } EN_WALK_CTRL_STATE;
 

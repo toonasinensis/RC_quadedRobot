@@ -31,7 +31,7 @@ void enable_all_motor(void);
 void disable_all_motor(void);
 
 void unitree_motor_crl_task(void);  //接收数据在串口中断，发送在这里
-//void LpFilter(ST_LPF *lpf);
+ void send_all_motor_command(uint8_t tx_raw_data[][UART_TX_LEN],uint8_t rx_raw_data[][UART_RX_LEN], leg_t *leg);
 void filter_command(void);
 void param_limit(void);
 void get_init_pos(void);

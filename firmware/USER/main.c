@@ -72,9 +72,8 @@ int main(void)
 	
 	MX_GPIO_Init();
   MX_DMA_Init();
-	//MYDMA_Config(DMA2_Stream7);
 	MX_USART1_UART_Init();
-//  MX_USART2_UART_Init();
+  MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   MX_UART4_Init();
   MX_UART5_Init();
@@ -83,7 +82,7 @@ int main(void)
 
 	
 	__HAL_USART_ENABLE_IT(&huart1,UART_IT_IDLE);
-//	__HAL_USART_ENABLE_IT(&huart2,UART_IT_IDLE);
+	__HAL_USART_ENABLE_IT(&huart2,UART_IT_IDLE);
 	__HAL_USART_ENABLE_IT(&huart3,UART_IT_IDLE);
 	__HAL_USART_ENABLE_IT(&huart4,UART_IT_IDLE);
 	__HAL_USART_ENABLE_IT(&huart5,UART_IT_IDLE);
@@ -93,24 +92,20 @@ int main(void)
 //  __HAL_USART_ENABLE_IT(&huart1,UART_IT_RXNE);
 	
 HAL_UART_Receive_DMA(&huart1, uart_rx_buffer[0], UART_RX_LEN);
-//HAL_UART_Receive_DMA(&huart2, uart_rx_buffer[1], UART_RX_LEN);
+HAL_UART_Receive_DMA(&huart2, uart_rx_buffer[1], UART_RX_LEN);
 HAL_UART_Receive_DMA(&huart3, uart_rx_buffer[2], UART_RX_LEN);
 HAL_UART_Receive_DMA(&huart4, uart_rx_buffer[3], UART_RX_LEN);
 HAL_UART_Receive_DMA(&huart5, uart_rx_buffer[4], UART_RX_LEN);
 HAL_UART_Receive_DMA(&huart6, uart_rx_buffer[5], UART_RX_LEN);
 HAL_UART_Receive_DMA(&huart7, uart_rx_buffer[6], UART_RX_LEN);
 
-//	HAL_UARTEx_ReceiveToIdle_DMA(&huart1, rv_buff, 78);
-//  __HAL_DMA_DISABLE_IT(&hdma_usart1_rx, DMA_IT_HT);
 
-//	__HAL_USART_ENABLE_IT(&huart7,UART_IT_IDLE);
-//	__HAL_USART_ENABLE_IT(&huart8,UART_IT_IDLE);
 	
 	LED_Init();								//初始化LED
 	KEY_Init();								//初始化按键
 	SDRAM_Init();             //初始化SDRAM
 	//LCD_Init();								//初始化LCD
-	//PCF8574_Init();                         //初始化PCF8574
+	PCF8574_Init();                         //初始化PCF8574
   my_mem_init(SRAMIN);		            //初始化内部内存池
 	my_mem_init(SRAMEX);		            //初始化外部内存池
 	my_mem_init(SRAMDTCM);		          //初始化DTCM内存池
@@ -131,7 +126,7 @@ HAL_UART_Receive_DMA(&huart7, uart_rx_buffer[6], UART_RX_LEN);
 	{
 
 				
-		}
+	}
 
 //	
 //	

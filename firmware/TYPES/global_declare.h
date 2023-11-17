@@ -12,8 +12,8 @@
 #define BODY_WIDTH 0.2425F
 #define BODY_HEIGHT 0.0F
 
-#define LEG_NUM 4 
-#define JOINT_NUM 2
+#define LEG_NUM 6
+#define JOINT_NUM 3
 
 /**********************************************************************************************************************
                                         Õ»¡¨∏À≥§∂»

@@ -1,9 +1,11 @@
 #include "unitree_motor.h"
 
-leg_t leg[4] ={ {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart1, GPIOE, GPIO_PIN_1},//FL,FR,RL,RR
+leg_t leg[6] ={ {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart1, GPIOE, GPIO_PIN_1},//FL,FR,RL,RR
                 {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart2, GPIOE, GPIO_PIN_7},
                 {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart3, GPIOE, GPIO_PIN_8},
-                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart6, GPIOE, GPIO_PIN_0}};
+                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart6, GPIOE, GPIO_PIN_0},
+								{{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart4, GPIOE, GPIO_PIN_0},
+							{	{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart5, GPIOE, GPIO_PIN_0}};
 
 
 
