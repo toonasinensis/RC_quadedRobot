@@ -78,6 +78,11 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	
+	  GPIO_InitStruct.Pin = GPIO_PIN_2;
+		
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+
 
 }
 

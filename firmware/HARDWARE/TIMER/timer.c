@@ -50,6 +50,7 @@ uint32_t timer_pp;
 
 uint32_t psc_1000;
 extern float normal_frecquency;
+extern u8 udp_send_flag;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim==(&TIM3_Handler))
@@ -82,7 +83,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		//			cal_fps_sys(&system_monitor);
 					psc_1000 = 0;
 				}
-
+				
+				
+				udp_send_flag = 1;
 
         lwip_localtime +=1; //¼Ó10
     }

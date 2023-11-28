@@ -66,7 +66,7 @@ void udp_demo_set_remoteip(void)
 } 
 
 //UDP测试
-
+u8 udp_send_flag;
 
 void udp_demo_test(void)
 {
@@ -103,12 +103,13 @@ void udp_demo_test(void)
 	}else res=1;
 	
 	
-	while(res==0)
+	while(1)
 	{
-		key=KEY_Scan(0);
-		if(key==WKUP_PRES)break;
-		if(key==KEY0_PRES)//KEY0按下了,发送数据
+		key=KEY_Scan(0);		
+
+		if(key==WKUP_PRES||udp_send_flag ==1)//KEY0按下了,发送数据
 		{
+			udp_send_flag =0;
 			udp_demo_senddata(udppcb);
 		}
 		if(udp_demo_flag&1<<6)//是否收到数据?

@@ -57,8 +57,12 @@ int32_t LAN8720_Init(void)
     //硬件复位
     INTX_DISABLE();                         //关闭所有中断，复位过程不能被打断！
     PCF8574_WriteBit(ETH_RESET_IO,1);       //硬件复位
+	  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_RESET);
+
     delay_ms(100);
     PCF8574_WriteBit(ETH_RESET_IO,0);       //复位结束
+		  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_SET);
+
     delay_ms(100);
     INTX_ENABLE();                          //开启所有中断 
     
@@ -172,8 +176,14 @@ void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
     HAL_GPIO_Init(GPIOA,&GPIO_Initure);         //初始化
     
     //PB11
-    GPIO_Initure.Pin=GPIO_PIN_11;               //PB11
-    HAL_GPIO_Init(GPIOB,&GPIO_Initure);         //始化
+//    GPIO_Initure.Pin=GPIO_PIN_11;               //PB11
+//    HAL_GPIO_Init(GPIOB,&GPIO_Initure);         //始化
+	
+	    //PG11
+    GPIO_Initure.Pin=GPIO_PIN_11;               //PG11
+    HAL_GPIO_Init(GPIOG,&GPIO_Initure);         //始化
+//	
+	
     
     //PC1,4,5
     GPIO_Initure.Pin=GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_5; //PC1,4,5
@@ -311,10 +321,11 @@ u8 LAN8720_GetITStatus(u32 interrupt)
 //        LAN8720_STATUS_100MBITS_FULLDUPLEX    100M全双工
 //        LAN8720_STATUS_100MBITS_HALFDUPLEX    100M半双工
 //        LAN8720_STATUS_10MBITS_FULLDUPLEX     10M全双工
-//        LAN8720_STATUS_10MBITS_HALFDUPLEX     10M半双工
+//        LAN8720_STATUS_10MBITS_HALFDUPLEX     10M半双工 
+    u32 readval=0;
+
 u32 LAN8720_GetLinkState(void)
 {
-    u32 readval=0;
     
     //读取两遍，确保读取正确！！！
     LAN8720_ReadPHY(LAN8720_BSR,&readval);

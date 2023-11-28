@@ -27,14 +27,20 @@ Project File Date:  11/17/2023
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'NETWORK'
-compiling stm32h7xx_it.c...
-stm32h7xx_it.c(315): warning:  #177-D: variable "tmp"  was declared but never referenced
-    uint32_t tmp;
-stm32h7xx_it.c: 1 warning, 0 errors
+compiling udp_demo.c...
+..\LWIP\lwip_app\udp_demo\udp_demo.c(42): warning:  #177-D: variable "xoff"  was declared but never referenced
+  	u16 xoff;
+..\LWIP\lwip_app\udp_demo\udp_demo.c(43): warning:  #177-D: variable "key"  was declared but never referenced
+  	u8 key;
+..\LWIP\lwip_app\udp_demo\udp_demo.c(130): warning:  #111-D: statement is unreachable
+  	udp_demo_connection_close(udppcb); 
+..\LWIP\lwip_app\udp_demo\udp_demo.c(79): warning:  #550-D: variable "res"  was set but never used
+  	u8 res=0;		
+..\LWIP\lwip_app\udp_demo\udp_demo.c: 4 warnings, 0 errors
 linking...
-Program Size: Code=52676 RO-data=1252 RW-data=2140 ZI-data=33792068  
+Program Size: Code=52618 RO-data=1254 RW-data=2144 ZI-data=33792064  
 FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 1 Warning(s).
+"..\OBJ\Template.axf" - 0 Error(s), 4 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -47,7 +53,7 @@ Package Vendor: Keil
   D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

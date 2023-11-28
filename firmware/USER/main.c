@@ -56,9 +56,6 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
 
 
 
-
-
-
 int main(void)
 {
     u8 key=0;
