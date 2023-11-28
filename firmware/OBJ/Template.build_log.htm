@@ -22,25 +22,29 @@ Dialog DLL:      TCM.DLL V1.48.0.0
  
 <h2>Project:</h2>
 E:\ROBOTICS\CRT\我的工作\h7comm\RC_quadedRobot\firmware\USER\NETWORK.uvprojx
-Project File Date:  11/17/2023
+Project File Date:  11/28/2023
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'NETWORK'
 compiling udp_demo.c...
-..\LWIP\lwip_app\udp_demo\udp_demo.c(42): warning:  #177-D: variable "xoff"  was declared but never referenced
+..\LWIP\lwip_app\udp_demo\udp_demo.c(28): warning:  #177-D: variable "xoff"  was declared but never referenced
   	u16 xoff;
-..\LWIP\lwip_app\udp_demo\udp_demo.c(43): warning:  #177-D: variable "key"  was declared but never referenced
+..\LWIP\lwip_app\udp_demo\udp_demo.c(29): warning:  #177-D: variable "key"  was declared but never referenced
   	u8 key;
-..\LWIP\lwip_app\udp_demo\udp_demo.c(130): warning:  #111-D: statement is unreachable
+..\LWIP\lwip_app\udp_demo\udp_demo.c(102): warning:  #111-D: statement is unreachable
   	udp_demo_connection_close(udppcb); 
-..\LWIP\lwip_app\udp_demo\udp_demo.c(79): warning:  #550-D: variable "res"  was set but never used
+..\LWIP\lwip_app\udp_demo\udp_demo.c(53): warning:  #550-D: variable "res"  was set but never used
   	u8 res=0;		
-..\LWIP\lwip_app\udp_demo\udp_demo.c: 4 warnings, 0 errors
+..\LWIP\lwip_app\udp_demo\udp_demo.c(154): warning:  #223-D: function "udp_motor_type2raw_motor_type" declared implicitly
+  					udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3],     &leg[i].hip_motor.command);
+..\LWIP\lwip_app\udp_demo\udp_demo.c(110): warning:  #177-D: variable "success_rev_flag"  was declared but never referenced
+  	u8 success_rev_flag = 0;
+..\LWIP\lwip_app\udp_demo\udp_demo.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=52618 RO-data=1254 RW-data=2144 ZI-data=33792064  
+Program Size: Code=52954 RO-data=1254 RW-data=2888 ZI-data=33792224  
 FromELF: creating hex file...
-"..\OBJ\Template.axf" - 0 Error(s), 4 Warning(s).
+"..\OBJ\Template.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -53,7 +57,7 @@ Package Vendor: Keil
   D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include
 
 <h2>Collection of Component Files used:</h2>
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

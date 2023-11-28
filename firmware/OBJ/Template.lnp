@@ -84,6 +84,7 @@
 "..\obj\system_monitor.o"
 "..\obj\unitree_motor.o"
 "..\obj\unitree_motor_ctrl_task.o"
+"..\obj\udp_comm.o"
 "..\obj\global_declare.o"
 --library_type=microlib --strict --scatter "..\OBJ\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols

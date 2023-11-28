@@ -23,7 +23,8 @@
  
 #define UDP_DEMO_RX_BUFSIZE		2000	//定义udp最大接收数据长度 
 #define UDP_DEMO_PORT			8089	//定义udp连接的端口 
-
+#define UDP_LOCAL_PORT    10
+#define UDP_REMOTE_PORT   7
  
 void udp_demo_test(void);
 void udp_demo_recv(void *arg,struct udp_pcb *upcb,struct pbuf *p,struct ip_addr *addr,u16_t port);

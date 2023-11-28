@@ -1,7 +1,7 @@
 #include "timer.h"
 #include "led.h"
 //////////////////////////////////////////////////////////////////////////////////	 
-
+#include "udp_comm.h"
 #include "unitree_motor_ctrl_task.h"
 #include "system_monitor.h"
 TIM_HandleTypeDef TIM3_Handler;      //定时器句柄 
@@ -84,8 +84,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 					psc_1000 = 0;
 				}
 				
+				//设置udp发送数据：
 				
-				udp_send_flag = 1;
+				// update motor feedback data
+        for (int i = 0; i < LEG_NUM; ++i)
+        {
+            raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3], &leg[i].hip_motor.feedback);
+            raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 1], &leg[i].thigh_motor.feedback);
+            raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 2], &leg[i].knee_motor.feedback);
+        }
+        // add crc
+        udp_send_data.check_digit = crc32_core((uint8_t *)&udp_send_data, sizeof(udp_send_data) / 4 - 1);
+
+				
+				
+				
+			//	udp_send_flag = 1;
 
         lwip_localtime +=1; //加10
     }

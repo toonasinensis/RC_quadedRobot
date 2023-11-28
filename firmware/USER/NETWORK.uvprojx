@@ -888,6 +888,16 @@
               <FileType>1</FileType>
               <FilePath>..\App\unitree_motor_ctrl_task.c</FilePath>
             </File>
+            <File>
+              <FileName>udp_comm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\udp_comm.c</FilePath>
+            </File>
+            <File>
+              <FileName>udp_comm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\udp_comm.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
