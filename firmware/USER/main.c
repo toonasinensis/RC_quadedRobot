@@ -60,9 +60,9 @@ int main(void)
 {
     u8 key=0;
 	
-    Write_Through();                        //开启强制透写！
-    MPU_Memory_Protection();                //保护相关存储区域
-    Cache_Enable();                         //打开L1-Cache
+  Write_Through();                        //开启强制透写！
+  MPU_Memory_Protection();                //保护相关存储区域
+  Cache_Enable();                         //打开L1-Cache
 	HAL_Init();				        		            //初始化HAL库
 	Stm32_Clock_Init(160,5,2,4);  		        //设置时钟,400Mhz 
 	delay_init(400);						              //延时初始化

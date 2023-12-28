@@ -481,8 +481,8 @@ void UART5_IRQHandler(void)
   /* USER CODE BEGIN UART5_IRQn 0 */
 			if (__HAL_UART_GET_FLAG(&huart5, UART_FLAG_ORE) == 1)
     {
-						SCB_InvalidateDCache();
-
+		//				SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[4], UART_RX_LEN);
 			__HAL_UART_CLEAR_OREFLAG(&huart5);
 //        HAL_UART_DMAStop(&huart1);
         HAL_UART_Receive_DMA(&huart5, uart_rx_buffer[4], UART_RX_LEN);

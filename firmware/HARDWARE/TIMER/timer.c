@@ -51,6 +51,7 @@ uint32_t timer_pp;
 uint32_t psc_1000;
 extern float normal_frecquency;
 extern u8 udp_send_flag;
+float otto_pos;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
     if(htim==(&TIM3_Handler))
@@ -75,6 +76,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 					}
 					timer_pp++;
+					otto_pos = leg[0].knee_motor.feedback.W;
 				}
 				
 				if(psc_1000>1000)//分频到1s
@@ -82,6 +84,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 					normal_frecquency = 0;
 		//			cal_fps_sys(&system_monitor);
 					psc_1000 = 0;
+						for(int i = 0;i<LEG_NUM;i++)
+					{
+						
+
+								leg[i].hip_motor.real_rate =leg[i].hip_motor.temp_rate;
+								leg[i].thigh_motor.real_rate =leg[i].thigh_motor.temp_rate;
+								leg[i].knee_motor.real_rate =leg[i].knee_motor.temp_rate;
+								leg[i].hip_motor.temp_rate = 0;
+						leg[i].thigh_motor.temp_rate = 0;
+						leg[i].knee_motor.temp_rate = 0; 
+					}
 				}
 				
 				//设置udp发送数据：

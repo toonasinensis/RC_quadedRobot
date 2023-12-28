@@ -106,6 +106,8 @@ void udp_demo_test(void)
 //UDP回调函数
 void udp_demo_recv(void *arg,struct udp_pcb *upcb,struct pbuf *p,struct ip_addr *addr,u16_t port)
 {
+		SCB_InvalidateDCache();
+
 	u32 data_len = 0;
 	u8 success_rev_flag = 0;
 	struct pbuf *q;
@@ -162,6 +164,7 @@ void udp_demo_recv(void *arg,struct udp_pcb *upcb,struct pbuf *p,struct ip_addr 
 int len_udp_send = 0;
 void udp_demo_senddata(struct udp_pcb *upcb)
 {
+	SCB_CleanDCache();
 	 len_udp_send = sizeof(udp_send_data);
 	struct pbuf *ptr;
 	ptr=pbuf_alloc(PBUF_TRANSPORT,sizeof(udp_send_data),PBUF_POOL); //申请内存
