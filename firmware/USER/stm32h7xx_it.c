@@ -678,5 +678,20 @@ if (__HAL_UART_GET_FLAG(&huart7, UART_FLAG_IDLE) == 1)
 
 /* USER CODE BEGIN 1 */
 
+/**
+  * @brief This function handles Ethernet global interrupt.
+  */
+//extern ETH_HandleTypeDef LAN8720_ETHHandle;
+//void ETH_IRQHandler(void)
+//{
+//  /* USER CODE BEGIN ETH_IRQn 0 */
+
+//  /* USER CODE END ETH_IRQn 0 */
+//  HAL_ETH_IRQHandler(&LAN8720_ETHHandle);
+//  /* USER CODE BEGIN ETH_IRQn 1 */
+
+//  /* USER CODE END ETH_IRQn 1 */
+//}
+
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
