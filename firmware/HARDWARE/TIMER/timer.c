@@ -4,40 +4,40 @@
 #include "udp_comm.h"
 #include "unitree_motor_ctrl_task.h"
 #include "system_monitor.h"
-TIM_HandleTypeDef TIM3_Handler;      //¶¨Ê±Æ÷¾ä±ú 
+TIM_HandleTypeDef TIM3_Handler;      //å®šæ—¶å™¨å¥æŸ„ 
 
-extern u32 lwip_localtime;	         //lwip±¾µØÊ±¼ä¼ÆÊıÆ÷,µ¥Î»:ms
-//Í¨ÓÃ¶¨Ê±Æ÷3ÖĞ¶Ï³õÊ¼»¯,¶¨Ê±Æ÷3ÔÚAPB1ÉÏ£¬APB1µÄ¶¨Ê±Æ÷Ê±ÖÓÎª200MHz
-//arr£º×Ô¶¯ÖØ×°Öµ¡£
-//psc£ºÊ±ÖÓÔ¤·ÖÆµÊı
-//¶¨Ê±Æ÷Òç³öÊ±¼ä¼ÆËã·½·¨:Tout=((arr+1)*(psc+1))/Ft us.
-//Ft=¶¨Ê±Æ÷¹¤×÷ÆµÂÊ,µ¥Î»:Mhz
-//ÕâÀïÊ¹ÓÃµÄÊÇ¶¨Ê±Æ÷3!(¶¨Ê±Æ÷3¹ÒÔÚAPB1ÉÏ£¬Ê±ÖÓÎªHCLK/2)
+extern u32 lwip_localtime;	         //lwipæœ¬åœ°æ—¶é—´è®¡æ•°å™¨,å•ä½:ms
+//é€šç”¨å®šæ—¶å™¨3ä¸­æ–­åˆå§‹åŒ–,å®šæ—¶å™¨3åœ¨APB1ä¸Šï¼ŒAPB1çš„å®šæ—¶å™¨æ—¶é’Ÿä¸º200MHz
+//arrï¼šè‡ªåŠ¨é‡è£…å€¼ã€‚
+//pscï¼šæ—¶é’Ÿé¢„åˆ†é¢‘æ•°
+//å®šæ—¶å™¨æº¢å‡ºæ—¶é—´è®¡ç®—æ–¹æ³•:Tout=((arr+1)*(psc+1))/Ft us.
+//Ft=å®šæ—¶å™¨å·¥ä½œé¢‘ç‡,å•ä½:Mhz
+//è¿™é‡Œä½¿ç”¨çš„æ˜¯å®šæ—¶å™¨3!(å®šæ—¶å™¨3æŒ‚åœ¨APB1ä¸Šï¼Œæ—¶é’Ÿä¸ºHCLK/2)
 void TIM3_Init(u16 arr,u16 psc)
 {  
-    TIM3_Handler.Instance=TIM3;                          //Í¨ÓÃ¶¨Ê±Æ÷3
-    TIM3_Handler.Init.Prescaler=psc;                     //·ÖÆµ
-    TIM3_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //ÏòÉÏ¼ÆÊıÆ÷
-    TIM3_Handler.Init.Period=arr;                        //×Ô¶¯×°ÔØÖµ
-    TIM3_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//Ê±ÖÓ·ÖÆµÒò×Ó
+    TIM3_Handler.Instance=TIM3;                          //é€šç”¨å®šæ—¶å™¨3
+    TIM3_Handler.Init.Prescaler=psc;                     //åˆ†é¢‘
+    TIM3_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //å‘ä¸Šè®¡æ•°å™¨
+    TIM3_Handler.Init.Period=arr;                        //è‡ªåŠ¨è£…è½½å€¼
+    TIM3_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//æ—¶é’Ÿåˆ†é¢‘å› å­
     HAL_TIM_Base_Init(&TIM3_Handler);
     
-    HAL_TIM_Base_Start_IT(&TIM3_Handler); //Ê¹ÄÜ¶¨Ê±Æ÷3ºÍ¶¨Ê±Æ÷3¸üĞÂÖĞ¶Ï£ºTIM_IT_UPDATE    
+    HAL_TIM_Base_Start_IT(&TIM3_Handler); //ä½¿èƒ½å®šæ—¶å™¨3å’Œå®šæ—¶å™¨3æ›´æ–°ä¸­æ–­ï¼šTIM_IT_UPDATE    
 }
 
-//¶¨Ê±Æ÷µ×²áÇı¶¯£¬¿ªÆôÊ±ÖÓ£¬ÉèÖÃÖĞ¶ÏÓÅÏÈ¼¶
-//´Ëº¯Êı»á±»HAL_TIM_Base_Init()º¯Êıµ÷ÓÃ
+//å®šæ—¶å™¨åº•å†Œé©±åŠ¨ï¼Œå¼€å¯æ—¶é’Ÿï¼Œè®¾ç½®ä¸­æ–­ä¼˜å…ˆçº§
+//æ­¤å‡½æ•°ä¼šè¢«HAL_TIM_Base_Init()å‡½æ•°è°ƒç”¨
 void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
 {
     if(htim->Instance==TIM3)
 	{
-		__HAL_RCC_TIM3_CLK_ENABLE();            //Ê¹ÄÜTIM3Ê±ÖÓ
-		HAL_NVIC_SetPriority(TIM3_IRQn,1,3);    //ÉèÖÃÖĞ¶ÏÓÅÏÈ¼¶£¬ÇÀÕ¼ÓÅÏÈ¼¶1£¬×ÓÓÅÏÈ¼¶3
-		HAL_NVIC_EnableIRQ(TIM3_IRQn);          //¿ªÆôITM3ÖĞ¶Ï   
+		__HAL_RCC_TIM3_CLK_ENABLE();            //ä½¿èƒ½TIM3æ—¶é’Ÿ
+		HAL_NVIC_SetPriority(TIM3_IRQn,1,3);    //è®¾ç½®ä¸­æ–­ä¼˜å…ˆçº§ï¼ŒæŠ¢å ä¼˜å…ˆçº§1ï¼Œå­ä¼˜å…ˆçº§3
+		HAL_NVIC_EnableIRQ(TIM3_IRQn);          //å¼€å¯ITM3ä¸­æ–­   
 	}  
 }
 
-//¶¨Ê±Æ÷3ÖĞ¶Ï·şÎñº¯Êı
+//å®šæ—¶å™¨3ä¸­æ–­æœåŠ¡å‡½æ•°
 void TIM3_IRQHandler(void)
 {
     HAL_TIM_IRQHandler(&TIM3_Handler);
@@ -45,7 +45,7 @@ void TIM3_IRQHandler(void)
 uint8_t start_send;
 uint8_t if_long_use;
 uint8_t fast_send=0;
-//¶¨Ê±Æ÷3ÖĞ¶Ï·şÎñº¯Êıµ÷ÓÃ
+//å®šæ—¶å™¨3ä¸­æ–­æœåŠ¡å‡½æ•°è°ƒç”¨
 uint32_t timer_pp;
 
 uint32_t psc_1000;
@@ -79,7 +79,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 					otto_pos = leg[0].knee_motor.feedback.W;
 				}
 				
-				if(psc_1000>1000)//·ÖÆµµ½1s
+				if(psc_1000>1000)//åˆ†é¢‘åˆ°1s
 				{
 					normal_frecquency = 0;
 		//			cal_fps_sys(&system_monitor);
@@ -97,7 +97,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 					}
 				}
 				
-				//ÉèÖÃudp·¢ËÍÊı¾İ£º
+				//è®¾ç½®udpå‘é€æ•°æ®ï¼š
 				
 				// update motor feedback data
         for (int i = 0; i < LEG_NUM; ++i)
@@ -114,6 +114,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 				
 			//	udp_send_flag = 1;
 
-        lwip_localtime +=1; //¼Ó10
+        lwip_localtime +=1; //åŠ 10
     }
 }

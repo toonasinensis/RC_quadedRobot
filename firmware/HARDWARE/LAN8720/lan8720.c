@@ -1,389 +1,374 @@
 #include "lan8720.h"
+#include "delay.h"
 #include "lwip_comm.h"
 #include "pcf8574.h"
-#include "delay.h"
 #include "usart.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌĞòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßĞí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK STM32H7¿ª·¢°å
-//LAN8720Çı¶¯´úÂë	   
-//ÕıµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//´´½¨ÈÕÆÚ:2018/7/6
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓĞ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾ 2014-2024
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
+
+//////////////////////////////////////////////////////////////////////////////////
+// æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºå…¶å®ƒä»»ä½•ç”¨é€”
+// ALIENTEK STM32H7å¼€å‘æ¿
+// LAN8720é©±åŠ¨ä»£ç 
+// æ­£ç‚¹åŸå­@ALIENTEK
+// æŠ€æœ¯è®ºå›:www.openedv.com
+// åˆ›å»ºæ—¥æœŸ:2018/7/6
+// ç‰ˆæœ¬ï¼šV1.0
+// ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+// Copyright(C) å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2014-2024
+// All rights reserved
+//////////////////////////////////////////////////////////////////////////////////
 
 ETH_HandleTypeDef LAN8720_ETHHandle;
 
-//ÒÔÌ«ÍøÃèÊö·ûºÍ»º³åÇø
-__attribute__((at(0x30040000))) ETH_DMADescTypeDef  DMARxDscrTab[ETH_RX_DESC_CNT];      //ÒÔÌ«ÍøRx DMAÃèÊö·û
-__attribute__((at(0x30040060))) ETH_DMADescTypeDef  DMATxDscrTab[ETH_TX_DESC_CNT];      //ÒÔÌ«ÍøTx DMAÃèÊö·û
-__attribute__((at(0x30040200))) uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE];  //ÒÔÌ«Íø½ÓÊÕ»º³åÇø
+// ä»¥å¤ªç½‘æè¿°ç¬¦å’Œç¼“å†²åŒº
+__attribute__((at(0x30040000)))
+ETH_DMADescTypeDef DMARxDscrTab[ETH_RX_DESC_CNT]; // ä»¥å¤ªç½‘Rx DMAæè¿°ç¬¦
+__attribute__((at(0x30040060)))
+ETH_DMADescTypeDef DMATxDscrTab[ETH_TX_DESC_CNT]; // ä»¥å¤ªç½‘Tx DMAæè¿°ç¬¦
+__attribute__((at(0x30040200)))
+uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE]; // ä»¥å¤ªç½‘æ¥æ”¶ç¼“å†²åŒº
 
+// è®¾ç½®ç½‘ç»œæ‰€ä½¿ç”¨çš„0X30040000çš„ramå†…å­˜ä¿æŠ¤
+void NETMPU_Config(void) {
+  MPU_Region_InitTypeDef MPU_InitStruct;
 
-//ÉèÖÃÍøÂçËùÊ¹ÓÃµÄ0X30040000µÄramÄÚ´æ±£»¤
-void NETMPU_Config(void)
-{
-    MPU_Region_InitTypeDef MPU_InitStruct;
-
-    HAL_MPU_Disable();
-    MPU_InitStruct.Enable=MPU_REGION_ENABLE;
-    MPU_InitStruct.BaseAddress=0x30040000;
-    MPU_InitStruct.Size=MPU_REGION_SIZE_256B;
-    MPU_InitStruct.AccessPermission=MPU_REGION_FULL_ACCESS;
-    MPU_InitStruct.IsBufferable=MPU_ACCESS_BUFFERABLE;
-    MPU_InitStruct.IsCacheable=MPU_ACCESS_NOT_CACHEABLE;
-    MPU_InitStruct.IsShareable=MPU_ACCESS_SHAREABLE;
-    MPU_InitStruct.Number=MPU_REGION_NUMBER5;
-    MPU_InitStruct.TypeExtField=MPU_TEX_LEVEL0;
-    MPU_InitStruct.SubRegionDisable=0x00;
-    MPU_InitStruct.DisableExec=MPU_INSTRUCTION_ACCESS_ENABLE;
-    HAL_MPU_ConfigRegion(&MPU_InitStruct); 
-    HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+  HAL_MPU_Disable();
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x30040000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER5;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+  HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 }
 
-//³õÊ¼»¯LAN8720
-int32_t LAN8720_Init(void)
-{         
-    u8 macaddress[6];
-    u32 timeout=0;
-    u32 regval=0;
-    u32 phylink=0;
-    int32_t status=LAN8720_STATUS_OK;
-    
-    //Ó²¼ş¸´Î»
-    INTX_DISABLE();                         //¹Ø±ÕËùÓĞÖĞ¶Ï£¬¸´Î»¹ı³Ì²»ÄÜ±»´ò¶Ï£¡
-    PCF8574_WriteBit(ETH_RESET_IO,1);       //Ó²¼ş¸´Î»
-	  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_RESET);
+// åˆå§‹åŒ–LAN8720
+int32_t LAN8720_Init(void) {
+  u8 macaddress[6];
+  u32 timeout = 0;
+  u32 regval = 0;
+  u32 phylink = 0;
+  int32_t status = LAN8720_STATUS_OK;
 
-    delay_ms(100);
-    PCF8574_WriteBit(ETH_RESET_IO,0);       //¸´Î»½áÊø
-		  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_SET);
+  // ç¡¬ä»¶å¤ä½
+  INTX_DISABLE(); // å…³é—­æ‰€æœ‰ä¸­æ–­ï¼Œå¤ä½è¿‡ç¨‹ä¸èƒ½è¢«æ‰“æ–­ï¼
+  PCF8574_WriteBit(ETH_RESET_IO, 1); // ç¡¬ä»¶å¤ä½
+  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_RESET);
 
-    delay_ms(100);
-    INTX_ENABLE();                          //¿ªÆôËùÓĞÖĞ¶Ï 
-    
-    NETMPU_Config();                        //MPU±£»¤ÉèÖÃ
-    macaddress[0]=lwipdev.mac[0]; 
-	macaddress[1]=lwipdev.mac[1]; 
-	macaddress[2]=lwipdev.mac[2];
-	macaddress[3]=lwipdev.mac[3];   
-	macaddress[4]=lwipdev.mac[4];
-	macaddress[5]=lwipdev.mac[5];
-    
-    LAN8720_ETHHandle.Instance=ETH;                             //ETH
-    LAN8720_ETHHandle.Init.MACAddr=macaddress;                  //macµØÖ·
-    LAN8720_ETHHandle.Init.MediaInterface=HAL_ETH_RMII_MODE;    //RMII½Ó¿Ú
-    LAN8720_ETHHandle.Init.RxDesc=DMARxDscrTab;                 //·¢ËÍÃèÊö·û
-    LAN8720_ETHHandle.Init.TxDesc=DMATxDscrTab;                 //½ÓÊÕÃèÊöÈç
-    LAN8720_ETHHandle.Init.RxBuffLen=ETH_MAX_PACKET_SIZE;       //½ÓÊÕ³¤¶È
-    HAL_ETH_Init(&LAN8720_ETHHandle);                           //³õÊ¼»¯ETH
-    HAL_ETH_SetMDIOClockRange(&LAN8720_ETHHandle);
-    
-    if(LAN8720_WritePHY(LAN8720_BCR,LAN8720_BCR_SOFT_RESET)>=0) //LAN8720Èí¼ş¸´Î»
-    {
-        //µÈ´ıÈí¼ş¸´Î»Íê³É
-        if(LAN8720_ReadPHY(LAN8720_BCR,&regval)>=0)
-        {
-            while(regval&LAN8720_BCR_SOFT_RESET)
-            {
-                if(LAN8720_ReadPHY(LAN8720_BCR,&regval)<0)
-                {
-                    status=LAN8720_STATUS_READ_ERROR;
-                    break;
-                }
-                delay_ms(10);
-                timeout++;
-                if(timeout>=LAN8720_TIMEOUT) break; //³¬Ê±Ìø³ö,5S
-            }
-    
+  delay_ms(100);
+  PCF8574_WriteBit(ETH_RESET_IO, 0); // å¤ä½ç»“æŸ
+  HAL_GPIO_WritePin(GPIOH, GPIO_PIN_2, GPIO_PIN_SET);
+
+  delay_ms(100);
+  INTX_ENABLE(); // å¼€å¯æ‰€æœ‰ä¸­æ–­
+
+  NETMPU_Config(); // MPUä¿æŠ¤è®¾ç½®
+  macaddress[0] = lwipdev.mac[0];
+  macaddress[1] = lwipdev.mac[1];
+  macaddress[2] = lwipdev.mac[2];
+  macaddress[3] = lwipdev.mac[3];
+  macaddress[4] = lwipdev.mac[4];
+  macaddress[5] = lwipdev.mac[5];
+
+  LAN8720_ETHHandle.Instance = ETH;                          // ETH
+  LAN8720_ETHHandle.Init.MACAddr = macaddress;               // macåœ°å€
+  LAN8720_ETHHandle.Init.MediaInterface = HAL_ETH_RMII_MODE; // RMIIæ¥å£
+  LAN8720_ETHHandle.Init.RxDesc = DMARxDscrTab;              // å‘é€æè¿°ç¬¦
+  LAN8720_ETHHandle.Init.TxDesc = DMATxDscrTab;              // æ¥æ”¶æè¿°å¦‚
+  LAN8720_ETHHandle.Init.RxBuffLen = ETH_MAX_PACKET_SIZE;    // æ¥æ”¶é•¿åº¦
+  HAL_ETH_Init(&LAN8720_ETHHandle);                          // åˆå§‹åŒ–ETH
+  HAL_ETH_SetMDIOClockRange(&LAN8720_ETHHandle);
+
+  if (LAN8720_WritePHY(LAN8720_BCR, LAN8720_BCR_SOFT_RESET) >=
+      0) // LAN8720è½¯ä»¶å¤ä½
+  {
+    // ç­‰å¾…è½¯ä»¶å¤ä½å®Œæˆ
+    if (LAN8720_ReadPHY(LAN8720_BCR, &regval) >= 0) {
+      while (regval & LAN8720_BCR_SOFT_RESET) {
+        if (LAN8720_ReadPHY(LAN8720_BCR, &regval) < 0) {
+          status = LAN8720_STATUS_READ_ERROR;
+          break;
         }
-        else
-        {
-            status=LAN8720_STATUS_READ_ERROR;
-        }
-    }
-    else
-    {
-        status=LAN8720_STATUS_WRITE_ERROR;
-    }
-
-    LAN8720_StartAutoNego();                //¿ªÆô×Ô¶¯Ğ­ÉÌ¹¦ÄÜ
-    
-    if(status==LAN8720_STATUS_OK)           //Èç¹ûÇ°ÃæÔËĞĞÕı³£¾ÍÑÓÊ±1s
-        delay_ms(1000);                     //µÈ´ı1s
-       
-    //µÈ´ıÍøÂçÁ¬½Ó³É¹¦
-    timeout=0;
-    while(LAN8720_GetLinkState()<=LAN8720_STATUS_LINK_DOWN)  
-    {
         delay_ms(10);
         timeout++;
-        if(timeout>=LAN8720_TIMEOUT) 
-        {
-            status=LAN8720_STATUS_LINK_DOWN;
-            break; //³¬Ê±Ìø³ö,5S
-        }
+        if (timeout >= LAN8720_TIMEOUT)
+          break; // è¶…æ—¶è·³å‡º,5S
+      }
+
+    } else {
+      status = LAN8720_STATUS_READ_ERROR;
     }
-    phylink=LAN8720_GetLinkState();
-    if(phylink==LAN8720_STATUS_100MBITS_FULLDUPLEX)
-        printf("LAN8720:100Mb/s FullDuplex\r\n");
-    else if(phylink==LAN8720_STATUS_100MBITS_HALFDUPLEX)
-        printf("LAN8720:100Mb/s HalfDuplex\r\n");
-    else if(phylink==LAN8720_STATUS_10MBITS_FULLDUPLEX)
-        printf("LAN8720:10Mb/s FullDuplex\r\n");
-    else if(phylink==LAN8720_STATUS_10MBITS_HALFDUPLEX)
-        printf("LAN8720:10Mb/s HalfDuplex\r\n");
-    return status; 
+  } else {
+    status = LAN8720_STATUS_WRITE_ERROR;
+  }
+
+  LAN8720_StartAutoNego(); // å¼€å¯è‡ªåŠ¨åå•†åŠŸèƒ½
+
+  if (status == LAN8720_STATUS_OK) // å¦‚æœå‰é¢è¿è¡Œæ­£å¸¸å°±å»¶æ—¶1s
+    delay_ms(1000);                // ç­‰å¾…1s
+
+  // ç­‰å¾…ç½‘ç»œè¿æ¥æˆåŠŸ
+  timeout = 0;
+  while (LAN8720_GetLinkState() <= LAN8720_STATUS_LINK_DOWN) {
+    delay_ms(10);
+    timeout++;
+    if (timeout >= LAN8720_TIMEOUT) {
+      status = LAN8720_STATUS_LINK_DOWN;
+      break; // è¶…æ—¶è·³å‡º,5S
+    }
+  }
+  phylink = LAN8720_GetLinkState();
+  if (phylink == LAN8720_STATUS_100MBITS_FULLDUPLEX)
+    printf("LAN8720:100Mb/s FullDuplex\r\n");
+  else if (phylink == LAN8720_STATUS_100MBITS_HALFDUPLEX)
+    printf("LAN8720:100Mb/s HalfDuplex\r\n");
+  else if (phylink == LAN8720_STATUS_10MBITS_FULLDUPLEX)
+    printf("LAN8720:10Mb/s FullDuplex\r\n");
+  else if (phylink == LAN8720_STATUS_10MBITS_HALFDUPLEX)
+    printf("LAN8720:10Mb/s HalfDuplex\r\n");
+  return status;
 }
 
 extern void lwip_pkt_handle(void);
-    
-//ÖĞ¶Ï·şÎñº¯Êı
-void ETH_IRQHandler(void)
-{
-    lwip_pkt_handle();
-    //Çå³ıÖĞ¶Ï±êÖ¾Î»
-    __HAL_ETH_DMA_CLEAR_IT(&LAN8720_ETHHandle,ETH_DMA_NORMAL_IT);  //Çå³ıDMAÖĞ¶Ï±êÖ¾Î»
-    __HAL_ETH_DMA_CLEAR_IT(&LAN8720_ETHHandle,ETH_DMA_RX_IT);     //Çå³ıDMA½ÓÊÕÖĞ¶Ï±êÖ¾Î»
-    __HAL_ETH_DMA_CLEAR_IT(&LAN8720_ETHHandle,ETH_DMA_TX_IT);     //Çå³ıDMA½ÓÊÕÖĞ¶Ï±êÖ¾Î»
+
+// ä¸­æ–­æœåŠ¡å‡½æ•°
+void ETH_IRQHandler(void) {
+  lwip_pkt_handle();
+  // æ¸…é™¤ä¸­æ–­æ ‡å¿—ä½
+  __HAL_ETH_DMA_CLEAR_IT(&LAN8720_ETHHandle,
+                         ETH_DMA_NORMAL_IT); // æ¸…é™¤DMAä¸­æ–­æ ‡å¿—ä½
+  __HAL_ETH_DMA_CLEAR_IT(&LAN8720_ETHHandle,
+                         ETH_DMA_RX_IT); // æ¸…é™¤DMAæ¥æ”¶ä¸­æ–­æ ‡å¿—ä½
+  __HAL_ETH_DMA_CLEAR_IT(&LAN8720_ETHHandle,
+                         ETH_DMA_TX_IT); // æ¸…é™¤DMAæ¥æ”¶ä¸­æ–­æ ‡å¿—ä½
 }
 
+// ETHåº•å±‚é©±åŠ¨ï¼Œå¼•è„šé…ç½®ï¼Œæ—¶é’Ÿä½¿èƒ½
+// æ­¤å‡½æ•°ä¼šè¢«HAL_ETH_Init()è°ƒç”¨
+// heth:ETHå¥æŸ„
+void HAL_ETH_MspInit(ETH_HandleTypeDef *heth) {
+  GPIO_InitTypeDef GPIO_Initure;
 
-//ETHµ×²ãÇı¶¯£¬Òı½ÅÅäÖÃ£¬Ê±ÖÓÊ¹ÄÜ
-//´Ëº¯Êı»á±»HAL_ETH_Init()µ÷ÓÃ
-//heth:ETH¾ä±ú
-void HAL_ETH_MspInit(ETH_HandleTypeDef *heth)
-{
-    GPIO_InitTypeDef GPIO_Initure;
+  __HAL_RCC_GPIOA_CLK_ENABLE();   // å¼€å¯GPIOAæ—¶é’Ÿ
+  __HAL_RCC_GPIOB_CLK_ENABLE();   // å¼€å¯GPIOBæ—¶é’Ÿ
+  __HAL_RCC_GPIOC_CLK_ENABLE();   // å¼€å¯GPIOCæ—¶é’Ÿ
+  __HAL_RCC_GPIOG_CLK_ENABLE();   // å¼€å¯GPIOGæ—¶é’Ÿ
+  __HAL_RCC_ETH1MAC_CLK_ENABLE(); // ä½¿èƒ½ETH1 MACæ—¶é’Ÿ
+  __HAL_RCC_ETH1TX_CLK_ENABLE();  // ä½¿èƒ½ETH1å‘é€æ—¶é’Ÿ
+  __HAL_RCC_ETH1RX_CLK_ENABLE();  // ä½¿èƒ½ETH1æ¥æ”¶æ—¶é’Ÿ
 
-    __HAL_RCC_GPIOA_CLK_ENABLE();			//¿ªÆôGPIOAÊ±ÖÓ
-	__HAL_RCC_GPIOB_CLK_ENABLE();			//¿ªÆôGPIOBÊ±ÖÓ
-    __HAL_RCC_GPIOC_CLK_ENABLE();			//¿ªÆôGPIOCÊ±ÖÓ
-    __HAL_RCC_GPIOG_CLK_ENABLE();			//¿ªÆôGPIOGÊ±ÖÓ
-    __HAL_RCC_ETH1MAC_CLK_ENABLE();         //Ê¹ÄÜETH1 MACÊ±ÖÓ
-    __HAL_RCC_ETH1TX_CLK_ENABLE();          //Ê¹ÄÜETH1·¢ËÍÊ±ÖÓ
-    __HAL_RCC_ETH1RX_CLK_ENABLE();          //Ê¹ÄÜETH1½ÓÊÕÊ±ÖÓ
-    
-    GPIO_Initure.Pin=GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_7; 
-    GPIO_Initure.Mode=GPIO_MODE_AF_PP;          //ÍÆÍì¸´ÓÃ
-    GPIO_Initure.Pull=GPIO_NOPULL;              //²»´øÉÏÏÂÀ­
-    GPIO_Initure.Speed=GPIO_SPEED_FREQ_HIGH;    //¸ßËÙ
-    GPIO_Initure.Alternate=GPIO_AF11_ETH;       //¸´ÓÃÎªETH¹¦ÄÜ
-    HAL_GPIO_Init(GPIOA,&GPIO_Initure);         //³õÊ¼»¯
-    
-    //PB11
-//    GPIO_Initure.Pin=GPIO_PIN_11;               //PB11
-//    HAL_GPIO_Init(GPIOB,&GPIO_Initure);         //Ê¼»¯
-	
-	    //PG11
-    GPIO_Initure.Pin=GPIO_PIN_11;               //PG11
-    HAL_GPIO_Init(GPIOG,&GPIO_Initure);         //Ê¼»¯
-//	
-	
-    
-    //PC1,4,5
-    GPIO_Initure.Pin=GPIO_PIN_1|GPIO_PIN_4|GPIO_PIN_5; //PC1,4,5
-    HAL_GPIO_Init(GPIOC,&GPIO_Initure);         //³õÊ¼»¯
-	
-    //PG13,14
-    GPIO_Initure.Pin=GPIO_PIN_13|GPIO_PIN_14;   //PG13,14
-    HAL_GPIO_Init(GPIOG,&GPIO_Initure);         //³õÊ¼»¯
-    
-    HAL_NVIC_SetPriority(ETH_IRQn,0,0);         //ÍøÂçÖĞ¶ÏÓÅÏÈ¼¶Ó¦¸Ã¸ßÒ»µã
-    HAL_NVIC_EnableIRQ(ETH_IRQn);
+  GPIO_Initure.Pin = GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_7;
+  GPIO_Initure.Mode = GPIO_MODE_AF_PP;       // æ¨æŒ½å¤ç”¨
+  GPIO_Initure.Pull = GPIO_NOPULL;           // ä¸å¸¦ä¸Šä¸‹æ‹‰
+  GPIO_Initure.Speed = GPIO_SPEED_FREQ_HIGH; // é«˜é€Ÿ
+  GPIO_Initure.Alternate = GPIO_AF11_ETH;    // å¤ç”¨ä¸ºETHåŠŸèƒ½
+  HAL_GPIO_Init(GPIOA, &GPIO_Initure);       // åˆå§‹åŒ–
+
+  // PB11
+  //    GPIO_Initure.Pin=GPIO_PIN_11;               //PB11
+  //    HAL_GPIO_Init(GPIOB,&GPIO_Initure);         //å§‹åŒ–
+
+  // PG11
+  GPIO_Initure.Pin = GPIO_PIN_11;      // PG11
+  HAL_GPIO_Init(GPIOG, &GPIO_Initure); // å§‹åŒ–
+  //
+
+  // PC1,4,5
+  GPIO_Initure.Pin = GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5; // PC1,4,5
+  HAL_GPIO_Init(GPIOC, &GPIO_Initure);                     // åˆå§‹åŒ–
+
+  // PG13,14
+  GPIO_Initure.Pin = GPIO_PIN_13 | GPIO_PIN_14; // PG13,14
+  HAL_GPIO_Init(GPIOG, &GPIO_Initure);          // åˆå§‹åŒ–
+
+  HAL_NVIC_SetPriority(ETH_IRQn, 0, 0); // ç½‘ç»œä¸­æ–­ä¼˜å…ˆçº§åº”è¯¥é«˜ä¸€ç‚¹
+  HAL_NVIC_EnableIRQ(ETH_IRQn);
 }
 
-
-//¶ÁÈ¡PHY¼Ä´æÆ÷Öµ
-//regÒª¶ÁÈ¡µÄ¼Ä´æÆ÷µØÖ·
-//·µ»ØÖµ:0 ¶ÁÈ¡³É¹¦£¬-1 ¶ÁÈ¡Ê§°Ü
-int32_t LAN8720_ReadPHY(u16 reg,u32 *regval)
-{
-    if(HAL_ETH_ReadPHYRegister(&LAN8720_ETHHandle,LAN8720_ADDR,reg,regval)!=HAL_OK)
-        return -1;
-    return 0;
+// è¯»å–PHYå¯„å­˜å™¨å€¼
+// regè¦è¯»å–çš„å¯„å­˜å™¨åœ°å€
+// è¿”å›å€¼:0 è¯»å–æˆåŠŸï¼Œ-1 è¯»å–å¤±è´¥
+int32_t LAN8720_ReadPHY(u16 reg, u32 *regval) {
+  if (HAL_ETH_ReadPHYRegister(&LAN8720_ETHHandle, LAN8720_ADDR, reg, regval) !=
+      HAL_OK)
+    return -1;
+  return 0;
 }
 
-//ÏòLAN8720Ö¸¶¨¼Ä´æÆ÷Ğ´ÈëÖµ
-//reg:ÒªĞ´ÈëµÄ¼Ä´æÆ÷
-//value:ÒªĞ´ÈëµÄÖµ
-//·µ»ØÖµ:0 Ğ´ÈëÕı³££¬-1 Ğ´ÈëÊ§°Ü
-int32_t LAN8720_WritePHY(u16 reg,u16 value)
-{
-    u32 temp=value;
-    if(HAL_ETH_WritePHYRegister(&LAN8720_ETHHandle,LAN8720_ADDR,reg,temp)!=HAL_OK)
-        return -1;
-    return 0;
+// å‘LAN8720æŒ‡å®šå¯„å­˜å™¨å†™å…¥å€¼
+// reg:è¦å†™å…¥çš„å¯„å­˜å™¨
+// value:è¦å†™å…¥çš„å€¼
+// è¿”å›å€¼:0 å†™å…¥æ­£å¸¸ï¼Œ-1 å†™å…¥å¤±è´¥
+int32_t LAN8720_WritePHY(u16 reg, u16 value) {
+  u32 temp = value;
+  if (HAL_ETH_WritePHYRegister(&LAN8720_ETHHandle, LAN8720_ADDR, reg, temp) !=
+      HAL_OK)
+    return -1;
+  return 0;
 }
 
-//´ò¿ªLAN8720 Power DownÄ£Ê½ 
-void LAN8720_EnablePowerDownMode(void)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_BCR,&readval);
-    readval|=LAN8720_BCR_POWER_DOWN;
-    LAN8720_WritePHY(LAN8720_BCR,readval);
+// æ‰“å¼€LAN8720 Power Downæ¨¡å¼
+void LAN8720_EnablePowerDownMode(void) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_BCR, &readval);
+  readval |= LAN8720_BCR_POWER_DOWN;
+  LAN8720_WritePHY(LAN8720_BCR, readval);
 }
 
-//¹Ø±ÕLAN8720 Power DownÄ£Ê½
-void LAN8720_DisablePowerDownMode(void)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_BCR,&readval);
-    readval&=~LAN8720_BCR_POWER_DOWN;
-    LAN8720_WritePHY(LAN8720_BCR,readval);
+// å…³é—­LAN8720 Power Downæ¨¡å¼
+void LAN8720_DisablePowerDownMode(void) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_BCR, &readval);
+  readval &= ~LAN8720_BCR_POWER_DOWN;
+  LAN8720_WritePHY(LAN8720_BCR, readval);
 }
 
-//¿ªÆôLAN8720µÄ×ÔĞ­ÉÌ¹¦ÄÜ
-void LAN8720_StartAutoNego(void)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_BCR,&readval);
-    readval|=LAN8720_BCR_AUTONEGO_EN;
-    LAN8720_WritePHY(LAN8720_BCR,readval);
+// å¼€å¯LAN8720çš„è‡ªåå•†åŠŸèƒ½
+void LAN8720_StartAutoNego(void) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_BCR, &readval);
+  readval |= LAN8720_BCR_AUTONEGO_EN;
+  LAN8720_WritePHY(LAN8720_BCR, readval);
 }
 
-//Ê¹ÄÜ»Ø²âÄ£Ê½
-void LAN8720_EnableLoopbackMode(void)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_BCR,&readval);
-    readval|=LAN8720_BCR_LOOPBACK;
-    LAN8720_WritePHY(LAN8720_BCR,readval);
+// ä½¿èƒ½å›æµ‹æ¨¡å¼
+void LAN8720_EnableLoopbackMode(void) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_BCR, &readval);
+  readval |= LAN8720_BCR_LOOPBACK;
+  LAN8720_WritePHY(LAN8720_BCR, readval);
 }
 
-//¹Ø±ÕLAN8720µÄ»Ø²âÄ£Ê½
-void LAN8720_DisableLoopbackMode(void)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_BCR,&readval);
-    readval&=~LAN8720_BCR_LOOPBACK;
-    LAN8720_WritePHY(LAN8720_BCR,readval);
+// å…³é—­LAN8720çš„å›æµ‹æ¨¡å¼
+void LAN8720_DisableLoopbackMode(void) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_BCR, &readval);
+  readval &= ~LAN8720_BCR_LOOPBACK;
+  LAN8720_WritePHY(LAN8720_BCR, readval);
 }
 
-//Ê¹ÄÜÖĞ¶Ï£¬ÖĞ¶ÏÔ´¿ÉÑ¡:LAN8720_ENERGYON_IT
-//                     LAN8720_AUTONEGO_COMPLETE_IT
-//                     LAN8720_REMOTE_FAULT_IT
-//                     LAN8720_LINK_DOWN_IT
-//                     LAN8720_AUTONEGO_LP_ACK_IT        
-//                     LAN8720_PARALLEL_DETECTION_FAULT_IT
-//                     LAN8720_AUTONEGO_PAGE_RECEIVED_IT
-void LAN8720_EnableIT(u32 interrupt)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_IMR,&readval);
-    readval|=interrupt;
-    LAN8720_WritePHY(LAN8720_IMR,readval);
+// ä½¿èƒ½ä¸­æ–­ï¼Œä¸­æ–­æºå¯é€‰:LAN8720_ENERGYON_IT
+//                      LAN8720_AUTONEGO_COMPLETE_IT
+//                      LAN8720_REMOTE_FAULT_IT
+//                      LAN8720_LINK_DOWN_IT
+//                      LAN8720_AUTONEGO_LP_ACK_IT
+//                      LAN8720_PARALLEL_DETECTION_FAULT_IT
+//                      LAN8720_AUTONEGO_PAGE_RECEIVED_IT
+void LAN8720_EnableIT(u32 interrupt) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_IMR, &readval);
+  readval |= interrupt;
+  LAN8720_WritePHY(LAN8720_IMR, readval);
 }
 
-//¹Ø±ÕÖĞ¶Ï£¬ÖĞ¶ÏÔ´¿ÉÑ¡:LAN8720_ENERGYON_IT
-//                     LAN8720_AUTONEGO_COMPLETE_IT
-//                     LAN8720_REMOTE_FAULT_IT
-//                     LAN8720_LINK_DOWN_IT
-//                     LAN8720_AUTONEGO_LP_ACK_IT        
-//                     LAN8720_PARALLEL_DETECTION_FAULT_IT
-//                     LAN8720_AUTONEGO_PAGE_RECEIVED_IT
-void LAN8720_DisableIT(u32 interrupt)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_IMR,&readval);
-    readval&=~interrupt;
-    LAN8720_WritePHY(LAN8720_IMR,readval);
+// å…³é—­ä¸­æ–­ï¼Œä¸­æ–­æºå¯é€‰:LAN8720_ENERGYON_IT
+//                      LAN8720_AUTONEGO_COMPLETE_IT
+//                      LAN8720_REMOTE_FAULT_IT
+//                      LAN8720_LINK_DOWN_IT
+//                      LAN8720_AUTONEGO_LP_ACK_IT
+//                      LAN8720_PARALLEL_DETECTION_FAULT_IT
+//                      LAN8720_AUTONEGO_PAGE_RECEIVED_IT
+void LAN8720_DisableIT(u32 interrupt) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_IMR, &readval);
+  readval &= ~interrupt;
+  LAN8720_WritePHY(LAN8720_IMR, readval);
 }
 
-//Çå³ıÖĞ¶Ï±êÖ¾Î»£¬¶Á¼Ä´æÆ÷ISFR¾Í¿ÉÇå³ıÖĞ¶Ï±êÖ¾Î»
-void LAN8720_ClearIT(u32 interrupt)
-{
-    u32 readval=0;
-    LAN8720_ReadPHY(LAN8720_ISFR,&readval);
+// æ¸…é™¤ä¸­æ–­æ ‡å¿—ä½ï¼Œè¯»å¯„å­˜å™¨ISFRå°±å¯æ¸…é™¤ä¸­æ–­æ ‡å¿—ä½
+void LAN8720_ClearIT(u32 interrupt) {
+  u32 readval = 0;
+  LAN8720_ReadPHY(LAN8720_ISFR, &readval);
 }
 
-//»ñÈ¡ÖĞ¶Ï±êÖ¾Î»
-//·µ»ØÖµ£¬1 ÖĞ¶Ï±êÖ¾Î»ÖÃÎ»£¬
-//        0 ÖĞ¶Ï±êÖ¾Î»ÇåÁã
-u8 LAN8720_GetITStatus(u32 interrupt)
-{
-    u32 readval=0;
-    u32 status=0;
-    LAN8720_ReadPHY(LAN8720_ISFR,&readval);
-    if(readval&interrupt) status=1;
-    else status=0;
-    return status;
+// è·å–ä¸­æ–­æ ‡å¿—ä½
+// è¿”å›å€¼ï¼Œ1 ä¸­æ–­æ ‡å¿—ä½ç½®ä½ï¼Œ
+//         0 ä¸­æ–­æ ‡å¿—ä½æ¸…é›¶
+u8 LAN8720_GetITStatus(u32 interrupt) {
+  u32 readval = 0;
+  u32 status = 0;
+  LAN8720_ReadPHY(LAN8720_ISFR, &readval);
+  if (readval & interrupt)
+    status = 1;
+  else
+    status = 0;
+  return status;
 }
 
-//»ñÈ¡LAN8720µÄÁ¬½Ó×´Ì¬
-//·µ»ØÖµ£ºLAN8720_STATUS_LINK_DOWN              Á¬½Ó¶Ï¿ª
-//        LAN8720_STATUS_AUTONEGO_NOTDONE       ×Ô¶¯Ğ­ÉÌÍê³É
-//        LAN8720_STATUS_100MBITS_FULLDUPLEX    100MÈ«Ë«¹¤
-//        LAN8720_STATUS_100MBITS_HALFDUPLEX    100M°ëË«¹¤
-//        LAN8720_STATUS_10MBITS_FULLDUPLEX     10MÈ«Ë«¹¤
-//        LAN8720_STATUS_10MBITS_HALFDUPLEX     10M°ëË«¹¤ 
-    u32 readval=0;
+// è·å–LAN8720çš„è¿æ¥çŠ¶æ€
+// è¿”å›å€¼ï¼šLAN8720_STATUS_LINK_DOWN              è¿æ¥æ–­å¼€
+//         LAN8720_STATUS_AUTONEGO_NOTDONE       è‡ªåŠ¨åå•†å®Œæˆ
+//         LAN8720_STATUS_100MBITS_FULLDUPLEX    100Må…¨åŒå·¥
+//         LAN8720_STATUS_100MBITS_HALFDUPLEX    100MåŠåŒå·¥
+//         LAN8720_STATUS_10MBITS_FULLDUPLEX     10Må…¨åŒå·¥
+//         LAN8720_STATUS_10MBITS_HALFDUPLEX     10MåŠåŒå·¥
+u32 readval = 0;
 
-u32 LAN8720_GetLinkState(void)
-{
-    
-    //¶ÁÈ¡Á½±é£¬È·±£¶ÁÈ¡ÕıÈ·£¡£¡£¡
-    LAN8720_ReadPHY(LAN8720_BSR,&readval);
-    LAN8720_ReadPHY(LAN8720_BSR,&readval);
-    
-    //»ñÈ¡Á¬½Ó×´Ì¬(Ó²¼ş£¬ÍøÏßµÄÁ¬½Ó£¬²»ÊÇTCP¡¢UDPµÈÈí¼şÁ¬½Ó£¡)
-    if((readval&LAN8720_BSR_LINK_STATUS)==0)
-        return LAN8720_STATUS_LINK_DOWN;
-    
-    //»ñÈ¡×Ô¶¯Ğ­ÉÌ×´Ì¬
-    LAN8720_ReadPHY(LAN8720_BCR,&readval);
-    if((readval&LAN8720_BCR_AUTONEGO_EN)!=LAN8720_BCR_AUTONEGO_EN)  //Î´Ê¹ÄÜ×Ô¶¯Ğ­ÉÌ
-    {
-        if(((readval&LAN8720_BCR_SPEED_SELECT)==LAN8720_BCR_SPEED_SELECT)&&
-                ((readval&LAN8720_BCR_DUPLEX_MODE)==LAN8720_BCR_DUPLEX_MODE)) 
-            return LAN8720_STATUS_100MBITS_FULLDUPLEX;
-        else if((readval&LAN8720_BCR_SPEED_SELECT)==LAN8720_BCR_SPEED_SELECT)
-            return LAN8720_STATUS_100MBITS_HALFDUPLEX;
-        else if((readval&LAN8720_BCR_DUPLEX_MODE)==LAN8720_BCR_DUPLEX_MODE)
-            return LAN8720_STATUS_10MBITS_FULLDUPLEX;
-        else
-            return LAN8720_STATUS_10MBITS_HALFDUPLEX;
-    }
-    else                                                            //Ê¹ÄÜÁË×Ô¶¯Ğ­ÉÌ    
-    {
-        LAN8720_ReadPHY(LAN8720_PHYSCSR,&readval);
-        if((readval&LAN8720_PHYSCSR_AUTONEGO_DONE)==0)
-            return LAN8720_STATUS_AUTONEGO_NOTDONE;
-        if((readval&LAN8720_PHYSCSR_HCDSPEEDMASK)==LAN8720_PHYSCSR_100BTX_FD)
-            return LAN8720_STATUS_100MBITS_FULLDUPLEX;
-        else if ((readval&LAN8720_PHYSCSR_HCDSPEEDMASK)==LAN8720_PHYSCSR_100BTX_HD)
-            return LAN8720_STATUS_100MBITS_HALFDUPLEX;
-        else if ((readval&LAN8720_PHYSCSR_HCDSPEEDMASK)==LAN8720_PHYSCSR_10BT_FD)
-            return LAN8720_STATUS_10MBITS_FULLDUPLEX;
-        else
-            return LAN8720_STATUS_10MBITS_HALFDUPLEX;         
-    }
+u32 LAN8720_GetLinkState(void) {
+
+  // è¯»å–ä¸¤éï¼Œç¡®ä¿è¯»å–æ­£ç¡®ï¼ï¼ï¼
+  LAN8720_ReadPHY(LAN8720_BSR, &readval);
+  LAN8720_ReadPHY(LAN8720_BSR, &readval);
+
+  // è·å–è¿æ¥çŠ¶æ€(ç¡¬ä»¶ï¼Œç½‘çº¿çš„è¿æ¥ï¼Œä¸æ˜¯TCPã€UDPç­‰è½¯ä»¶è¿æ¥ï¼)
+  if ((readval & LAN8720_BSR_LINK_STATUS) == 0)
+    return LAN8720_STATUS_LINK_DOWN;
+
+  // è·å–è‡ªåŠ¨åå•†çŠ¶æ€
+  LAN8720_ReadPHY(LAN8720_BCR, &readval);
+  if ((readval & LAN8720_BCR_AUTONEGO_EN) !=
+      LAN8720_BCR_AUTONEGO_EN) // æœªä½¿èƒ½è‡ªåŠ¨åå•†
+  {
+    if (((readval & LAN8720_BCR_SPEED_SELECT) == LAN8720_BCR_SPEED_SELECT) &&
+        ((readval & LAN8720_BCR_DUPLEX_MODE) == LAN8720_BCR_DUPLEX_MODE))
+      return LAN8720_STATUS_100MBITS_FULLDUPLEX;
+    else if ((readval & LAN8720_BCR_SPEED_SELECT) == LAN8720_BCR_SPEED_SELECT)
+      return LAN8720_STATUS_100MBITS_HALFDUPLEX;
+    else if ((readval & LAN8720_BCR_DUPLEX_MODE) == LAN8720_BCR_DUPLEX_MODE)
+      return LAN8720_STATUS_10MBITS_FULLDUPLEX;
+    else
+      return LAN8720_STATUS_10MBITS_HALFDUPLEX;
+  } else // ä½¿èƒ½äº†è‡ªåŠ¨åå•†
+  {
+    LAN8720_ReadPHY(LAN8720_PHYSCSR, &readval);
+    if ((readval & LAN8720_PHYSCSR_AUTONEGO_DONE) == 0)
+      return LAN8720_STATUS_AUTONEGO_NOTDONE;
+    if ((readval & LAN8720_PHYSCSR_HCDSPEEDMASK) == LAN8720_PHYSCSR_100BTX_FD)
+      return LAN8720_STATUS_100MBITS_FULLDUPLEX;
+    else if ((readval & LAN8720_PHYSCSR_HCDSPEEDMASK) ==
+             LAN8720_PHYSCSR_100BTX_HD)
+      return LAN8720_STATUS_100MBITS_HALFDUPLEX;
+    else if ((readval & LAN8720_PHYSCSR_HCDSPEEDMASK) ==
+             LAN8720_PHYSCSR_10BT_FD)
+      return LAN8720_STATUS_10MBITS_FULLDUPLEX;
+    else
+      return LAN8720_STATUS_10MBITS_HALFDUPLEX;
+  }
 }
 
+// è®¾ç½®LAN8720çš„è¿æ¥çŠ¶æ€
+// å‚æ•°linkstateï¼šLAN8720_STATUS_100MBITS_FULLDUPLEX 100Må…¨åŒå·¥
+//                LAN8720_STATUS_100MBITS_HALFDUPLEX 100MåŠåŒå·¥
+//                LAN8720_STATUS_10MBITS_FULLDUPLEX  10Må…¨åŒå·¥
+//                LAN8720_STATUS_10MBITS_HALFDUPLEX  10MåŠåŒå·¥
+void LAN8720_SetLinkState(u32 linkstate) {
 
-//ÉèÖÃLAN8720µÄÁ¬½Ó×´Ì¬
-//²ÎÊılinkstate£ºLAN8720_STATUS_100MBITS_FULLDUPLEX 100MÈ«Ë«¹¤
-//               LAN8720_STATUS_100MBITS_HALFDUPLEX 100M°ëË«¹¤
-//               LAN8720_STATUS_10MBITS_FULLDUPLEX  10MÈ«Ë«¹¤
-//               LAN8720_STATUS_10MBITS_HALFDUPLEX  10M°ëË«¹¤
-void LAN8720_SetLinkState(u32 linkstate)
-{
-    
-    u32 bcrvalue=0;
-    LAN8720_ReadPHY(LAN8720_BCR,&bcrvalue);
-    //¹Ø±ÕÁ¬½ÓÅäÖÃ£¬±ÈÈç×Ô¶¯Ğ­ÉÌ£¬ËÙ¶ÈºÍË«¹¤
-    bcrvalue&=~(LAN8720_BCR_AUTONEGO_EN|LAN8720_BCR_SPEED_SELECT|LAN8720_BCR_DUPLEX_MODE);
-    if(linkstate==LAN8720_STATUS_100MBITS_FULLDUPLEX)       //100MÈ«Ë«¹¤
-        bcrvalue|=(LAN8720_BCR_SPEED_SELECT|LAN8720_BCR_DUPLEX_MODE);
-    else if(linkstate==LAN8720_STATUS_100MBITS_HALFDUPLEX)  //100M°ëË«¹¤
-        bcrvalue|=LAN8720_BCR_SPEED_SELECT; 
-    else if(linkstate==LAN8720_STATUS_10MBITS_FULLDUPLEX)   //10MÈ«Ë«¹¤
-        bcrvalue|=LAN8720_BCR_DUPLEX_MODE;
-    
-    LAN8720_WritePHY(LAN8720_BCR,bcrvalue);
+  u32 bcrvalue = 0;
+  LAN8720_ReadPHY(LAN8720_BCR, &bcrvalue);
+  // å…³é—­è¿æ¥é…ç½®ï¼Œæ¯”å¦‚è‡ªåŠ¨åå•†ï¼Œé€Ÿåº¦å’ŒåŒå·¥
+  bcrvalue &= ~(LAN8720_BCR_AUTONEGO_EN | LAN8720_BCR_SPEED_SELECT |
+                LAN8720_BCR_DUPLEX_MODE);
+  if (linkstate == LAN8720_STATUS_100MBITS_FULLDUPLEX) // 100Må…¨åŒå·¥
+    bcrvalue |= (LAN8720_BCR_SPEED_SELECT | LAN8720_BCR_DUPLEX_MODE);
+  else if (linkstate == LAN8720_STATUS_100MBITS_HALFDUPLEX) // 100MåŠåŒå·¥
+    bcrvalue |= LAN8720_BCR_SPEED_SELECT;
+  else if (linkstate == LAN8720_STATUS_10MBITS_FULLDUPLEX) // 10Må…¨åŒå·¥
+    bcrvalue |= LAN8720_BCR_DUPLEX_MODE;
+
+  LAN8720_WritePHY(LAN8720_BCR, bcrvalue);
 }
