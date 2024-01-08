@@ -11,9 +11,9 @@
 // #include "robot.h"
 // #include "delay.h"
 
-// 宇树A1参数限制
+// 瀹囨爲A1鍙傛暟闄愬埗
 // T < 250NM   W < 500 rad/s  Pos < 130000 rad   KP < 16 KW < 32
-// 官方给的，可能太大了
+// 瀹樻柟缁欑殑锛屽彲鑳藉お澶т簡
 
 #define UNITREE_MOTOR_MAX_KP 1.0f
 #define UNITREE_MOTOR_MAX_KD 3.5f // K_W
@@ -24,7 +24,7 @@ void send_command(void);
 void enable_all_motor(void);
 void disable_all_motor(void);
 
-void unitree_motor_crl_task(void); // 接收数据在串口中断，发送在这里
+void unitree_motor_crl_task(void); // 鎺ユ敹鏁版嵁鍦ㄤ覆鍙ｄ腑鏂紝鍙戦�佸湪杩欓噷
 void send_all_motor_command(uint8_t tx_raw_data[][UART_TX_LEN],
                             uint8_t rx_raw_data[][UART_RX_LEN], leg_t *leg);
 void filter_command(void);

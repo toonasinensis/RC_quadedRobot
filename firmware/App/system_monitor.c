@@ -1,7 +1,7 @@
 #include "system_monitor.h"
 // #include "robot.h"
 
-SYSTEM_MONITOR system_monitor = {0}; // ϵͳ������
+SYSTEM_MONITOR system_monitor = {0}; // ÏµÍ³¼àÊÓÆ÷
 
 void cal_fps_sys(SYSTEM_MONITOR *sys) {
 

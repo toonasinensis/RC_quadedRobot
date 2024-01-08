@@ -57,8 +57,8 @@ typedef struct {
   u32 TaskTotalTimeMost;
   u32 TaskTotalTimeLeast;
 
-  u16 CommuErrorBit;  // ͨ�Ŵ����־λ
-  u16 TaskWarningBit; // ���񾯸��־λ
+  u16 CommuErrorBit;  // 通信错误标志位
+  u16 TaskWarningBit; // 任务警告标志位
 } SYSTEM_MONITOR;
 
 extern SYSTEM_MONITOR system_monitor;

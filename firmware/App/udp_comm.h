@@ -5,7 +5,6 @@
 #include "lwip/tcp.h"
 #include "lwip/udp.h"
 #include "main.h"
-#include "robot.h"
 #include "unitree_motor.h"
 #include <stdio.h>
 #include <string.h>

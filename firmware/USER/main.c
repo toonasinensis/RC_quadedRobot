@@ -23,17 +23,17 @@ struct __FILE {
 };
 
 FILE __stdout;
-// ¶¨Òå_sys_exit()ÒÔ±ÜÃâÊ¹ÓÃ°ëÖ÷»úÄ£Ê½
+// å®šä¹‰_sys_exit()ä»¥é¿å…ä½¿ç”¨åŠä¸»æœºæ¨¡å¼
 void _sys_exit(int x) { x = x; }
-// ÖØ¶¨Òåfputcº¯Êı
+// é‡å®šä¹‰fputcå‡½æ•°
 int fputc(int ch, FILE *f) {
   while ((UART7->ISR & 0X40) == 0)
-    ; // Ñ­»··¢ËÍ,Ö±µ½·¢ËÍÍê±Ï
+    ; // å¾ªç¯å‘é€,ç›´åˆ°å‘é€å®Œæ¯•
   UART7->TDR = (u8)ch;
   return ch;
 }
 
-extern u8 udp_demo_flag; // UDP ²âÊÔÈ«¾Ö×´Ì¬±ê¼Ç±äÁ¿
+extern u8 udp_demo_flag; // UDP æµ‹è¯•å…¨å±€çŠ¶æ€æ ‡è®°å˜é‡
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
   if (huart->Instance == USART1) {
@@ -49,12 +49,12 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart) {
 int main(void) {
   u8 key = 0;
 
-  Write_Through();                // ¿ªÆôÇ¿ÖÆÍ¸Ğ´£¡
-  MPU_Memory_Protection();        // ±£»¤Ïà¹Ø´æ´¢ÇøÓò
-  Cache_Enable();                 // ´ò¿ªL1-Cache
-  HAL_Init();                     // ³õÊ¼»¯HAL¿â
-  Stm32_Clock_Init(160, 5, 2, 4); // ÉèÖÃÊ±ÖÓ,400Mhz
-  delay_init(400);                // ÑÓÊ±³õÊ¼»¯
+  Write_Through();                // å¼€å¯å¼ºåˆ¶é€å†™ï¼
+  MPU_Memory_Protection();        // ä¿æŠ¤ç›¸å…³å­˜å‚¨åŒºåŸŸ
+  Cache_Enable();                 // æ‰“å¼€L1-Cache
+  HAL_Init();                     // åˆå§‹åŒ–HALåº“
+  Stm32_Clock_Init(160, 5, 2, 4); // è®¾ç½®æ—¶é’Ÿ,400Mhz
+  delay_init(400);                // å»¶æ—¶åˆå§‹åŒ–
 
   MX_GPIO_Init();
   MX_DMA_Init();
@@ -84,29 +84,29 @@ int main(void) {
   HAL_UART_Receive_DMA(&huart6, uart_rx_buffer[5], UART_RX_LEN);
   HAL_UART_Receive_DMA(&huart7, uart_rx_buffer[6], UART_RX_LEN);
 
-  LED_Init();   // ³õÊ¼»¯LED
-  KEY_Init();   // ³õÊ¼»¯°´¼ü
-  SDRAM_Init(); // ³õÊ¼»¯SDRAM
+  LED_Init();   // åˆå§‹åŒ–LED
+  KEY_Init();   // åˆå§‹åŒ–æŒ‰é”®
+  SDRAM_Init(); // åˆå§‹åŒ–SDRAM
   // LCD_Init();
-  // //³õÊ¼»¯LCD
-  PCF8574_Init();        // ³õÊ¼»¯PCF8574
-  my_mem_init(SRAMIN);   // ³õÊ¼»¯ÄÚ²¿ÄÚ´æ³Ø
-  my_mem_init(SRAMEX);   // ³õÊ¼»¯Íâ²¿ÄÚ´æ³Ø
-  my_mem_init(SRAMDTCM); // ³õÊ¼»¯DTCMÄÚ´æ³Ø
+  // //åˆå§‹åŒ–LCD
+  PCF8574_Init();        // åˆå§‹åŒ–PCF8574
+  my_mem_init(SRAMIN);   // åˆå§‹åŒ–å†…éƒ¨å†…å­˜æ± 
+  my_mem_init(SRAMEX);   // åˆå§‹åŒ–å¤–éƒ¨å†…å­˜æ± 
+  my_mem_init(SRAMDTCM); // åˆå§‹åŒ–DTCMå†…å­˜æ± 
 
   TIM3_Init(
       100 - 1,
       2000 -
-          1); // ¶¨Ê±Æ÷3³õÊ¼»¯£¬¶¨Ê±Æ÷Ê±ÖÓÎª200M£¬·ÖÆµÏµÊıÎª2000-1£¬
-              // ËùÒÔ¶¨Ê±Æ÷3µÄÆµÂÊÎª200M/2000=100K£¬×Ô¶¯ÖØ×°ÔØÎª100-1£¬ÄÇÃ´¶¨Ê±Æ÷ÖÜÆÚ¾ÍÊÇ1ms
-  while (lwip_comm_init()) // lwip³õÊ¼»¯
+          1); // å®šæ—¶å™¨3åˆå§‹åŒ–ï¼Œå®šæ—¶å™¨æ—¶é’Ÿä¸º200Mï¼Œåˆ†é¢‘ç³»æ•°ä¸º2000-1ï¼Œ
+              // æ‰€ä»¥å®šæ—¶å™¨3çš„é¢‘ç‡ä¸º200M/2000=100Kï¼Œè‡ªåŠ¨é‡è£…è½½ä¸º100-1ï¼Œé‚£ä¹ˆå®šæ—¶å™¨å‘¨æœŸå°±æ˜¯1ms
+  while (lwip_comm_init()) // lwipåˆå§‹åŒ–
   {
     // if failed....
   }
   //
   //	modify(&motor1, send_buff_uart);
 
-  udp_demo_test(); // UDP Ä£Ê½
+  udp_demo_test(); // UDP æ¨¡å¼
 
   while (1) {
   }
@@ -115,14 +115,14 @@ int main(void) {
   //
   //	while(1)
   //	{
-  //        lwip_periodic_handle();	//LWIPÄÚºËĞèÒª¶¨Ê±´¦ÀíµÄº¯Êı
+  //        lwip_periodic_handle();	//LWIPå†…æ ¸éœ€è¦å®šæ—¶å¤„ç†çš„å‡½æ•°
   //        key=KEY_Scan(0);
-  //		if(key==KEY1_PRES)		    //°´KEY1¼ü½¨Á¢Á¬½Ó
+  //		if(key==KEY1_PRES)		    //æŒ‰KEY1é”®å»ºç«‹è¿æ¥
   //		{
   //			if((udp_demo_flag & 1<<5)){}//
-  // printf("UDPÁ¬½ÓÒÑ¾­½¨Á¢,²»ÄÜÖØ¸´Á¬½Ó\r\n");
-  // //Èç¹ûÁ¬½Ó³É¹¦,²»×öÈÎºÎ´¦Àí else udp_demo_test();
-  // //µ±¶Ï¿ªÁ¬½Óºó,µ÷ÓÃudp_demo_test()º¯Êı
+  // printf("UDPè¿æ¥å·²ç»å»ºç«‹,ä¸èƒ½é‡å¤è¿æ¥\r\n");
+  // //å¦‚æœè¿æ¥æˆåŠŸ,ä¸åšä»»ä½•å¤„ç† else udp_demo_test();
+  // //å½“æ–­å¼€è¿æ¥å,è°ƒç”¨udp_demo_test()å‡½æ•°
   //		}
   //		delay_ms(10);
   //	}

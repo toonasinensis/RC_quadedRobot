@@ -73,7 +73,7 @@ void enable_all_motor(void) {
 }
 
 void update_command(void) {
-  // µ¥Î»±äÎ»»¡¶È//×¢Òâ·½ÏòºÍ·ûºÅ	ÒªºÍ·´À¡Æ¥Åä
+  // å•ä½å˜ä½å¼§åº¦//æ³¨æ„æ–¹å‘å’Œç¬¦å·	è¦å’Œåé¦ˆåŒ¹é…
   //
   //    leg[0].thigh_motor.command.Pos = -(stPosWheel1.fpDes - POS_INI_1) * 9.1f
   //    / 180.0f * PI + motor1_init_pos; leg[0].knee_motor.command.Pos  =
@@ -89,13 +89,13 @@ void update_command(void) {
   //    leg[3].knee_motor.command.Pos  = (stPosWheel8.fpDes - POS_INI_8) * 9.1f
   //    / 180.0f * PI + motor8_init_pos;
 }
-// 0 ÊÇÕı³£×´Ì¬ //64 µôµç //4 ¶Â×ª£¬¹ıÈÈ
+// 0 æ˜¯æ­£å¸¸çŠ¶æ€ //64 æ‰ç”µ //4 å µè½¬ï¼Œè¿‡çƒ­
 void A1_protect(void) {
-  // µç»ú±¨´í¾ÍÊ§ÄÜ
+  // ç”µæœºæŠ¥é”™å°±å¤±èƒ½
   for (int i = 0; i < 4; i++) {
     if (leg[i].knee_motor.feedback.Error != 0 ||
         leg[i].thigh_motor.feedback.Error != 0) {
-      disable_all_motor(); // A1µç»ú
+      disable_all_motor(); // A1ç”µæœº
     }
   }
 }
