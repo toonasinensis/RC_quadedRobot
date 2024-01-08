@@ -23,6 +23,7 @@ const u8 *tcp_demo_sendbuf = "Apollo STM32F4/F7/H7 UDP demo send data\r\n";
 u8 udp_demo_flag;
 
 // 设置远端IP地址
+extern uint8_t fast_send;
 void udp_demo_set_remoteip(void) {
   u8 *tbuf;
   u16 xoff;
@@ -82,7 +83,9 @@ void udp_demo_test(void) {
       res = 1;
   } else
     res = 1;
+  fast_send = 1;
 
+  //	udp_send_flag =1;
   while (1) {
     key = KEY_Scan(0);
 
@@ -148,10 +151,10 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
   }
 
   memcpy(&udp_receive_data, udp_demo_recvbuf, sizeof(udp_receive_data));
-  if (crc32_core((uint8_t *)&udp_receive_data,
+  if (1||crc32_core((uint8_t *)&udp_receive_data,
                  sizeof(udp_receive_data) / 4 - 1) ==
       udp_receive_data.check_digit) {
-    udp_send_flag = 1;
+    // udp_send_flag = 1;
 
     for (int i = 0; i < 6; ++i) {
       udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3],
@@ -162,6 +165,7 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
                                     &leg[i].knee_motor.command);
     }
   }
+  udp_demo_senddata(upcb);
 }
 // UDP服务器发送数据
 int len_udp_send = 0;

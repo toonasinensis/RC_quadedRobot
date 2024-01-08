@@ -44,7 +44,7 @@ void TIM3_IRQHandler(void)
 }
 uint8_t start_send;
 uint8_t if_long_use;
-uint8_t fast_send;
+uint8_t fast_send=0;
 //定时器3中断服务函数调用
 uint32_t timer_pp;
 
