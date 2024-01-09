@@ -151,7 +151,7 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
   }
 
   memcpy(&udp_receive_data, udp_demo_recvbuf, sizeof(udp_receive_data));
-  if (1||crc32_core((uint8_t *)&udp_receive_data,
+  if (crc32_core((uint8_t *)&udp_receive_data,
                  sizeof(udp_receive_data) / 4 - 1) ==
       udp_receive_data.check_digit) {
     // udp_send_flag = 1;
@@ -189,66 +189,3 @@ void udp_demo_connection_close(struct udp_pcb *upcb) {
   udp_remove(upcb);           // 断开UDP连接
   udp_demo_flag &= ~(1 << 5); // 标记连接断开
 }
-
-// void udp_demo_test(void)
-//{
-//  	err_t err;
-//	struct udp_pcb *udppcb;  	//定义一个TCP服务器控制块
-//	struct ip_addr rmtipaddr;  	//远端ip地址
-//
-//	u8 *tbuf;
-//  	u8 key;
-//	u8 res=0;
-//	u16 t=0;
-//
-//	udp_demo_set_remoteip();//先选择IP
-
-//	tbuf=mymalloc(SRAMIN,200);	//申请内存
-//	if(tbuf==NULL)return ;		//内存申请失败了,直接退出
-
-//	udppcb=udp_new();
-//	if(udppcb)//创建成功
-//	{
-//		IP4_ADDR(&rmtipaddr,lwipdev.remoteip[0],lwipdev.remoteip[1],lwipdev.remoteip[2],lwipdev.remoteip[3]);
-//		err=udp_connect(udppcb,&rmtipaddr,UDP_DEMO_PORT);//UDP客户端连接到指定IP地址和端口号的服务器
-//		if(err==ERR_OK)
-//		{
-//			err=udp_bind(udppcb,IP_ADDR_ANY,UDP_DEMO_PORT);//绑定本地IP地址与端口号
-//			if(err==ERR_OK)	//绑定完成
-//			{
-//				udp_recv(udppcb,udp_demo_recv,NULL);//注册接收回调函数
-//// LCD_ShowString(30,210,210,16,16,"STATUS:Connected
-///");//标记连接上了(UDP是非可靠连接,这里仅仅表示本地UDP已经准备好)
-//				udp_demo_flag |= 1<<5;
-////标记已经连接上
-
-//			}else res=1;
-//		}else res=1;
-//	}else res=1;
-//	while(res==0)
-//	{
-//		key=KEY_Scan(0);
-//		if(key==WKUP_PRES)break;
-//		if(key==KEY0_PRES)//KEY0按下了,发送数据
-//		{
-//			udp_demo_senddata(udppcb);
-//		}
-//		if(udp_demo_flag&1<<6)//是否收到数据?
-//		{
-////
-/// LCD_Fill(30,250,lcddev.width-1,lcddev.height-1,WHITE);//清上一次数据 /
-/// LCD_ShowString(30,250,lcddev.width-30,lcddev.height-230,16,udp_demo_recvbuf);//显示接收到的数据
-//			udp_demo_flag&=~(1<<6);//标记数据已经被处理了.
-//		}
-//		lwip_periodic_handle();
-//		delay_us(100);
-//		t++;
-//		if(t==2000)
-//		{
-//			t=0;
-//			LED0_Toggle;
-//		}
-//	}
-//	udp_demo_connection_close(udppcb);
-//	myfree(SRAMIN,tbuf);
-//}
