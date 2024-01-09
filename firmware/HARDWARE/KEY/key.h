@@ -1,29 +1,29 @@
 #ifndef _KEY_H
 #define _KEY_H
 #include "sys.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌĞòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßĞí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK STM32H7¿ª·¢°å
-//KEYÇı¶¯´úÂë	   
-//ÕıµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//´´½¨ÈÕÆÚ:2017/6/8
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓĞ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾ 2014-2024
-//All rights reserved									  
+//////////////////////////////////////////////////////////////////////////////////
+// æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºå…¶å®ƒä»»ä½•ç”¨é€”
+// ALIENTEK STM32H7å¼€å‘æ¿
+// KEYé©±åŠ¨ä»£ç 
+// æ­£ç‚¹åŸå­@ALIENTEK
+// æŠ€æœ¯è®ºå›:www.openedv.com
+// åˆ›å»ºæ—¥æœŸ:2017/6/8
+// ç‰ˆæœ¬ï¼šV1.0
+// ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+// Copyright(C) å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2014-2024
+// All rights reserved
 //////////////////////////////////////////////////////////////////////////////////
 
-#define KEY0        HAL_GPIO_ReadPin(GPIOH,GPIO_PIN_3)  //KEY0°´¼üPH3
-#define KEY1        HAL_GPIO_ReadPin(GPIOH,GPIO_PIN_2)  //KEY1°´¼üPH2
-#define KEY2        HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13) //KEY2°´¼üPC13
-#define WK_UP       HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_0)  //WKUP°´¼üPA0
+#define KEY0 HAL_GPIO_ReadPin(GPIOH, GPIO_PIN_3)  // KEY0æŒ‰é”®PH3
+#define KEY1 HAL_GPIO_ReadPin(GPIOH, GPIO_PIN_2)  // KEY1æŒ‰é”®PH2
+#define KEY2 HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) // KEY2æŒ‰é”®PC13
+#define WK_UP HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0) // WKUPæŒ‰é”®PA0
 
-#define KEY0_PRES 	1  	//KEY0°´ÏÂºó·µ»ØÖµ
-#define KEY1_PRES	2	//KEY1°´ÏÂºó·µ»ØÖµ
-#define KEY2_PRES	3	//KEY2°´ÏÂºó·µ»ØÖµ
-#define WKUP_PRES   4	//WKUP°´ÏÂºó·µ»ØÖµ
+#define KEY0_PRES 1 // KEY0æŒ‰ä¸‹åè¿”å›å€¼
+#define KEY1_PRES 2 // KEY1æŒ‰ä¸‹åè¿”å›å€¼
+#define KEY2_PRES 3 // KEY2æŒ‰ä¸‹åè¿”å›å€¼
+#define WKUP_PRES 4 // WKUPæŒ‰ä¸‹åè¿”å›å€¼
 
-void KEY_Init(void);  //°´¼üIO³õÊ¼»¯º¯Êı
-u8 KEY_Scan(u8 mode); //°´¼üÉ¨Ãèº¯Êı
+void KEY_Init(void);  // æŒ‰é”®IOåˆå§‹åŒ–å‡½æ•°
+u8 KEY_Scan(u8 mode); // æŒ‰é”®æ‰«æå‡½æ•°
 #endif

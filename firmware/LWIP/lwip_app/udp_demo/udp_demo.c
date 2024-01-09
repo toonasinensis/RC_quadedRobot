@@ -101,7 +101,7 @@ void udp_demo_test(void) {
     lwip_periodic_handle();
     delay_us(100);
     t++;
-    if (t == 2000) {
+    if (t >= 1000) {
       t = 0;
       LED0_Toggle;
     }
