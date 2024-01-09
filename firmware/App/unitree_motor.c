@@ -4,9 +4,9 @@
 leg_t leg[6] ={ {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart1, GPIOE, GPIO_PIN_1},//FL,FR,RL,RR
                 {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart2, GPIOE, GPIO_PIN_7},
                 {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart3, GPIOE, GPIO_PIN_8},
-                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart6, GPIOE, GPIO_PIN_0},
-								{{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart4, GPIOE, GPIO_PIN_0},
-							{	{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart5, GPIOE, GPIO_PIN_0}};
+                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart4, GPIOE, GPIO_PIN_0},
+								{{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart5, GPIOE, GPIO_PIN_0},
+							{	{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart6, GPIOE, GPIO_PIN_0}};
 // clang-format on
 
 float max_kp = 2.5f, min_kd = 4.0f, max_torque = 5.0f;
@@ -100,6 +100,39 @@ uint32_t extract(motor_receive_data_t *motor_data, uint8_t *raw_data) {
     return 1;
   }
   return 0;
+}
+
+uint32_t extract_new(motor_receive_data_t *motor_data, uint8_t *raw_data) {
+	
+	
+	//if(raw_data[0]==0XFE||raw_data[1]==OXEE)
+  uint8_t if_find_frame_head=0;
+	int j=0;
+	for( j=0;j<77;j++)
+	{
+		if(raw_data[j]==0xFE||raw_data[j+1]==0XEE)
+		{
+			if_find_frame_head = 1;
+		}
+		if(if_find_frame_head==1)
+		{
+			break;
+		}
+			
+	}
+
+    motor_data->ID = raw_data[2+j];
+    motor_data->mode = raw_data[4+j];
+    motor_data->Temp = raw_data[6+j];
+    motor_data->Error = raw_data[7+j];
+    motor_data->T = (*(short *)(&raw_data[12+j])) / 256.0;
+    motor_data->W = (*(short *)(&raw_data[14+j])) / 128.0;
+    //        motor_data->Acc = (*(short *)(&raw_data[26]));
+    motor_data->Pos = (*(int *)(&raw_data[30+j])) * 2 * PI / 16384;
+
+    return 1;
+//  }
+//  return 0;
 }
 
 void param_protect(motor_send_data_t *check_data, float max_kp, float min_kd,

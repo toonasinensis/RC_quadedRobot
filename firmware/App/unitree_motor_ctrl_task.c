@@ -3,7 +3,7 @@
 void receive_motor_feedback(uint8_t *raw_data, leg_t *leg) {
   motor_receive_data_t temp_receive_data;
   // while(leg->p_huart->RxState != HAL_UART_STATE_READY){};
-  if (extract(&temp_receive_data, raw_data)) {
+  if (extract_new(&temp_receive_data, raw_data)) {
     if (temp_receive_data.Error != 0) {
       // enter all_stop mode
     }
@@ -26,15 +26,15 @@ void send_single_motor_command(uint8_t *raw_data, leg_t *leg,
   switch (motor_num) {
   case 0:
     modify(&leg->hip_motor.command, raw_data);
-    leg->hip_motor.cnt++;
+//    leg->hip_motor.cnt++;
     break;
   case 1:
     modify(&leg->thigh_motor.command, raw_data);
-    leg->thigh_motor.cnt++;
+//    leg->thigh_motor.cnt++;
     break;
   case 2:
     modify(&leg->knee_motor.command, raw_data);
-    leg->knee_motor.cnt++;
+  //  leg->knee_motor.cnt++;
     break;
   }
 
@@ -73,21 +73,7 @@ void enable_all_motor(void) {
 }
 
 void update_command(void) {
-  // 单位变位弧度//注意方向和符号	要和反馈匹配
-  //
-  //    leg[0].thigh_motor.command.Pos = -(stPosWheel1.fpDes - POS_INI_1) * 9.1f
-  //    / 180.0f * PI + motor1_init_pos; leg[0].knee_motor.command.Pos  =
-  //    (stPosWheel2.fpDes - POS_INI_2) * 9.1f / 180.0f * PI + motor2_init_pos;
-  //  	 leg[1].thigh_motor.command.Pos = -(stPosWheel3.fpDes - POS_INI_3)
-  //  * 9.1f / 180.0f * PI + motor3_init_pos;
-  //    leg[1].knee_motor.command.Pos  = (stPosWheel4.fpDes - POS_INI_4) * 9.1f
-  //    / 180.0f * PI + motor4_init_pos; leg[2].thigh_motor.command.Pos =
-  //    -(stPosWheel5.fpDes - POS_INI_5) * 9.1f / 180.0f * PI + motor5_init_pos;
-  //    leg[2].knee_motor.command.Pos  = (stPosWheel6.fpDes - POS_INI_6) * 9.1f
-  //    / 180.0f * PI + motor6_init_pos; leg[3].thigh_motor.command.Pos =
-  //    -(stPosWheel7.fpDes - POS_INI_7) * 9.1f / 180.0f * PI + motor7_init_pos;
-  //    leg[3].knee_motor.command.Pos  = (stPosWheel8.fpDes - POS_INI_8) * 9.1f
-  //    / 180.0f * PI + motor8_init_pos;
+
 }
 // 0 是正常状态 //64 掉电 //4 堵转，过热
 void A1_protect(void) {

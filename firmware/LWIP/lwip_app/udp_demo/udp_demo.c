@@ -103,10 +103,12 @@ void udp_demo_test(void) {
   udp_demo_connection_close(udppcb);
   myfree(SRAMIN, tbuf);
 }
+extern uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE]; // 以太网接收缓冲区
 
 // UDP回调函数
 void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
                    struct ip_addr *addr, u16_t port) {
+
   SCB_InvalidateDCache();
   u32 data_len = 0;
   u8 success_rev_flag = 0;
@@ -115,6 +117,7 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
   // get motor command from PC
   if (p != NULL) // 接收到不为空的数据时
   {
+			SCB_InvalidateDCache_by_Addr((uint32_t *)Rx_Buff, ETH_RX_DESC_CNT*ETH_MAX_PACKET_SIZE);
 
     memset(udp_demo_recvbuf, 0, UDP_DEMO_RX_BUFSIZE); // 数据接收缓冲区清零
     for (q = p; q != NULL; q = q->next) {
@@ -134,7 +137,21 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
                    sizeof(udp_receive_data) / 4 - 1) ==
         udp_receive_data.check_digit) {
       LED0_Toggle;
+			
+					
       for (int i = 0; i < 6; ++i) {
+						if(udp_receive_data.state==1)//normal
+					{
+						leg[i].hip_motor.command.mode =10;
+						leg[i].thigh_motor.command.mode =10;
+						leg[i].knee_motor.command.mode =10;
+					}
+					else
+					{
+						leg[i].hip_motor.command.mode =0;
+						leg[i].thigh_motor.command.mode =0;
+						leg[i].knee_motor.command.mode =0;
+					}
         udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3],
                                       &leg[i].hip_motor.command);
         udp_motor_type2raw_motor_type(

@@ -48,7 +48,7 @@ uint32_t psc_1000;
 extern float normal_frecquency;
 extern u8 udp_send_flag;
 float otto_pos;
-
+uint16_t motor_fps[18]={0};
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim == (&TIM3_Handler)) {
     psc_1000++;
@@ -70,9 +70,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
       //cal_fps_sys(&system_monitor);
       psc_1000 = 0;
       for (int i = 0; i < LEG_NUM; i++) {
-        leg[i].hip_motor.real_rate = leg[i].hip_motor.temp_rate;
+        leg[i].hip_motor.real_rate   = leg[i].hip_motor.temp_rate;
         leg[i].thigh_motor.real_rate = leg[i].thigh_motor.temp_rate;
-        leg[i].knee_motor.real_rate = leg[i].knee_motor.temp_rate;
+        leg[i].knee_motor.real_rate  = leg[i].knee_motor.temp_rate;
+				motor_fps[3*i] = leg[i].hip_motor.real_rate;
+				motor_fps[3*i+1] = leg[i].thigh_motor.real_rate;
+				motor_fps[3*i+2] = leg[i].knee_motor.real_rate;
         leg[i].hip_motor.temp_rate = 0;
         leg[i].thigh_motor.temp_rate = 0;
         leg[i].knee_motor.temp_rate = 0;
