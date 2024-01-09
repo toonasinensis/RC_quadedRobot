@@ -64,17 +64,16 @@ void udp_demo_test(void) {
   {
     IP4_ADDR(&rmtipaddr, lwipdev.remoteip[0], lwipdev.remoteip[1],
              lwipdev.remoteip[2], lwipdev.remoteip[3]);
-    err = udp_connect(
-        udppcb, &rmtipaddr,
-        UDP_REMOTE_PORT); // UDP客户端连接到指定IP地址和端口号的服务器
+    // UDP客户端连接到指定IP地址和端口号的服务器
+    err = udp_connect(udppcb, &rmtipaddr, UDP_REMOTE_PORT);
     if (err == ERR_OK) {
       err = udp_bind(udppcb, IP_ADDR_ANY,
                      UDP_LOCAL_PORT); // 绑定本地IP地址与端口号
       if (err == ERR_OK)              // 绑定完成
       {
         udp_recv(udppcb, udp_demo_recv, NULL); // 注册接收回调函数
-        //				LCD_ShowString(30,210,210,16,16,"STATUS:Connected
-        //");//标记连接上了(UDP是非可靠连接,这里仅仅表示本地UDP已经准备好)
+        // LCD_ShowString(30,210,210,16,16,"STATUS:Connected
+        // 标记连接上了(UDP是非可靠连接,这里仅仅表示本地UDP已经准备好)
         udp_demo_flag |= 1 << 5; // 标记已经连接上
 
       } else
@@ -114,7 +113,7 @@ void udp_demo_test(void) {
 void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
                    struct ip_addr *addr, u16_t port) {
   SCB_InvalidateDCache();
-
+  LED0_Toggle;
   u32 data_len = 0;
   u8 success_rev_flag = 0;
   struct pbuf *q;
@@ -167,6 +166,7 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
   }
   udp_demo_senddata(upcb);
 }
+
 // UDP服务器发送数据
 int len_udp_send = 0;
 void udp_demo_senddata(struct udp_pcb *upcb) {
@@ -183,6 +183,7 @@ void udp_demo_senddata(struct udp_pcb *upcb) {
     pbuf_free(ptr);      // 释放内存
   }
 }
+
 // 关闭UDP连接
 void udp_demo_connection_close(struct udp_pcb *upcb) {
   udp_disconnect(upcb);
