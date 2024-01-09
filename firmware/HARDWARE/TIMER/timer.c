@@ -40,7 +40,7 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim) {
 // 定时器3中断服务函数
 void TIM3_IRQHandler(void) { HAL_TIM_IRQHandler(&TIM3_Handler); }
 uint8_t start_send;
-uint8_t if_long_use;
+uint8_t if_long_use = 0;
 uint8_t fast_send = 0;
 // 定时器3中断服务函数调用
 uint32_t timer_pp;

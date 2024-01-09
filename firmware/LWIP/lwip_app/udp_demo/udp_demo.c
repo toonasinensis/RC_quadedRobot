@@ -45,7 +45,7 @@ u8 udp_send_flag;
 
 void udp_demo_test(void) {
   err_t err;
-  struct udp_pcb *udppcb;   // 定义一个TCP服务器控制块
+  struct udp_pcb *udppcb; // 定义一个TCP服务器控制块
   // struct ip_addr rmtipaddr; // 远端ip地址
 
   u8 *tbuf;
@@ -108,7 +108,6 @@ void udp_demo_test(void) {
 void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
                    struct ip_addr *addr, u16_t port) {
   SCB_InvalidateDCache();
-  LED0_Toggle;
   u32 data_len = 0;
   u8 success_rev_flag = 0;
   struct pbuf *q;
@@ -116,6 +115,7 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
   // get motor command from PC
   if (p != NULL) // 接收到不为空的数据时
   {
+
     memset(udp_demo_recvbuf, 0, UDP_DEMO_RX_BUFSIZE); // 数据接收缓冲区清零
     for (q = p; q != NULL; q = q->next) {
       if (q->len > (UDP_DEMO_RX_BUFSIZE - data_len)) {
@@ -133,6 +133,7 @@ void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
     if (crc32_core((uint8_t *)&udp_receive_data,
                    sizeof(udp_receive_data) / 4 - 1) ==
         udp_receive_data.check_digit) {
+      LED0_Toggle;
       for (int i = 0; i < 6; ++i) {
         udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3],
                                       &leg[i].hip_motor.command);
