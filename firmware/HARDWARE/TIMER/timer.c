@@ -49,6 +49,11 @@ extern float normal_frecquency;
 extern u8 udp_send_flag;
 float otto_pos;
 uint16_t motor_fps[18]={0};
+int test_id = 0;
+
+extern  int udp_cnt;
+int   udp_fps;
+uint8_t loss_udp_detect;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim == (&TIM3_Handler)) {
     psc_1000++;
@@ -56,16 +61,30 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
       if (if_long_use && timer_pp > 1000) {
         timer_pp = 0;
         start_send = 0;
+				
         send_all_motor_command(uart_tx_buffer, uart_rx_buffer, leg);
       } else if (!if_long_use) {
         send_all_motor_command(uart_tx_buffer, uart_rx_buffer, leg);
       }
       timer_pp++;
       otto_pos = leg[0].knee_motor.feedback.W;
+			test_id = uart_tx_buffer[3][2];
     }
 
     if (psc_1000 > 1000) // 分频到1s
     {
+			
+			udp_fps = udp_cnt;
+			udp_cnt = 0;
+			if(udp_cnt<500)
+			{
+				loss_udp_detect++;
+				if(loss_udp_detect>5)
+				{
+					loss_udp_detect = 0;
+					HAL_NVIC_SystemReset();
+				}
+			}
       normal_frecquency = 0;
       //cal_fps_sys(&system_monitor);
       psc_1000 = 0;
@@ -92,6 +111,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
       raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 2],
                                     &leg[i].knee_motor.feedback);
     }
+		
     // add crc
     udp_send_data.check_digit =
         crc32_core((uint8_t *)&udp_send_data, sizeof(udp_send_data) / 4 - 1);

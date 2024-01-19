@@ -105,10 +105,12 @@ void udp_demo_test(void) {
 }
 extern uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE]; // 以太网接收缓冲区
 
+int udp_cnt=0;
+
 // UDP回调函数
 void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
                    struct ip_addr *addr, u16_t port) {
-
+	udp_cnt++;
   SCB_InvalidateDCache();
   u32 data_len = 0;
   u8 success_rev_flag = 0;

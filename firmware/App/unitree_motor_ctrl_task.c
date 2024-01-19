@@ -48,6 +48,8 @@ void send_all_motor_command(uint8_t tx_raw_data[][UART_TX_LEN],
                             uint8_t rx_raw_data[][UART_RX_LEN], leg_t *leg) {
   for (int i = 0; i < JOINT_NUM; i++) {
     for (int j = 0; j < LEG_NUM; j++) {
+			
+			SCB_CleanDCache_by_Addr((uint32_t*)tx_raw_data,8*UART_TX_LEN);
       send_single_motor_command(tx_raw_data[j], &leg[j], i);
     }
     for (int j = 0; j < LEG_NUM; j++) {
