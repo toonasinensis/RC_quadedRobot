@@ -75,16 +75,16 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     {
 			
 			udp_fps = udp_cnt;
-			udp_cnt = 0;
-			if(udp_cnt<500)
+			if(udp_cnt<200)
 			{
 				loss_udp_detect++;
-				if(loss_udp_detect>5)
+				if(loss_udp_detect>1)
 				{
 					loss_udp_detect = 0;
 					HAL_NVIC_SystemReset();
 				}
 			}
+			udp_cnt = 0;
       normal_frecquency = 0;
       //cal_fps_sys(&system_monitor);
       psc_1000 = 0;
