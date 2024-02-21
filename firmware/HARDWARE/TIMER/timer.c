@@ -54,6 +54,10 @@ int test_id = 0;
 extern  int udp_cnt;
 int   udp_fps;
 uint8_t loss_udp_detect;
+
+
+
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
   if (htim == (&TIM3_Handler)) {
     psc_1000++;
@@ -78,11 +82,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			udp_cnt = 0;
 			if(udp_cnt<500)
 			{
-				loss_udp_detect++;
+			//	loss_udp_detect
 				if(loss_udp_detect>5)
 				{
 					loss_udp_detect = 0;
-					HAL_NVIC_SystemReset();
+					//HAL_NVIC_SystemReset();
 				}
 			}
       normal_frecquency = 0;
