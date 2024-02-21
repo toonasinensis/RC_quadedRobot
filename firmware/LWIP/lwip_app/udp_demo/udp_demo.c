@@ -1,271 +1,209 @@
-#include "udp_demo.h" 
+#include "udp_demo.h"
 #include "delay.h"
-#include "usart.h"
-#include "led.h"
 #include "key.h"
 #include "lcd.h"
+#include "led.h"
 #include "malloc.h"
 #include "stdio.h"
-#include "string.h" 
+#include "string.h"
 #include "udp_comm.h"
-//UDP½ÓÊÕÊı¾İ»º³åÇø
-u8 udp_demo_recvbuf[UDP_DEMO_RX_BUFSIZE];	//UDP½ÓÊÕÊı¾İ»º³åÇø 
-//UDP·¢ËÍÊı¾İÄÚÈİ
-u8 udp_send_buffer_quad[200];
-const u8 *tcp_demo_sendbuf="Apollo STM32F4/F7/H7 UDP demo send data\r\n";
+#include "usart.h"
 
-//UDP ²âÊÔÈ«¾Ö×´Ì¬±ê¼Ç±äÁ¿
-//bit7:Ã»ÓĞÓÃµ½
-//bit6:0,Ã»ÓĞÊÕµ½Êı¾İ;1,ÊÕµ½Êı¾İÁË.
-//bit5:0,Ã»ÓĞÁ¬½ÓÉÏ;1,Á¬½ÓÉÏÁË.
-//bit4~0:±£Áô
+// UDPéºãƒ¦æ•¹éç‰ˆåµç¼‚æ’³å•¿é–ï¿½
+u8 udp_demo_recvbuf[UDP_DEMO_RX_BUFSIZE]; // UDPéºãƒ¦æ•¹éç‰ˆåµç¼‚æ’³å•¿é–ï¿½
+// UDPé™æˆ¦â‚¬ä½¹æšŸé¹î†¼å”´ç€¹ï¿½
+u8 udp_send_buffer_quad[200];
+const u8 *tcp_demo_sendbuf = "Apollo STM32F4/F7/H7 UDP demo send data\r\n";
+
+// UDP å¨´å¬­ç˜¯éã„¥çœ¬é˜èˆµâ‚¬ä½¹çˆ£ç’æ¿å½‰é–²ï¿½
+// bit7:å¨Œâ„ƒæ¹é¢ã„¥åŸŒ
+// bit6:0,å¨Œâ„ƒæ¹é€è·ºåŸŒéç‰ˆåµ;1,é€è·ºåŸŒéç‰ˆåµæµœï¿½.
+// bit5:0,å¨Œâ„ƒæ¹æ©ç‚´å¸´æ¶“ï¿½;1,æ©ç‚´å¸´æ¶“å©ç°¡.
+// bit4~0:æ·‡æ¿ˆæš€
 u8 udp_demo_flag;
 
-//ÉèÖÃÔ¶¶ËIPµØÖ·
-extern uint8_t fast_send ;
-void udp_demo_set_remoteip(void)
-{
-	u8 *tbuf;
-	u16 xoff;
-	u8 key;
-	
-	tbuf=mymalloc(SRAMIN,400);	//ÉêÇëÄÚ´æ
-	if(tbuf==NULL)return;
-	//Ç°Èı¸öIP±£³ÖºÍDHCPµÃµ½µÄIPÒ»ÖÂ
-	lwipdev.remoteip[0]=lwipdev.ip[0];
-	lwipdev.remoteip[1]=lwipdev.ip[1];
-	lwipdev.remoteip[2]=lwipdev.ip[2]; 
-	
+// ç’å‰§ç–†æ©æ»…î¬IPé¦æ¿æ½ƒ
+extern uint8_t fast_send;
+void udp_demo_set_remoteip(void) {
+  // u8 *tbuf;
+  // u16 xoff;
+  // u8 key;
 
-	myfree(SRAMIN,tbuf); 
-} 
+  // tbuf = mymalloc(SRAMIN, 400); // é¢å® î‡¬éå‘­ç“¨
+  // if (tbuf == NULL)
+  //   return;
+  // é“å¶„ç¬æ¶“ç‹ªPæ·‡æ¿‡å¯”éœå­ŒHCPå¯°æ¥€åŸŒé¨å‡¦Pæ¶“â‚¬é‘·ï¿½
+  lwipdev.remoteip[0] = lwipdev.ip[0];
+  lwipdev.remoteip[1] = lwipdev.ip[1];
+  lwipdev.remoteip[2] = lwipdev.ip[2];
 
-//UDP²âÊÔ
-u8 udp_send_flag;
-
-void udp_demo_test(void)
-{
- 	err_t err;
-	struct udp_pcb *udppcb;  	//¶¨ÒåÒ»¸öTCP·şÎñÆ÷¿ØÖÆ¿é
-	struct ip_addr rmtipaddr;  	//Ô¶¶ËipµØÖ·
- 	
-	u8 *tbuf;
- 	u8 key;
-	u8 res=0;		
-	u16 t=0; 
- 	
-	udp_demo_set_remoteip();//ÏÈÑ¡ÔñIP
-
-	tbuf=mymalloc(SRAMIN,400);	//ÉêÇëÄÚ´æ
-	if(tbuf==NULL)return ;		//ÄÚ´æÉêÇëÊ§°ÜÁË,Ö±½ÓÍË³ö
-
-	udppcb=udp_new();
-	if(udppcb)//´´½¨³É¹¦
-	{ 
-		IP4_ADDR(&rmtipaddr,lwipdev.remoteip[0],lwipdev.remoteip[1],lwipdev.remoteip[2],lwipdev.remoteip[3]);
-		err=udp_connect(udppcb,&rmtipaddr,UDP_REMOTE_PORT);//UDP¿Í»§¶ËÁ¬½Óµ½Ö¸¶¨IPµØÖ·ºÍ¶Ë¿ÚºÅµÄ·şÎñÆ÷
-		if(err==ERR_OK)
-		{
-			err=udp_bind(udppcb,IP_ADDR_ANY,UDP_LOCAL_PORT);//°ó¶¨±¾µØIPµØÖ·Óë¶Ë¿ÚºÅ
-			if(err==ERR_OK)	//°ó¶¨Íê³É
-			{
-				udp_recv(udppcb,udp_demo_recv,NULL);//×¢²á½ÓÊÕ»Øµ÷º¯Êı 
-//				LCD_ShowString(30,210,210,16,16,"STATUS:Connected   ");//±ê¼ÇÁ¬½ÓÉÏÁË(UDPÊÇ·Ç¿É¿¿Á¬½Ó,ÕâÀï½ö½ö±íÊ¾±¾µØUDPÒÑ¾­×¼±¸ºÃ)
-				udp_demo_flag |= 1<<5;			//±ê¼ÇÒÑ¾­Á¬½ÓÉÏ
-
-			}else res=1;
-		}else res=1;		
-	}else res=1;
-	fast_send=1;
-
-//	udp_send_flag =1;
-	while(1)
-	{
-		key=KEY_Scan(0);		
-
-		if(key==WKUP_PRES||udp_send_flag ==1)//KEY0°´ÏÂÁË,·¢ËÍÊı¾İ
-		{
-			udp_send_flag =0;
-			udp_demo_senddata(udppcb);
-		}
-		if(udp_demo_flag&1<<6)//ÊÇ·ñÊÕµ½Êı¾İ?
-		{	
-			udp_demo_flag&=~(1<<6);//±ê¼ÇÊı¾İÒÑ¾­±»´¦ÀíÁË.
-		} 
-		lwip_periodic_handle();
-		delay_us(100);
-		t++;
-		if(t==2000)
-		{
-			t=0;
-			LED0_Toggle;
-		}
-	}
-	udp_demo_connection_close(udppcb); 
-	myfree(SRAMIN,tbuf);
-} 
-
-//UDP»Øµ÷º¯Êı
-void udp_demo_recv(void *arg,struct udp_pcb *upcb,struct pbuf *p,struct ip_addr *addr,u16_t port)
-{
-		SCB_InvalidateDCache();
-
-	u32 data_len = 0;
-	u8 success_rev_flag = 0;
-	struct pbuf *q;
-	if(p!=NULL)	//½ÓÊÕµ½²»Îª¿ÕµÄÊı¾İÊ±
-	{
-		memset(udp_demo_recvbuf,0,UDP_DEMO_RX_BUFSIZE);  //Êı¾İ½ÓÊÕ»º³åÇøÇåÁã
-		for(q=p;q!=NULL;q=q->next)  //±éÀúÍêÕû¸öpbufÁ´±í
-		{
-			//ÅĞ¶ÏÒª¿½±´µ½UDP_DEMO_RX_BUFSIZEÖĞµÄÊı¾İÊÇ·ñ´óÓÚUDP_DEMO_RX_BUFSIZEµÄÊ£Óà¿Õ¼ä£¬Èç¹û´óÓÚ
-			//µÄ»°¾ÍÖ»¿½±´UDP_DEMO_RX_BUFSIZEÖĞÊ£Óà³¤¶ÈµÄÊı¾İ£¬·ñÔòµÄ»°¾Í¿½±´ËùÓĞµÄÊı¾İ
-			if(q->len > (UDP_DEMO_RX_BUFSIZE-data_len))
-			{
-				memcpy(udp_demo_recvbuf+data_len,q->payload,(UDP_DEMO_RX_BUFSIZE-data_len));//¿½±´Êı¾İ
-			}
-			else
-			{		
-				memcpy(udp_demo_recvbuf+data_len,q->payload,q->len);
-			}
-			
-			data_len += q->len;  	
-			if(data_len > UDP_DEMO_RX_BUFSIZE) break; //³¬³öTCP¿Í»§¶Ë½ÓÊÕÊı×é,Ìø³ö	
-		}
-		upcb->remote_ip=*addr; 				//¼ÇÂ¼Ô¶³ÌÖ÷»úµÄIPµØÖ·
-		upcb->remote_port=port;  			//¼ÇÂ¼Ô¶³ÌÖ÷»úµÄ¶Ë¿ÚºÅ
-		lwipdev.remoteip[0]=upcb->remote_ip.addr&0xff; 		//IADDR4
-		lwipdev.remoteip[1]=(upcb->remote_ip.addr>>8)&0xff; //IADDR3
-		lwipdev.remoteip[2]=(upcb->remote_ip.addr>>16)&0xff;//IADDR2
-		lwipdev.remoteip[3]=(upcb->remote_ip.addr>>24)&0xff;//IADDR1 
-		udp_demo_flag|=1<<6;	//±ê¼Ç½ÓÊÕµ½Êı¾İÁË
-		pbuf_free(p);//ÊÍ·ÅÄÚ´æ
-	
-	}
-	else
-	{
-		udp_disconnect(upcb); 
-		udp_demo_flag &= ~(1<<5);	//±ê¼ÇÁ¬½Ó¶Ï¿ª
-	}
-	
-	memcpy(&udp_receive_data,udp_demo_recvbuf,sizeof(udp_receive_data));
-	if (1||crc32_core((uint8_t *)&udp_receive_data, sizeof(udp_receive_data) / 4 - 1) == udp_receive_data.check_digit)
-	{
-	//	udp_send_flag = 1;
-
-			for (int i = 0; i < 6; ++i)
-			{
-					udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3],     &leg[i].hip_motor.command);
-					udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3 + 1], &leg[i].thigh_motor.command);
-					udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3 + 2], &leg[i].knee_motor.command);
-			}
-	}
-	udp_demo_senddata(upcb);
-	
-} 
-//UDP·şÎñÆ÷·¢ËÍÊı¾İ
-int len_udp_send = 0;
-void udp_demo_senddata(struct udp_pcb *upcb)
-{
-	SCB_CleanDCache();
-	 len_udp_send = sizeof(udp_send_data);
-	struct pbuf *ptr;
-	ptr=pbuf_alloc(PBUF_TRANSPORT,sizeof(udp_send_data),PBUF_POOL); //ÉêÇëÄÚ´æ
-	if(ptr)
-	{
-		pbuf_take(ptr,(char*)&udp_send_data,sizeof(udp_send_data)); //½«tcp_demo_sendbufÖĞµÄÊı¾İ´ò°ü½øpbuf½á¹¹ÖĞ
-		udp_send(upcb,ptr);	//udp·¢ËÍÊı¾İ 
-		pbuf_free(ptr);//ÊÍ·ÅÄÚ´æ
-	} 
-} 
-//¹Ø±ÕUDPÁ¬½Ó
-void udp_demo_connection_close(struct udp_pcb *upcb)
-{
-	udp_disconnect(upcb); 
-	udp_remove(upcb);			//¶Ï¿ªUDPÁ¬½Ó 
-	udp_demo_flag &= ~(1<<5);	//±ê¼ÇÁ¬½Ó¶Ï¿ª
-
+  // myfree(SRAMIN, tbuf);
 }
 
+// UDPå¨´å¬­ç˜¯
+u8 udp_send_flag;
 
+void udp_demo_test(void) {
+  err_t err;
+  struct udp_pcb *udppcb; // ç€¹æ°«ç®Ÿæ¶“â‚¬æ¶“çŒ…CPéˆå¶…å§Ÿé£ã„¦å¸¶é’è·ºæ½¡
+  // struct ip_addr rmtipaddr; // æ©æ»…î¬ipé¦æ¿æ½ƒ
 
+  u8 *tbuf;
+  u8 key;
+  u8 res = 0;
+  u16 t = 0;
 
+  udp_demo_set_remoteip(); // éå ¥â‚¬å¤‹å«¨IP
 
+  tbuf = mymalloc(SRAMIN, 400); // é¢å® î‡¬éå‘­ç“¨
+  if (tbuf == NULL)
+    return; // éå‘­ç“¨é¢å® î‡¬æ¾¶è¾«è§¦æµœï¿½,é©å­˜å¸´é–«â‚¬é‘ï¿½
 
+  udppcb = udp_new();
+  if (udppcb) // é’æ¶˜ç¼“é´æ„¬å§›
+  {
+    // IP4_ADDR(&rmtipaddr, lwipdev.remoteip[0], lwipdev.remoteip[1],
+    //          lwipdev.remoteip[2], lwipdev.remoteip[3]);
+    // NOTE: No need to connect right now
+    // UDPç€¹ãˆ¡åŸ›ç»”îˆç¹›éºãƒ¥åŸŒé¸å›§ç•¾IPé¦æ¿æ½ƒéœå²€î¬é™ï½…å½¿é¨å‹¬æ¹‡é”â€³æ«’
+    // err = udp_connect(udppcb, &rmtipaddr, UDP_REMOTE_PORT);
+    err = udp_bind(udppcb, IP_ADDR_ANY, UDP_LOCAL_PORT);
+    if (err == ERR_OK) {
+      udp_recv(udppcb, udp_demo_recv, NULL); // å¨‰ã„¥å”½éºãƒ¦æ•¹é¥ç‚¶çšŸé‘èŠ¥æšŸ
+      // éå›ªî†‡æ©ç‚´å¸´æ¶“å©ç°¡(UDPé„îˆæ½ªé™îˆæ½¬æ©ç‚´å¸´,æ©æ¬“å™·æµ å‘¬ç²ç›ã„§ãšéˆî„€æ¹´UDPå®¸èŒ¬ç²¡é‘å——î˜¬æ¿‚ï¿½)
+      udp_demo_flag |= 1 << 5; // éå›ªî†‡å®¸èŒ¬ç²¡æ©ç‚´å¸´æ¶“ï¿½
+    } else
+      res = 1;
+  } else
+    res = 1;
 
+  // Make sure udp is disconnected
+  udp_disconnect(udppcb);
 
+  fast_send = 1;
+  while (1) {
+    // key = KEY_Scan(0);
+    // if (key == WKUP_PRES || udp_send_flag == 1) // KEY0é¸å¤‰ç¬…æµœï¿½,é™æˆ¦â‚¬ä½¹æšŸé¹ï¿½
+    // {
+    //   udp_send_flag = 0;
+    //   udp_demo_senddata(udppcb);
+    // }
+    // if (udp_demo_flag & 1 << 6) // é„îˆšæƒé€è·ºåŸŒéç‰ˆåµ?
+    // {
+    //   udp_demo_flag &= ~(1 << 6); // éå›ªî†‡éç‰ˆåµå®¸èŒ¬ç²¡çšî‚¢î˜©éå—•ç°¡.
+    // }
+    lwip_periodic_handle();
+    delay_us(100);
+    // t++;
+    // if (t >= 1000) {
+    //   t = 0;
+    //   LED0_Toggle;
+    // }
+  }
+  udp_demo_connection_close(udppcb);
+  myfree(SRAMIN, tbuf);
+}
+extern uint8_t Rx_Buff[ETH_RX_DESC_CNT][ETH_MAX_PACKET_SIZE]; // æµ ãƒ¥ãŠç¼ƒæˆå¸´é€å‰ç´¦éæ’å°¯
 
+int udp_cnt=0;
 
+// UDPé¥ç‚¶çšŸé‘èŠ¥æšŸ
+void udp_demo_recv(void *arg, struct udp_pcb *upcb, struct pbuf *p,
+                   struct ip_addr *addr, u16_t port) {
+	udp_cnt++;
+  SCB_InvalidateDCache();
+  u32 data_len = 0;
+  u8 success_rev_flag = 0;
+  struct pbuf *q;
 
+  // get motor command from PC
+  if (p != NULL) // éºãƒ¦æ•¹é’é¢ç¬‰æ¶“è™¹â”–é¨å‹¬æšŸé¹î†½æ¤‚
+  {
+			SCB_InvalidateDCache_by_Addr((uint32_t *)Rx_Buff, ETH_RX_DESC_CNT*ETH_MAX_PACKET_SIZE);
 
+    memset(udp_demo_recvbuf, 0, UDP_DEMO_RX_BUFSIZE); // éç‰ˆåµéºãƒ¦æ•¹ç¼‚æ’³å•¿é–çƒ˜ç«»é—†ï¿½
+    for (q = p; q != NULL; q = q->next) {
+      if (q->len > (UDP_DEMO_RX_BUFSIZE - data_len)) {
+        memcpy(udp_demo_recvbuf + data_len, q->payload,
+               (UDP_DEMO_RX_BUFSIZE - data_len)); // é·ç–¯ç¤‰éç‰ˆåµ
+      } else {
+        memcpy(udp_demo_recvbuf + data_len, q->payload, q->len);
+      }
+      data_len += q->len;
+      if (data_len > UDP_DEMO_RX_BUFSIZE)
+        break; // ç“’å‘­åš­TCPç€¹ãˆ¡åŸ›ç»”îˆ›å¸´é€èˆµæšŸç¼ï¿½,ç’ºå†²åš­
+    }
+    // Set Motor Cmd
+    memcpy(&udp_receive_data, udp_demo_recvbuf, sizeof(udp_receive_data));
+    if (crc32_core((uint8_t *)&udp_receive_data,
+                   sizeof(udp_receive_data) / 4 - 1) ==
+        udp_receive_data.check_digit) {
+      LED0_Toggle;
+			
+					
+      for (int i = 0; i < 6; ++i) {
+						if(udp_receive_data.state==1)//normal
+					{
+						leg[i].hip_motor.command.mode =10;
+						leg[i].thigh_motor.command.mode =10;
+						leg[i].knee_motor.command.mode =10;
+					}
+					else
+					{
+						leg[i].hip_motor.command.mode =0;
+						leg[i].thigh_motor.command.mode =0;
+						leg[i].knee_motor.command.mode =0;
+					}
+        udp_motor_type2raw_motor_type(&udp_receive_data.udp_motor_send[i * 3],
+                                      &leg[i].hip_motor.command);
+        udp_motor_type2raw_motor_type(
+            &udp_receive_data.udp_motor_send[i * 3 + 1],
+            &leg[i].thigh_motor.command);
+        udp_motor_type2raw_motor_type(
+            &udp_receive_data.udp_motor_send[i * 3 + 2],
+            &leg[i].knee_motor.command);
+      }
+    }
+    // Update UDP remote IP and port (not needed for HexapodSoftware udp_comm)
+    // upcb->remote_ip = *addr;  // ç’æ¿ç¶æ©æ»…â–¼æ¶“ç»˜æº€é¨å‡¦Pé¦æ¿æ½ƒ
+    // upcb->remote_port = port; // ç’æ¿ç¶æ©æ»…â–¼æ¶“ç»˜æº€é¨å‹­î¬é™ï½…å½¿
+    // lwipdev.remoteip[0] = upcb->remote_ip.addr & 0xff;         // IADDR4
+    // lwipdev.remoteip[1] = (upcb->remote_ip.addr >> 8) & 0xff;  // IADDR3
+    // lwipdev.remoteip[2] = (upcb->remote_ip.addr >> 16) & 0xff; // IADDR2
+    // lwipdev.remoteip[3] = (upcb->remote_ip.addr >> 24) & 0xff; // IADDR1
+    udp_demo_flag |= 1 << 6; // éå›ªî†‡éºãƒ¦æ•¹é’ç‰ˆæšŸé¹î†»ç°¡
+    pbuf_free(p);            // é–²å©ƒæ–éå‘­ç“¨
+  }
+  // else {
+  //   udp_disconnect(upcb);
+  //   udp_demo_flag &= ~(1 << 5); // éå›ªî†‡æ©ç‚´å¸´é‚î…ç´‘
+  // }
 
+  // send motor feedback to PC
+  udp_connect(upcb, addr, UDP_REMOTE_PORT);
+  udp_demo_senddata(upcb);
+  // IMPORTANT: free the connection to accept new clients
+  udp_disconnect(upcb);
+}
 
+// UDPéˆå¶…å§Ÿé£ã„¥å½‚é–«ä½¹æšŸé¹ï¿½
+int len_udp_send = 0;
+void udp_demo_senddata(struct udp_pcb *upcb) {
+  SCB_CleanDCache();
+  len_udp_send = sizeof(udp_send_data);
+  struct pbuf *ptr;
+  ptr = pbuf_alloc(PBUF_TRANSPORT, sizeof(udp_send_data), PBUF_POOL);
+  if (ptr) {
+    // çå”—cp_demo_sendbufæ¶“î… æ®‘éç‰ˆåµéµæ’³å¯˜æ©æ²ºbufç¼æ’´ç€¯æ¶“ï¿½
+    pbuf_take(ptr, (char *)&udp_send_data, sizeof(udp_send_data));
+    udp_send(upcb, ptr);
+    pbuf_free(ptr);
+  }
+}
 
-
-
-
-
-
-
-//void udp_demo_test(void)
-//{
-// 	err_t err;
-//	struct udp_pcb *udppcb;  	//¶¨ÒåÒ»¸öTCP·şÎñÆ÷¿ØÖÆ¿é
-//	struct ip_addr rmtipaddr;  	//Ô¶¶ËipµØÖ·
-// 	
-//	u8 *tbuf;
-// 	u8 key;
-//	u8 res=0;		
-//	u16 t=0; 
-// 	
-//	udp_demo_set_remoteip();//ÏÈÑ¡ÔñIP
-
-//	tbuf=mymalloc(SRAMIN,200);	//ÉêÇëÄÚ´æ
-//	if(tbuf==NULL)return ;		//ÄÚ´æÉêÇëÊ§°ÜÁË,Ö±½ÓÍË³ö
-
-//	udppcb=udp_new();
-//	if(udppcb)//´´½¨³É¹¦
-//	{ 
-//		IP4_ADDR(&rmtipaddr,lwipdev.remoteip[0],lwipdev.remoteip[1],lwipdev.remoteip[2],lwipdev.remoteip[3]);
-//		err=udp_connect(udppcb,&rmtipaddr,UDP_DEMO_PORT);//UDP¿Í»§¶ËÁ¬½Óµ½Ö¸¶¨IPµØÖ·ºÍ¶Ë¿ÚºÅµÄ·şÎñÆ÷
-//		if(err==ERR_OK)
-//		{
-//			err=udp_bind(udppcb,IP_ADDR_ANY,UDP_DEMO_PORT);//°ó¶¨±¾µØIPµØÖ·Óë¶Ë¿ÚºÅ
-//			if(err==ERR_OK)	//°ó¶¨Íê³É
-//			{
-//				udp_recv(udppcb,udp_demo_recv,NULL);//×¢²á½ÓÊÕ»Øµ÷º¯Êı 
-////				LCD_ShowString(30,210,210,16,16,"STATUS:Connected   ");//±ê¼ÇÁ¬½ÓÉÏÁË(UDPÊÇ·Ç¿É¿¿Á¬½Ó,ÕâÀï½ö½ö±íÊ¾±¾µØUDPÒÑ¾­×¼±¸ºÃ)
-//				udp_demo_flag |= 1<<5;			//±ê¼ÇÒÑ¾­Á¬½ÓÉÏ
-
-//			}else res=1;
-//		}else res=1;		
-//	}else res=1;
-//	while(res==0)
-//	{
-//		key=KEY_Scan(0);
-//		if(key==WKUP_PRES)break;
-//		if(key==KEY0_PRES)//KEY0°´ÏÂÁË,·¢ËÍÊı¾İ
-//		{
-//			udp_demo_senddata(udppcb);
-//		}
-//		if(udp_demo_flag&1<<6)//ÊÇ·ñÊÕµ½Êı¾İ?
-//		{
-////			LCD_Fill(30,250,lcddev.width-1,lcddev.height-1,WHITE);//ÇåÉÏÒ»´ÎÊı¾İ
-////			LCD_ShowString(30,250,lcddev.width-30,lcddev.height-230,16,udp_demo_recvbuf);//ÏÔÊ¾½ÓÊÕµ½µÄÊı¾İ			
-//			udp_demo_flag&=~(1<<6);//±ê¼ÇÊı¾İÒÑ¾­±»´¦ÀíÁË.
-//		} 
-//		lwip_periodic_handle();
-//		delay_us(100);
-//		t++;
-//		if(t==2000)
-//		{
-//			t=0;
-//			LED0_Toggle;
-//		}
-//	}
-//	udp_demo_connection_close(udppcb); 
-//	myfree(SRAMIN,tbuf);
-//} 
-
-
-
+// éæŠ½æ£´UDPæ©ç‚´å¸´
+void udp_demo_connection_close(struct udp_pcb *upcb) {
+  udp_disconnect(upcb);
+  udp_remove(upcb);           // é‚î…ç´‘UDPæ©ç‚´å¸´
+  udp_demo_flag &= ~(1 << 5); // éå›ªî†‡æ©ç‚´å¸´é‚î…ç´‘
+}

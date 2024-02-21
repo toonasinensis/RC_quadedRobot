@@ -1,45 +1,44 @@
 #ifndef _LWIP_COMM_H
-#define _LWIP_COMM_H 
-#include "lan8720.h" 
+#define _LWIP_COMM_H
+#include "lan8720.h"
 #include "sys.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌĞòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßĞí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK STM32F7¿ª·¢°å
-//lwipÍ¨ÓÃÇı¶¯ ´úÂë	   
-//ÕıµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//´´½¨ÈÕÆÚ:2016/1/1
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓĞ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖİÊĞĞÇÒíµç×Ó¿Æ¼¼ÓĞÏŞ¹«Ë¾ 2009-2019
-//All rights reserved									  
+//////////////////////////////////////////////////////////////////////////////////
+// æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºå…¶å®ƒä»»ä½•ç”¨é€”
+// ALIENTEK STM32F7å¼€å‘æ¿
+// lwipé€šç”¨é©±åŠ¨ ä»£ç 
+// æ­£ç‚¹åŸå­@ALIENTEK
+// æŠ€æœ¯è®ºå›:www.openedv.com
+// åˆ›å»ºæ—¥æœŸ:2016/1/1
+// ç‰ˆæœ¬ï¼šV1.0
+// ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+// Copyright(C) å¹¿å·å¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2009-2019
+// All rights reserved
 //*******************************************************************************
-//ĞŞ¸ÄĞÅÏ¢
-//ÎŞ
-////////////////////////////////////////////////////////////////////////////////// 	   
- 
-#define LWIP_MAX_DHCP_TRIES		4   //DHCP·şÎñÆ÷×î´óÖØÊÔ´ÎÊı
-   
-//lwip¿ØÖÆ½á¹¹Ìå
-typedef struct  
-{
-	u8 mac[6];      //MACµØÖ·
-	u8 remoteip[4];	//Ô¶¶ËÖ÷»úIPµØÖ· 
-	u8 ip[4];       //±¾»úIPµØÖ·
-	u8 netmask[4]; 	//×ÓÍøÑÚÂë
-	u8 gateway[4]; 	//Ä¬ÈÏÍø¹ØµÄIPµØÖ·
-	
-	vu8 dhcpstatus;	//dhcp×´Ì¬ 
-					//0,Î´»ñÈ¡DHCPµØÖ·;
-					//1,½øÈëDHCP»ñÈ¡×´Ì¬
-					//2,³É¹¦»ñÈ¡DHCPµØÖ·
-					//0XFF,»ñÈ¡Ê§°Ü.
-}__lwip_dev;
-extern __lwip_dev lwipdev;	//lwip¿ØÖÆ½á¹¹Ìå
+// ä¿®æ”¹ä¿¡æ¯
+// æ— 
+//////////////////////////////////////////////////////////////////////////////////
+
+#define LWIP_MAX_DHCP_TRIES 4 // DHCPæœåŠ¡å™¨æœ€å¤§é‡è¯•æ¬¡æ•°
+
+// lwipæ§åˆ¶ç»“æ„ä½“
+typedef struct {
+  u8 mac[6];      // MACåœ°å€
+  u8 remoteip[4]; // è¿œç«¯ä¸»æœºIPåœ°å€
+  u8 ip[4];       // æœ¬æœºIPåœ°å€
+  u8 netmask[4];  // å­ç½‘æ©ç 
+  u8 gateway[4];  // é»˜è®¤ç½‘å…³çš„IPåœ°å€
+
+  vu8 dhcpstatus; // dhcpçŠ¶æ€
+                  // 0,æœªè·å–DHCPåœ°å€;
+                  // 1,è¿›å…¥DHCPè·å–çŠ¶æ€
+                  // 2,æˆåŠŸè·å–DHCPåœ°å€
+                  // 0XFF,è·å–å¤±è´¥.
+} __lwip_dev;
+extern __lwip_dev lwipdev; // lwipæ§åˆ¶ç»“æ„ä½“
 
 void lwip_pkt_handle(void);
 void lwip_periodic_handle(void);
-	
+
 void lwip_comm_default_ip_set(__lwip_dev *lwipx);
 u8 lwip_comm_mem_malloc(void);
 void lwip_comm_mem_free(void);
@@ -47,16 +46,3 @@ u8 lwip_comm_init(void);
 void lwip_dhcp_process_handle(void);
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,119 +1,125 @@
 #include "timer.h"
 #include "led.h"
-//////////////////////////////////////////////////////////////////////////////////	 
+//////////////////////////////////////////////////////////////////////////////////
+#include "system_monitor.h"
 #include "udp_comm.h"
 #include "unitree_motor_ctrl_task.h"
-#include "system_monitor.h"
-TIM_HandleTypeDef TIM3_Handler;      //¶¨Ê±Æ÷¾ä±ú 
 
-extern u32 lwip_localtime;	         //lwip±¾µØÊ±¼ä¼ÆÊıÆ÷,µ¥Î»:ms
-//Í¨ÓÃ¶¨Ê±Æ÷3ÖĞ¶Ï³õÊ¼»¯,¶¨Ê±Æ÷3ÔÚAPB1ÉÏ£¬APB1µÄ¶¨Ê±Æ÷Ê±ÖÓÎª200MHz
-//arr£º×Ô¶¯ÖØ×°Öµ¡£
-//psc£ºÊ±ÖÓÔ¤·ÖÆµÊı
-//¶¨Ê±Æ÷Òç³öÊ±¼ä¼ÆËã·½·¨:Tout=((arr+1)*(psc+1))/Ft us.
-//Ft=¶¨Ê±Æ÷¹¤×÷ÆµÂÊ,µ¥Î»:Mhz
-//ÕâÀïÊ¹ÓÃµÄÊÇ¶¨Ê±Æ÷3!(¶¨Ê±Æ÷3¹ÒÔÚAPB1ÉÏ£¬Ê±ÖÓÎªHCLK/2)
-void TIM3_Init(u16 arr,u16 psc)
-{  
-    TIM3_Handler.Instance=TIM3;                          //Í¨ÓÃ¶¨Ê±Æ÷3
-    TIM3_Handler.Init.Prescaler=psc;                     //·ÖÆµ
-    TIM3_Handler.Init.CounterMode=TIM_COUNTERMODE_UP;    //ÏòÉÏ¼ÆÊıÆ÷
-    TIM3_Handler.Init.Period=arr;                        //×Ô¶¯×°ÔØÖµ
-    TIM3_Handler.Init.ClockDivision=TIM_CLOCKDIVISION_DIV1;//Ê±ÖÓ·ÖÆµÒò×Ó
-    HAL_TIM_Base_Init(&TIM3_Handler);
-    
-    HAL_TIM_Base_Start_IT(&TIM3_Handler); //Ê¹ÄÜ¶¨Ê±Æ÷3ºÍ¶¨Ê±Æ÷3¸üĞÂÖĞ¶Ï£ºTIM_IT_UPDATE    
+TIM_HandleTypeDef TIM3_Handler; // ç€¹æ°­æ¤‚é£ã„¥å½éŒï¿½
+
+extern u32 lwip_localtime; // lwipéˆî„€æ¹´éƒå •æ£¿ç’â„ƒæšŸé£ï¿½,é—æ›šç¶…:ms
+// é–«æ°±æ•¤ç€¹æ°­æ¤‚é£ï¿½3æ¶“î…ŸæŸ‡é’æ¿†îé–ï¿½,ç€¹æ°­æ¤‚é£ï¿½3é¦Ë‹PB1æ¶“å©ç´APB1é¨å‹«ç•¾éƒè·ºæ«’éƒå •æŒ“æ¶“ï¿½200MHz
+// arré”›æ°³åšœé”ã„©å™¸ç‘å‘­â‚¬ç¬ºâ‚¬ï¿½
+// pscé”›æ°­æ¤‚é–½ç†¼î•©é’å—›î•¶éï¿½
+// ç€¹æ°­æ¤‚é£ã„¦å­©é‘çƒ˜æ¤‚é—‚ç£‹î…¸ç» æ¥æŸŸå¨‰ï¿½:Tout=((arr+1)*(psc+1))/Ft us.
+// Ft=ç€¹æ°­æ¤‚é£ã„¥ä¼æµ£æ»ˆî•¶éœï¿½,é—æ›šç¶…:Mhz
+// æ©æ¬“å™·æµ£è·¨æ•¤é¨å‹¬æ§¸ç€¹æ°­æ¤‚é£ï¿½3!(ç€¹æ°­æ¤‚é£ï¿½3é¸å‚šæ¹ªAPB1æ¶“å©ç´éƒå •æŒ“æ¶“ç¯CLK/2)
+void TIM3_Init(u16 arr, u16 psc) {
+  TIM3_Handler.Instance = TIM3;                             // é–«æ°±æ•¤ç€¹æ°­æ¤‚é£ï¿½3
+  TIM3_Handler.Init.Prescaler = psc;                        // é’å—›î•¶
+  TIM3_Handler.Init.CounterMode = TIM_COUNTERMODE_UP;       // éšæˆœç¬‚ç’â„ƒæšŸé£ï¿½
+  TIM3_Handler.Init.Period = arr;                           // é‘·î„å§©ç‘å‘°æµ‡éŠï¿½
+  TIM3_Handler.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1; // éƒå •æŒ“é’å—›î•¶é¥çŠ²ç“™
+  HAL_TIM_Base_Init(&TIM3_Handler);
+
+  HAL_TIM_Base_Start_IT(
+      &TIM3_Handler); // æµ£èƒ¯å…˜ç€¹æ°­æ¤‚é£ï¿½3éœå±½ç•¾éƒè·ºæ«’3é‡å­˜æŸŠæ¶“î…ŸæŸ‡é”›æ­IM_IT_UPDATE
 }
 
-//¶¨Ê±Æ÷µ×²áÇı¶¯£¬¿ªÆôÊ±ÖÓ£¬ÉèÖÃÖĞ¶ÏÓÅÏÈ¼¶
-//´Ëº¯Êı»á±»HAL_TIM_Base_Init()º¯Êıµ÷ÓÃ
-void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim)
-{
-    if(htim->Instance==TIM3)
-	{
-		__HAL_RCC_TIM3_CLK_ENABLE();            //Ê¹ÄÜTIM3Ê±ÖÓ
-		HAL_NVIC_SetPriority(TIM3_IRQn,1,3);    //ÉèÖÃÖĞ¶ÏÓÅÏÈ¼¶£¬ÇÀÕ¼ÓÅÏÈ¼¶1£¬×ÓÓÅÏÈ¼¶3
-		HAL_NVIC_EnableIRQ(TIM3_IRQn);          //¿ªÆôITM3ÖĞ¶Ï   
-	}  
+// ç€¹æ°­æ¤‚é£ã„¥ç°³éå²„â”é”îŸ’ç´å¯®â‚¬éšîˆ›æ¤‚é–½ç‡‚ç´ç’å‰§ç–†æ¶“î…ŸæŸ‡æµ¼æ¨ºå›ç»¾ï¿½
+// å§ã‚…åš±éé¢ç´°çšçºAL_TIM_Base_Init()é‘èŠ¥æšŸç’‹å†ªæ•¤
+void HAL_TIM_Base_MspInit(TIM_HandleTypeDef *htim) {
+  if (htim->Instance == TIM3) {
+    __HAL_RCC_TIM3_CLK_ENABLE(); // æµ£èƒ¯å…˜TIM3éƒå •æŒ“
+    HAL_NVIC_SetPriority(TIM3_IRQn, 1,
+                         3); // ç’å‰§ç–†æ¶“î…ŸæŸ‡æµ¼æ¨ºå›ç»¾Ñç´é¶ãˆ å´°æµ¼æ¨ºå›ç»¾ï¿½1é”›å±½ç“™æµ¼æ¨ºå›ç»¾ï¿½3
+    HAL_NVIC_EnableIRQ(TIM3_IRQn); // å¯®â‚¬éšç–˜TM3æ¶“î…ŸæŸ‡
+  }
 }
 
-//¶¨Ê±Æ÷3ÖĞ¶Ï·şÎñº¯Êı
-void TIM3_IRQHandler(void)
-{
-    HAL_TIM_IRQHandler(&TIM3_Handler);
-}
+// ç€¹æ°­æ¤‚é£ï¿½3æ¶“î…ŸæŸ‡éˆå¶…å§Ÿé‘èŠ¥æšŸ
+void TIM3_IRQHandler(void) { HAL_TIM_IRQHandler(&TIM3_Handler); }
 uint8_t start_send;
-uint8_t if_long_use;
-uint8_t fast_send=0;
-//¶¨Ê±Æ÷3ÖĞ¶Ï·şÎñº¯Êıµ÷ÓÃ
+uint8_t if_long_use = 0;
+uint8_t fast_send = 0;
+// ç€¹æ°­æ¤‚é£ï¿½3æ¶“î…ŸæŸ‡éˆå¶…å§Ÿé‘èŠ¥æšŸç’‹å†ªæ•¤
 uint32_t timer_pp;
-
 uint32_t psc_1000;
 extern float normal_frecquency;
 extern u8 udp_send_flag;
 float otto_pos;
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-    if(htim==(&TIM3_Handler))
+uint16_t motor_fps[18]={0};
+int test_id = 0;
+
+extern  int udp_cnt;
+int   udp_fps;
+uint8_t loss_udp_detect;
+
+
+
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+  if (htim == (&TIM3_Handler)) {
+    psc_1000++;
+    if (start_send || if_long_use || fast_send) {
+      if (if_long_use && timer_pp > 1000) {
+        timer_pp = 0;
+        start_send = 0;
+				
+        send_all_motor_command(uart_tx_buffer, uart_rx_buffer, leg);
+      } else if (!if_long_use) {
+        send_all_motor_command(uart_tx_buffer, uart_rx_buffer, leg);
+      }
+      timer_pp++;
+      otto_pos = leg[0].knee_motor.feedback.W;
+			test_id = uart_tx_buffer[3][2];
+    }
+
+    if (psc_1000 > 1000) // é’å—›î•¶é’ï¿½1s
     {
 			
-			psc_1000++;
-			if(start_send||if_long_use||fast_send)
+			udp_fps = udp_cnt;
+			if(udp_cnt<200)
+			{
+				loss_udp_detect++;
+				if(loss_udp_detect>1)
 				{
-					if(if_long_use&&timer_pp>1000)
-					{
-						timer_pp = 0;
-						
-						
-					start_send = 0;
-						
-							send_all_motor_command(uart_tx_buffer,uart_rx_buffer,leg);
-					}
-					else if(!if_long_use)
-					{
-						
-					send_all_motor_command(uart_tx_buffer,uart_rx_buffer,leg);
-
-					}
-					timer_pp++;
-					otto_pos = leg[0].knee_motor.feedback.W;
+					loss_udp_detect = 0;
+					//HAL_NVIC_SystemReset();
 				}
-				
-				if(psc_1000>1000)//·ÖÆµµ½1s
-				{
-					normal_frecquency = 0;
-		//			cal_fps_sys(&system_monitor);
-					psc_1000 = 0;
-						for(int i = 0;i<LEG_NUM;i++)
-					{
-						
-
-								leg[i].hip_motor.real_rate =leg[i].hip_motor.temp_rate;
-								leg[i].thigh_motor.real_rate =leg[i].thigh_motor.temp_rate;
-								leg[i].knee_motor.real_rate =leg[i].knee_motor.temp_rate;
-								leg[i].hip_motor.temp_rate = 0;
-						leg[i].thigh_motor.temp_rate = 0;
-						leg[i].knee_motor.temp_rate = 0; 
-					}
-				}
-				
-				//ÉèÖÃudp·¢ËÍÊı¾İ£º
-				
-				// update motor feedback data
-        for (int i = 0; i < LEG_NUM; ++i)
-        {
-            raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3], &leg[i].hip_motor.feedback);
-            raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 1], &leg[i].thigh_motor.feedback);
-            raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 2], &leg[i].knee_motor.feedback);
-        }
-        // add crc
-        udp_send_data.check_digit = crc32_core((uint8_t *)&udp_send_data, sizeof(udp_send_data) / 4 - 1);
-
-				
-				
-				
-			//	udp_send_flag = 1;
-
-        lwip_localtime +=1; //¼Ó10
+			}
+			udp_cnt = 0;
+      normal_frecquency = 0;
+      //cal_fps_sys(&system_monitor);
+      psc_1000 = 0;
+      for (int i = 0; i < LEG_NUM; i++) {
+        leg[i].hip_motor.real_rate   = leg[i].hip_motor.temp_rate;
+        leg[i].thigh_motor.real_rate = leg[i].thigh_motor.temp_rate;
+        leg[i].knee_motor.real_rate  = leg[i].knee_motor.temp_rate;
+				motor_fps[3*i] = leg[i].hip_motor.real_rate;
+				motor_fps[3*i+1] = leg[i].thigh_motor.real_rate;
+				motor_fps[3*i+2] = leg[i].knee_motor.real_rate;
+        leg[i].hip_motor.temp_rate = 0;
+        leg[i].thigh_motor.temp_rate = 0;
+        leg[i].knee_motor.temp_rate = 0;
+      }
     }
+
+    // ç’å‰§ç–†udpé™æˆ¦â‚¬ä½¹æšŸé¹î‡†ç´°
+    // update motor feedback data
+    for (int i = 0; i < LEG_NUM; ++i) {
+      raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3],
+                                    &leg[i].hip_motor.feedback);
+      raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 1],
+                                    &leg[i].thigh_motor.feedback);
+      raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 2],
+                                    &leg[i].knee_motor.feedback);
+    }
+		
+    // add crc
+    udp_send_data.check_digit =
+        crc32_core((uint8_t *)&udp_send_data, sizeof(udp_send_data) / 4 - 1);
+    //	udp_send_flag = 1;
+    lwip_localtime += 1; // é”ï¿½10
+  }
 }

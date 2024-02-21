@@ -1,24 +1,28 @@
 #ifndef _LED_H
 #define _LED_H
 #include "sys.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//±¾³ÌÐòÖ»¹©Ñ§Ï°Ê¹ÓÃ£¬Î´¾­×÷ÕßÐí¿É£¬²»µÃÓÃÓÚÆäËüÈÎºÎÓÃÍ¾
-//ALIENTEK STM32H7¿ª·¢°å
-//LEDÇý¶¯´úÂë	   
-//ÕýµãÔ­×Ó@ALIENTEK
-//¼¼ÊõÂÛÌ³:www.openedv.com
-//´´½¨ÈÕÆÚ:2017/6/8
-//°æ±¾£ºV1.0
-//°æÈ¨ËùÓÐ£¬µÁ°æ±Ø¾¿¡£
-//Copyright(C) ¹ãÖÝÊÐÐÇÒíµç×Ó¿Æ¼¼ÓÐÏÞ¹«Ë¾ 2014-2024
-//All rights reserved									  
-////////////////////////////////////////////////////////////////////////////////// 	
+//////////////////////////////////////////////////////////////////////////////////
+// æœ¬ç¨‹åºåªä¾›å­¦ä¹ ä½¿ç”¨ï¼Œæœªç»ä½œè€…è®¸å¯ï¼Œä¸å¾—ç”¨äºŽå…¶å®ƒä»»ä½•ç”¨é€”
+// ALIENTEK STM32H7å¼€å‘æ¿
+// LEDé©±åŠ¨ä»£ç 
+// æ­£ç‚¹åŽŸå­@ALIENTEK
+// æŠ€æœ¯è®ºå›:www.openedv.com
+// åˆ›å»ºæ—¥æœŸ:2017/6/8
+// ç‰ˆæœ¬ï¼šV1.0
+// ç‰ˆæƒæ‰€æœ‰ï¼Œç›—ç‰ˆå¿…ç©¶ã€‚
+// Copyright(C) å¹¿å·žå¸‚æ˜Ÿç¿¼ç”µå­ç§‘æŠ€æœ‰é™å…¬å¸ 2014-2024
+// All rights reserved
+//////////////////////////////////////////////////////////////////////////////////
 
-//LED¶Ë¿Ú¶¨Òå
-#define LED0(n)		(n?HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_SET):HAL_GPIO_WritePin(GPIOB,GPIO_PIN_1,GPIO_PIN_RESET))
-#define LED0_Toggle (HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1)) //LED0Êä³öµçÆ½·­×ª
-#define LED1(n)		(n?HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET):HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET))
-#define LED1_Toggle (HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0)) //LED1Êä³öµçÆ½·­×ª
+// LEDç«¯å£å®šä¹‰
+#define LED0(n)                                                                \
+  (n ? HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET)                      \
+     : HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_RESET))
+#define LED0_Toggle (HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_1)) // LED0è¾“å‡ºç”µå¹³ç¿»è½¬
+#define LED1(n)                                                                \
+  (n ? HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET)                      \
+     : HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_RESET))
+#define LED1_Toggle (HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0)) // LED1è¾“å‡ºç”µå¹³ç¿»è½¬
 
-void LED_Init(void); //LED³õÊ¼»¯º¯Êý
+void LED_Init(void); // LEDåˆå§‹åŒ–å‡½æ•°
 #endif

@@ -1,15 +1,15 @@
 #ifndef _HITCRT_COFF_H
 #define _HITCRT_COFF_H
 /*---------------------------------------------------------------------
-°æÈ¨ÉùÃ÷£ºHITCRT(¹þ¹¤´ó¾º¼¼»úÆ÷ÈË¶Ó)
-ÎÄ¼þÃû£ºHITCRT_Coff.h
-×î½üÐÞ¸ÄÈÕÆÚ£º2016.04.04
-°æ±¾£º1.0
+ç‰ˆæƒå£°æ˜Žï¼šHITCRT(å“ˆå·¥å¤§ç«žæŠ€æœºå™¨äººé˜Ÿ)
+æ–‡ä»¶åï¼šHITCRT_Coff.h
+æœ€è¿‘ä¿®æ”¹æ—¥æœŸï¼š2016.04.04
+ç‰ˆæœ¬ï¼š1.0
 ---------------------------------------------------------------------*/
 #define PI 3.1415926536f
 #define PI2 6.2831853072f
 #define PISHORT 3.14f
-#define RADIAN_10 0.00174532922f // PI/1800£¬¶à´ÎÐèÒªÔËËã£¬¹Êµ¥¶ÀÌáÈ¡³öÀ´
+#define RADIAN_10 0.00174532922f // PI/1800ï¼Œå¤šæ¬¡éœ€è¦è¿ç®—ï¼Œæ•…å•ç‹¬æå–å‡ºæ¥
 #define RADIAN_100 0.000174532922f
 #define DEG 57.29578f
 #define DEG_10 572.9578f     // DEG*10
@@ -27,5 +27,3 @@
 #define RADIAN_165 2.879793266f
 
 #endif
-
-

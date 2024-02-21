@@ -1,3 +1,8 @@
+firmware/USER/NETWORK.uvguix*
+firmware/USER/JLinkLog.txt
+firmware/OBJ
+*.crf
+
 # Prerequisites
 *.d
 
@@ -6,6 +11,7 @@
 *.lo
 *.o
 *.obj
+
 
 # Precompiled Headers
 *.gch
@@ -30,3 +36,7 @@
 *.exe
 *.out
 *.app
+
+#vscode files
+*.json
+.vscode/

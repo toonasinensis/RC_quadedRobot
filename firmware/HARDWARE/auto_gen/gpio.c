@@ -82,6 +82,9 @@ void MX_GPIO_Init(void)
 	  GPIO_InitStruct.Pin = GPIO_PIN_2;
 		
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+	  GPIO_InitStruct.Pin = GPIO_PIN_11;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
 
 
 }

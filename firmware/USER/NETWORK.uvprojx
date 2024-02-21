@@ -869,11 +869,6 @@
           <GroupName>APP</GroupName>
           <Files>
             <File>
-              <FileName>robot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\App\robot.c</FilePath>
-            </File>
-            <File>
               <FileName>system_monitor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\App\system_monitor.c</FilePath>

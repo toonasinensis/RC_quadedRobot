@@ -315,7 +315,7 @@ void USART1_IRQHandler(void)
   uint32_t tmp;
 	if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE) == 1)
     {
-							SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[0], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_OREFLAG(&huart1);
 //        HAL_UART_DMAStop(&huart1);
@@ -326,7 +326,7 @@ void USART1_IRQHandler(void)
 		}
 if (__HAL_UART_GET_FLAG(&huart1, UART_FLAG_IDLE) == 1)
     {
-				SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[0], UART_RX_LEN);
   		  __HAL_UART_CLEAR_IDLEFLAG(&huart1);
 //			  tmp = huart4.Instance->ISR;
 //	      tmp = huart4.Instance->RDR;
@@ -353,7 +353,7 @@ void USART2_IRQHandler(void)
   /* USER CODE BEGIN USART2_IRQn 0 */
 		if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_ORE) == 1)
     {
-							SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[1], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_OREFLAG(&huart2);
 //        HAL_UART_DMAStop(&huart1);
@@ -364,7 +364,7 @@ void USART2_IRQHandler(void)
 		}
 if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_IDLE) == 1)
     {
-			SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[1], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_IDLEFLAG(&huart2);
 //		  	uint8_t temp_DR = USART6->DR;
@@ -391,7 +391,7 @@ void USART3_IRQHandler(void)
 	
 	if (__HAL_UART_GET_FLAG(&huart3, UART_FLAG_ORE) == 1)
     {
-							SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[2], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_OREFLAG(&huart3);
 //        HAL_UART_DMAStop(&huart1);
@@ -402,7 +402,7 @@ void USART3_IRQHandler(void)
 		}
 if (__HAL_UART_GET_FLAG(&huart3, UART_FLAG_IDLE) == 1)
     {
-										SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[2], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_IDLEFLAG(&huart3);
 //		  	uint8_t temp_DR = USART6->DR;
@@ -444,7 +444,7 @@ void UART4_IRQHandler(void)
   /* USER CODE BEGIN UART4_IRQn 0 */
 		if (__HAL_UART_GET_FLAG(&huart4, UART_FLAG_ORE) == 1)
     {
-							SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[3], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_OREFLAG(&huart4);
 //        HAL_UART_DMAStop(&huart1);
@@ -456,7 +456,7 @@ void UART4_IRQHandler(void)
 	
 if (__HAL_UART_GET_FLAG(&huart4, UART_FLAG_IDLE) == 1)
     {
-										SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[3], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_IDLEFLAG(&huart4);
 //		  	uint8_t temp_DR = USART6->DR;
@@ -492,7 +492,7 @@ void UART5_IRQHandler(void)
 		}
 	if (__HAL_UART_GET_FLAG(&huart5, UART_FLAG_ORE) == 1)
     {
-				SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[4], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_IDLEFLAG(&huart5);
         HAL_UART_DMAStop(&huart5);
@@ -502,7 +502,7 @@ void UART5_IRQHandler(void)
 	
 if (__HAL_UART_GET_FLAG(&huart5, UART_FLAG_IDLE) == 1)
     {
-													SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[4], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_IDLEFLAG(&huart5);
         HAL_UART_DMAStop(&huart5);
@@ -611,7 +611,9 @@ void USART6_IRQHandler(void)
   /* USER CODE BEGIN USART6_IRQn 0 */
 				if (__HAL_UART_GET_FLAG(&huart6, UART_FLAG_ORE) == 1)
     {
-							SCB_InvalidateDCache();
+									SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[5], UART_RX_LEN);
+
+					//		SCB_InvalidateDCache();
 
 			__HAL_UART_CLEAR_OREFLAG(&huart6);
 //        HAL_UART_DMAStop(&huart1);
@@ -623,7 +625,7 @@ void USART6_IRQHandler(void)
 	
 if (__HAL_UART_GET_FLAG(&huart6, UART_FLAG_IDLE) == 1)
     {
-													SCB_InvalidateDCache();
+						SCB_InvalidateDCache_by_Addr((uint32_t *)uart_rx_buffer[5], UART_RX_LEN);
 
 			__HAL_UART_CLEAR_IDLEFLAG(&huart6);
 //		  	uint8_t temp_DR = USART6->DR;
