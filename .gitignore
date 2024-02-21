@@ -39,3 +39,4 @@ firmware/OBJ
 
 #vscode files
 *.json
+.vscode/
