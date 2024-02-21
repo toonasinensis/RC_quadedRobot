@@ -36,3 +36,6 @@ firmware/OBJ
 *.exe
 *.out
 *.app
+
+#vscode files
+*.json
