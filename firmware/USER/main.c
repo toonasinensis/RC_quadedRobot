@@ -85,7 +85,7 @@ int main(void) {
   HAL_UART_Receive_DMA(&huart7, uart_rx_buffer[6], UART_RX_LEN);
 
   LED_Init();   // 初始化LED
-  KEY_Init();   // 初始化按键
+ // KEY_Init();   // 初始化按键
   SDRAM_Init(); // 初始化SDRAM
   // LCD_Init();
   // //初始化LCD

@@ -1,12 +1,12 @@
 #include "unitree_motor.h"
 
 // clang-format off
-leg_t leg[6] ={ {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart1, GPIOE, GPIO_PIN_1},//FL,FR,RL,RR
-                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart2, GPIOE, GPIO_PIN_7},
-                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart3, GPIOE, GPIO_PIN_8},
-                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart4, GPIOE, GPIO_PIN_0},
-								{{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart5, GPIOE, GPIO_PIN_0},
-							{	{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart6, GPIOE, GPIO_PIN_0}};
+leg_t leg[6] ={ {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart1, GPIOA, GPIO_PIN_11},//FL,FR,RL,RR
+                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart2, GPIOA, GPIO_PIN_4},
+                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart3, GPIOH, GPIO_PIN_8},
+                {{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart4, GPIOB, GPIO_PIN_11},
+								{{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart5, GPIOD, GPIO_PIN_6},
+							{	{.command.ID = 0}, {.command.ID = 1}, {.command.ID = 2}, &huart6, GPIOC, GPIO_PIN_8}};
 // clang-format on
 
 float max_kp = 2.5f, min_kd = 4.0f, max_torque = 5.0f;

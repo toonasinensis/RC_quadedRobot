@@ -79,12 +79,27 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 	
-	  GPIO_InitStruct.Pin = GPIO_PIN_2;
-		
+	
+	//eth reset
+	  GPIO_InitStruct.Pin = GPIO_PIN_2;	
   HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);
+	
+	
+	
+
+	//rs485 control direction
 	  GPIO_InitStruct.Pin = GPIO_PIN_11;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);//rs485 control direction
+	  GPIO_InitStruct.Pin = GPIO_PIN_11;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);	//rs485 control direction
+	  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);	//rs485 control direction
+	  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  HAL_GPIO_Init(GPIOH, &GPIO_InitStruct);	//rs485 control direction
+	  GPIO_InitStruct.Pin = GPIO_PIN_6;
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);	//rs485 control direction
+	  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
 
 }

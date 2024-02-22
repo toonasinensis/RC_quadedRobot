@@ -1,6 +1,6 @@
 firmware/USER/NETWORK.uvguix*
 firmware/USER/JLinkLog.txt
-firmware/OBJ
+firmware/OBJ/*
 *.crf
 
 # Prerequisites

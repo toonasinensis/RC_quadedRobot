@@ -66,6 +66,7 @@ extern void param_protect(motor_send_data_t *check_data, float max_kp,
 
 extern uint32_t crc32_core(volatile uint8_t *src, uint32_t len);
 extern uint32_t extract(motor_receive_data_t *motor_data, uint8_t *raw_data);
+uint32_t extract_new(motor_receive_data_t *motor_data, uint8_t *raw_data) ;
 extern void modify(motor_send_data_t *motor_data, uint8_t *raw_data);
 extern uint32_t extract_new(motor_receive_data_t *motor_data, uint8_t *raw_data) ;
 extern leg_t leg[6];

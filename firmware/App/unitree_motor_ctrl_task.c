@@ -38,11 +38,11 @@ void send_single_motor_command(uint8_t *raw_data, leg_t *leg,
     break;
   }
 
-  // HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_SET);
+   HAL_GPIO_WritePin(leg->en_gpio_port,leg->en_gpio_pin,GPIO_PIN_SET);
   HAL_UART_Transmit_DMA(leg->p_huart, raw_data, UART_TX_LEN);
   while (leg->p_huart->gState != HAL_UART_STATE_READY) {
   };
-  //	HAL_GPIO_WritePin(GPIOB,GPIO_PIN_0,GPIO_PIN_RESET);
+  	HAL_GPIO_WritePin(leg->en_gpio_port,leg->en_gpio_pin,GPIO_PIN_RESET);
 }
 void send_all_motor_command(uint8_t tx_raw_data[][UART_TX_LEN],
                             uint8_t rx_raw_data[][UART_RX_LEN], leg_t *leg) {
