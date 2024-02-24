@@ -1,17 +1,5 @@
 #include "key.h"
 #include "delay.h"
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32H7开发板
-//KEY驱动代码	   
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2017/6/8
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved									  
-//////////////////////////////////////////////////////////////////////////////////
 
 //按键初始化函数
 void KEY_Init(void)
@@ -22,19 +10,19 @@ void KEY_Init(void)
     __HAL_RCC_GPIOC_CLK_ENABLE();           //开启GPIOC时钟
     __HAL_RCC_GPIOH_CLK_ENABLE();           //开启GPIOH时钟
 
-    GPIO_Initure.Pin=GPIO_PIN_0;            //PA0
+//    GPIO_Initure.Pin=GPIO_PIN_0;            //PA0
     GPIO_Initure.Mode=GPIO_MODE_INPUT;      //输入
     GPIO_Initure.Pull=GPIO_PULLDOWN;        //下拉
     GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;     //高速
     HAL_GPIO_Init(GPIOA,&GPIO_Initure);
     
-    GPIO_Initure.Pin=GPIO_PIN_13;           //PC13
+//    GPIO_Initure.Pin=GPIO_PIN_13;           //PC13
     GPIO_Initure.Mode=GPIO_MODE_INPUT;      //输入
     GPIO_Initure.Pull=GPIO_PULLUP;          //上拉
     GPIO_Initure.Speed=GPIO_SPEED_FREQ_VERY_HIGH;     //高速
-    HAL_GPIO_Init(GPIOC,&GPIO_Initure);
+//    HAL_GPIO_Init(GPIOC,&GPIO_Initure);
     
-    GPIO_Initure.Pin=GPIO_PIN_2|GPIO_PIN_3; //PH2,3
+    GPIO_Initure.Pin=GPIO_PIN_4; //PH2,3
     HAL_GPIO_Init(GPIOH,&GPIO_Initure);
 }
 
