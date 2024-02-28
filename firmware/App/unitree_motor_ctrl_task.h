@@ -4,7 +4,6 @@
 #include "global_declare.h"
 #include "unitree_motor.h"
 #include "usart.h"
-
 // #include "unitree_motor.h"
 
 // #include "motor_infro.h"
@@ -19,6 +18,7 @@
 #define UNITREE_MOTOR_MAX_KD 3.5f // K_W
 
 void receive_motor_feedback(uint8_t *raw_data, leg_t *leg);
+void receive_go1motor_feedback(uint8_t *raw_data, leg_t *leg);
 void update_command(void);
 void send_command(void);
 void enable_all_motor(void);

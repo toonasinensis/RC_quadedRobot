@@ -48,8 +48,8 @@
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-#define UART_TX_LEN 34
-#define UART_RX_LEN 78
+#define UART_TX_LEN 17
+#define UART_RX_LEN 16
 extern uint8_t uart_rx_buffer[8][UART_RX_LEN];
 extern uint8_t uart_tx_buffer[8][UART_TX_LEN];	 
 /* USER CODE END Includes */

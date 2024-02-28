@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32H743xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\CORE;..\USER;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USMART;..\HALLIB\STM32H7xx_HAL_Driver\Inc;..\MALLOC;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\SDRAM;..\HARDWARE\24CXX;..\HARDWARE\IIC;..\HARDWARE\PCF8574;..\HARDWARE\LAN8720;..\HARDWARE\TIMER;..\HARDWARE\LAN8720;..\HARDWARE\MPU;..\LWIP;..\LWIP\arch;..\LWIP\lwip-1.4.1\src\include;..\LWIP\lwip-1.4.1\src\include\ipv4;..\LWIP\lwip-1.4.1\src\include\netif;..\LWIP\lwip_app\lwip_comm;..\LWIP\lwip_app\udp_demo;..\HARDWARE\auto_gen;..\App;..\TYPES</IncludePath>
+              <IncludePath>..\CORE;..\USER;..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\USMART;..\HALLIB\STM32H7xx_HAL_Driver\Inc;..\MALLOC;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\LCD;..\HARDWARE\SDRAM;..\HARDWARE\24CXX;..\HARDWARE\IIC;..\HARDWARE\PCF8574;..\HARDWARE\LAN8720;..\HARDWARE\TIMER;..\HARDWARE\LAN8720;..\HARDWARE\MPU;..\LWIP;..\LWIP\arch;..\LWIP\lwip-1.4.1\src\include;..\LWIP\lwip-1.4.1\src\include\ipv4;..\LWIP\lwip-1.4.1\src\include\netif;..\LWIP\lwip_app\lwip_comm;..\LWIP\lwip_app\udp_demo;..\HARDWARE\auto_gen;..\App;..\TYPES;..\App\go1_motor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -893,6 +893,26 @@
               <FileType>5</FileType>
               <FilePath>..\App\udp_comm.h</FilePath>
             </File>
+            <File>
+              <FileName>crc_ccitt.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\go1_motor\crc_ccitt.h</FilePath>
+            </File>
+            <File>
+              <FileName>GO-M8010-6.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\App\go1_motor\GO-M8010-6.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor_control.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\go1_motor\motor_control.h</FilePath>
+            </File>
+            <File>
+              <FileName>ris_protocol.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\App\go1_motor\ris_protocol.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -924,5 +944,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>NETWORK</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>
