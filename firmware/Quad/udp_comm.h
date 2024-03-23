@@ -9,6 +9,25 @@
 #include <stdio.h>
 #include <string.h>
 
+typedef struct
+{
+
+			  float ang_vel_x;             //4
+        float ang_vel_y;             //4
+        float ang_vel_z;               //4
+
+        float quat_X;              //4
+        float quat_Y;              //4
+        float quat_Z;              //4
+			  float quat_W;              //4
+			
+			  float acc_x_send;             //4
+        float acc_y_send;             //4
+        float acc_z_send;               //4
+
+
+}__attribute__((packed)) udp_imu_send_t;
+
 // motor command
 typedef struct
 {
@@ -38,7 +57,7 @@ typedef struct
     uint8_t header[2];
     uint8_t state;
     udp_motor_receive_t udp_motor_receive[3*LEG_NUM];
-	
+	udp_imu_send_t udp_imu;
     uint32_t check_digit;
 } __attribute__((packed)) udp_send_data_t;
 

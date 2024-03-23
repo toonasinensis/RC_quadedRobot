@@ -85,7 +85,7 @@ I (../Core/Inc/usart.h)(0x657300C6)
 I (../Core/Inc/gpio.h)(0x6571B140)
 I (..\Quad\unitree_motor_ctrl_task.h)(0x65FC744B)
 I (../HITLIB/GLOBAL/global_declare.h)(0x657B0C84)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (..\Quad\unitree_motor.h)(0x65FC7107)
 I (../HITLIB/GLOBAL/hitcrt_types.h)(0x65FC7144)
@@ -266,7 +266,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x656FF44A)
-F (../Core/Src/usart.c)(0x6597A9EA)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\usart.o --depend rc-vr\usart.d)
+F (../Core/Src/usart.c)(0x65FE7B86)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\usart.o --depend rc-vr\usart.d)
 I (../Core/Inc/usart.h)(0x657300C6)
 I (../Core/Inc/main.h)(0x65770BD4)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x656FF44A)
@@ -352,7 +352,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x656FF44A)
 I (../Core/Inc/stm32h7xx_it.h)(0x65771F74)
 I (../Core/Inc/usart.h)(0x657300C6)
 I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (../HITLIB/ROBOT/uart_protocol.h)(0x65A79A72)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
@@ -1439,7 +1439,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x656FF44A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 F (..\HARDWARE\bsp_fdcan.c)(0x65845464)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\bsp_fdcan.o --depend rc-vr\bsp_fdcan.d)
 I (..\HARDWARE\bsp_fdcan.h)(0x6583FB16)
@@ -1487,7 +1487,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x656FF44A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E8E3CC2)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (../Core/Inc/fdcan.h)(0x6571B142)
 I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
@@ -6456,7 +6456,7 @@ I (../Middlewares/Third_Party/LwIP/src/include/lwip/altcp_tls.h)(0x656FF44E)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 F (..\HITLIB\ALGORITHM\filter_algorithm.cpp)(0x634C000C)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\filter_algorithm.o --depend rc-vr\filter_algorithm.d)
 I (..\HITLIB\ALGORITHM\filter_algorithm.h)(0x657560DA)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6469,7 +6469,7 @@ I (D:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cach
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h)(0x63BF9858)
 F (..\HITLIB\ALGORITHM\locate_algorithm.cpp)(0x65815BEA)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\locate_algorithm.o --depend rc-vr\locate_algorithm.d)
 I (..\HITLIB\ALGORITHM\locate_algorithm.h)(0x6583D7AA)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6535,7 +6535,7 @@ I (../HITLIB/ALGORITHM/path_algorithm.h)(0x65858532)
 I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
 F (..\HITLIB\ALGORITHM\math_algorithm.cpp)(0x657BFFFA)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\math_algorithm.o --depend rc-vr\math_algorithm.d)
 I (..\HITLIB\ALGORITHM\math_algorithm.h)(0x657BFFFA)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6550,7 +6550,7 @@ I (../HITLIB/ROBOT/movement_info.h)(0x65756454)
 I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E8E3CC2)
 F (..\HITLIB\ALGORITHM\navigation_algorithm.cpp)(0x65A778CC)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\navigation_algorithm.o --depend rc-vr\navigation_algorithm.d)
 I (..\HITLIB\ALGORITHM\navigation_algorithm.h)(0x6579C348)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6610,7 +6610,7 @@ I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
 F (..\HITLIB\ALGORITHM\path_algorithm.cpp)(0x659FC9FA)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\path_algorithm.o --depend rc-vr\path_algorithm.d)
 I (..\HITLIB\ALGORITHM\path_algorithm.h)(0x65858532)
 I (..\HITLIB\ALGORITHM\navigation_algorithm.h)(0x6579C348)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6667,7 +6667,7 @@ I (../HITLIB/ALGORITHM/filter_algorithm.h)(0x657560DA)
 F (..\HITLIB\ALGORITHM\pid_algorithm.cpp)(0x6597DF54)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\pid_algorithm.o --depend rc-vr\pid_algorithm.d)
 I (..\HITLIB\ALGORITHM\pid_algorithm.h)(0x657564E2)
 I (..\HITLIB\ALGORITHM\math_algorithm.h)(0x657BFFFA)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6680,10 +6680,10 @@ I (D:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cach
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h)(0x63BF9858)
 I (../HITLIB/ROBOT/movement_info.h)(0x65756454)
 I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E8E3CC2)
-F (..\HITLIB\GLOBAL\hit_global_type.h)(0x65956012)()
+F (..\HITLIB\GLOBAL\hit_global_type.h)(0x65FE7E29)()
 F (..\HITLIB\GLOBAL\system_monitor.c)(0x65785BB6)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\system_monitor.o --depend rc-vr\system_monitor.d)
 I (..\HITLIB\GLOBAL\system_monitor.h)(0x6597A950)
-I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65956012)
+I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6696,7 +6696,7 @@ I (D:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cach
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h)(0x63BF9858)
 F (..\HITLIB\GLOBAL\global_declare.c)(0x65754414)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\global_declare.o --depend rc-vr\global_declare.d)
 I (..\HITLIB\GLOBAL\global_declare.h)(0x657B0C84)
-I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65956012)
+I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6707,10 +6707,10 @@ I (D:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsi
 I (D:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8ED122)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cachel1_armv7.h)(0x5E8ED122)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\system_stm32h7xx.h)(0x63BF9858)
-F (..\HITLIB\GLOBAL\task_os.c)(0x65FE4B6C)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\task_os.o --depend rc-vr\task_os.d)
+F (..\HITLIB\GLOBAL\task_os.c)(0x65FE7F9C)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\task_os.o --depend rc-vr\task_os.d)
 I (..\HITLIB\GLOBAL\task_os.h)(0x65FE4901)
 I (..\HITLIB\GLOBAL\system_monitor.h)(0x6597A950)
-I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65956012)
+I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6795,7 +6795,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\limits.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x5E8E3CC2)
 I (..\Quad\udp_basic.h)(0x65FE4740)
-I (..\Quad\udp_comm.h)(0x65FE45AA)
+I (..\Quad\udp_comm.h)(0x65FE7F49)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/err.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/tcp.h)(0x656FF44E)
@@ -6822,7 +6822,7 @@ I (../Middlewares/Third_Party/LwIP/src/include/lwip/udp.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/prot/udp.h)(0x656FF44E)
 F (..\HITLIB\GLOBAL\os.c)(0x65FE4A12)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\os.o --depend rc-vr\os.d)
 I (..\HITLIB\GLOBAL\os.h)(0x65770D08)
-I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65956012)
+I (..\HITLIB\GLOBAL\hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6840,7 +6840,7 @@ F (..\HITLIB\ROBOT\chassis.cpp)(0x6579D244)(--cpp -c --cpu Cortex-M7.fp.dp -D__M
 I (..\HITLIB\ROBOT\chassis.h)(0x657C3F90)
 I (../HITLIB/ALGORITHM/pid_algorithm.h)(0x657564E2)
 I (../HITLIB/ALGORITHM/math_algorithm.h)(0x657BFFFA)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6857,7 +6857,7 @@ I (..\HITLIB\ROBOT\motor_drive.h)(0x6583E5E6)
 I (../HITLIB/ALGORITHM/navigation_algorithm.h)(0x6579C348)
 F (..\HITLIB\ROBOT\movement_info.cpp)(0x634C000C)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\movement_info.o --depend rc-vr\movement_info.d)
 I (..\HITLIB\ROBOT\movement_info.h)(0x65756454)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6871,7 +6871,7 @@ I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\
 I (D:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E8E3CC2)
 F (..\HITLIB\ROBOT\motor_drive.cpp)(0x65757168)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\motor_drive.o --depend rc-vr\motor_drive.d)
 I (..\HITLIB\ROBOT\motor_drive.h)(0x6583E5E6)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -6930,7 +6930,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x656FF44A)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\cstring)(0x5E8E3CC2)
 I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
@@ -6979,7 +6979,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x656FF44A)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x656FF44A)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\cstring)(0x5E8E3CC2)
 I (../HITLIB/ALGORITHM/navigation_algorithm.h)(0x6579C348)
@@ -6992,7 +6992,7 @@ I (../HITLIB/ALGORITHM/filter_algorithm.h)(0x657560DA)
 F (..\HITLIB\ROBOT\parallel_mechanism.cpp)(0x65FC6F4B)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\parallel_mechanism.o --depend rc-vr\parallel_mechanism.d)
 I (..\HITLIB\ROBOT\parallel_mechanism.h)(0x65A5E31A)
 I (..\HITLIB\ROBOT\motor_drive.h)(0x6583E5E6)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7055,7 +7055,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\cstring)(0x5E8E3CC2)
 I (../HITLIB/ALGORITHM/filter_algorithm.h)(0x657560DA)
 F (..\HITLIB\ROBOT\dm_motor.cpp)(0x6595490C)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\dm_motor.o --depend rc-vr\dm_motor.d)
 I (..\HITLIB\ROBOT\dm_motor.h)(0x65964042)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7107,7 +7107,7 @@ F (..\HITLIB\TASK\action_task.cpp)(0x657544BA)(--cpp -c --cpu Cortex-M7.fp.dp -D
 I (..\HITLIB\TASK\action_task.h)(0x657544B6)
 F (..\HITLIB\TASK\debug_task.cpp)(0x65754768)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\debug_task.o --depend rc-vr\debug_task.d)
 I (..\HITLIB\TASK\debug_task.h)(0x657552E8)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7123,7 +7123,7 @@ I (..\HITLIB\TASK\motor_control_task.h)(0x6583F6C8)
 I (../HITLIB/ROBOT/chassis.h)(0x657C3F90)
 I (../HITLIB/ALGORITHM/pid_algorithm.h)(0x657564E2)
 I (../HITLIB/ALGORITHM/math_algorithm.h)(0x657BFFFA)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7186,7 +7186,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\cstring)(0x5E8E3CC2)
 I (../HITLIB/ALGORITHM/filter_algorithm.h)(0x657560DA)
 F (..\HITLIB\TASK\navigation_task.cpp)(0x65A7967A)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\navigation_task.o --depend rc-vr\navigation_task.d)
 I (..\HITLIB\TASK\navigation_task.h)(0x659FC9FA)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7247,7 +7247,7 @@ I (../HITLIB/ROBOT/PM_navigation.h)(0x65964D7A)
 I (..\HITLIB\TASK\vision_task.h)(0x65A79666)
 F (..\HITLIB\TASK\read_remote_ctrl_task.cpp)(0x65A879D2)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\read_remote_ctrl_task.o --depend rc-vr\read_remote_ctrl_task.d)
 I (..\HITLIB\TASK\read_remote_ctrl_task.h)(0x659518A6)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7316,7 +7316,7 @@ I (../HITLIB/GLOBAL/task_os.h)(0x65FE4901)
 I (..\HITLIB\TASK\vision_task.h)(0x65A79666)
 F (..\HITLIB\TASK\remote_lcd_task.cpp)(0x65A66B7A)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\remote_lcd_task.o --depend rc-vr\remote_lcd_task.d)
 I (..\HITLIB\TASK\remote_lcd_task.h)(0x65A664A6)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7385,7 +7385,7 @@ F (..\HITLIB\TASK\parallel_mechanism_task.cpp)(0x65A88C00)(--cpp -c --cpu Cortex
 I (..\HITLIB\TASK\parallel_mechanism_task.h)(0x65A7C4F2)
 I (../HITLIB/ROBOT/parallel_mechanism.h)(0x65A5E31A)
 I (../HITLIB/ROBOT/motor_drive.h)(0x6583E5E6)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7450,7 +7450,7 @@ I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
 F (..\HITLIB\TASK\vision_task.cpp)(0x65A88C00)(--cpp -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\vision_task.o --depend rc-vr\vision_task.d)
 I (..\HITLIB\TASK\vision_task.h)(0x65A79666)
 I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7515,7 +7515,7 @@ I (../HITLIB/ROBOT/chassis.h)(0x657C3F90)
 I (../HITLIB/TASK/read_remote_ctrl_task.h)(0x659518A6)
 I (../HITLIB/ROBOT/remote_control.h)(0x659516BA)
 F (..\Quad\udp_comm.c)(0x65FC74BB)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\udp_comm.o --depend rc-vr\udp_comm.d)
-I (..\Quad\udp_comm.h)(0x65FE45AA)
+I (..\Quad\udp_comm.h)(0x65FE7F49)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/opt.h)(0x656FF44E)
 I (../LWIP/Target/lwipopts.h)(0x657468FC)
@@ -7593,18 +7593,18 @@ I (../Middlewares/Third_Party/LwIP/src/include/lwip/udp.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/prot/udp.h)(0x656FF44E)
 I (..\Quad\unitree_motor.h)(0x65FC7107)
 I (../HITLIB/GLOBAL/global_declare.h)(0x657B0C84)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (../HITLIB/GLOBAL/hitcrt_types.h)(0x65FC7144)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/sys.h)(0x656FF44E)
 I (../Core/Inc/usart.h)(0x657300C6)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (../HITLIB/GLOBAL/system_monitor.h)(0x6597A950)
-F (..\Quad\udp_comm.h)(0x65FE45AA)()
+F (..\Quad\udp_comm.h)(0x65FE7F49)()
 F (..\Quad\unitree_motor.c)(0x65FC7439)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\unitree_motor.o --depend rc-vr\unitree_motor.d)
 I (..\Quad\unitree_motor.h)(0x65FC7107)
 I (../HITLIB/GLOBAL/global_declare.h)(0x657B0C84)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7664,7 +7664,7 @@ F (..\Quad\unitree_motor.h)(0x65FC7107)()
 F (..\Quad\unitree_motor_ctrl_task.c)(0x65FC76F5)(--c99 -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../HARDWARE -I ../LWIP/App -I ../LWIP/Target -I ../Middlewares/Third_Party/LwIP/src/include -I ../Middlewares/Third_Party/LwIP/system -I ../Drivers/BSP/Components/lan8742 -I ../Middlewares/Third_Party/LwIP/src/include/netif/ppp -I ../Middlewares/Third_Party/LwIP/src/include/lwip -I ../Middlewares/Third_Party/LwIP/src/include/lwip/apps -I ../Middlewares/Third_Party/LwIP/src/include/lwip/priv -I ../Middlewares/Third_Party/LwIP/src/include/lwip/prot -I ../Middlewares/Third_Party/LwIP/src/include/netif -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/arpa -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/net -I ../Middlewares/Third_Party/LwIP/src/include/compat/posix/sys -I ../Middlewares/Third_Party/LwIP/src/include/compat/stdc -I ../Middlewares/Third_Party/LwIP/system/arch -I ../HALLIB/STM32H7xx_HAL_Driver/Inc/Legacy -I ../HALLIB/STM32H7xx_HAL_Driver/Inc -I ../HALLIB/STM32H7xx_HAL_Driver/Src -I ../HITLIB/ALGORITHM -I ../HITLIB/GLOBAL -I ../HITLIB/ROBOT -I ../HITLIB/TASK -I ..\Quad --cpp11-I.\RTE\_RC-VR-ID:\Users\DELL\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-ID:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="534" -D_RTE_ -DSTM32H743xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H743xx-o rc-vr\unitree_motor_ctrl_task.o --depend rc-vr\unitree_motor_ctrl_task.d)
 I (..\Quad\unitree_motor_ctrl_task.h)(0x65FC744B)
 I (../HITLIB/GLOBAL/global_declare.h)(0x657B0C84)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E8E3CC2)
 I (D:\Users\DELL\AppData\Local\Arm\Packs\Keil\STM32H7xx_DFP\3.1.1\Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h743xx.h)(0x63BF9858)
@@ -7721,7 +7721,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\inttypes.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\limits.h)(0x5E8E3CC2)
 I (D:\Keil_v5\ARM\ARMCC\include\ctype.h)(0x5E8E3CC2)
 I (../Core/Inc/usart.h)(0x657300C6)
-I (..\Quad\udp_comm.h)(0x65FE45AA)
+I (..\Quad\udp_comm.h)(0x65FE7F49)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/pbuf.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/err.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/tcp.h)(0x656FF44E)
@@ -7833,10 +7833,10 @@ I (../Middlewares/Third_Party/LwIP/src/include/lwip/udp.h)(0x656FF44E)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/prot/udp.h)(0x656FF44E)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E8E3CC2)
 I (..\Quad\udp_basic.h)(0x65FE4740)
-I (..\Quad\udp_comm.h)(0x65FE45AA)
+I (..\Quad\udp_comm.h)(0x65FE7F49)
 I (..\Quad\unitree_motor.h)(0x65FC7107)
 I (../HITLIB/GLOBAL/global_declare.h)(0x657B0C84)
-I (../HITLIB/GLOBAL/hit_global_type.h)(0x65956012)
+I (../HITLIB/GLOBAL/hit_global_type.h)(0x65FE7E29)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E8E3CC2)
 I (../HITLIB/GLOBAL/hitcrt_types.h)(0x65FC7144)
 I (../Middlewares/Third_Party/LwIP/src/include/lwip/sys.h)(0x656FF44E)

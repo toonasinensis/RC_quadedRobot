@@ -14,6 +14,7 @@ uint8_t start_send;
 uint8_t if_long_use = 0;
 int timer_psc;
 uint8_t fast_send = 0;
+ST_IMU st_imu_recv;
 void motor_ctrl_Task(void)
 {
 	if (start_send || if_long_use || fast_send) {
@@ -37,7 +38,15 @@ void motor_ctrl_Task(void)
       raw_motor_type2udp_motor_type(&udp_send_data.udp_motor_receive[i * 3 + 2],
                                     &leg[i].knee_motor.feedback);
     }
-		
+	 for(int i=0;i<3;i++)
+		{
+			if(uart_rx_buffer[6][i]==0x55&&uart_rx_buffer[6][i+1]==0x00)
+			{
+				memcpy(&udp_send_data.udp_imu,&(uart_rx_buffer[6][i+4]),4*10);
+
+			}
+
+		}
     // add crc
     udp_send_data.check_digit =
         crc32_core((uint8_t *)&udp_send_data, sizeof(udp_send_data) / 4 - 1);

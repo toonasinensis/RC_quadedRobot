@@ -113,6 +113,26 @@ typedef struct{
 }ST_ORIENTATION;
 
 
+typedef struct
+{
+
+        uint8_t head[2];                    //2
+			  float ang_vel_x;             //4
+        float ang_vel_y;             //4
+        float ang_vel_z;               //4
+
+        float quat_X;              //4
+        float quat_Y;              //4
+        float quat_Z;              //4
+			  float quat_W;              //4
+			
+			  float acc_x_send;             //4
+        float acc_y_send;             //4
+        float acc_z_send;               //4
+
+        uint8_t tail[2];                    //2
+
+} ST_IMU;
 
 
 
